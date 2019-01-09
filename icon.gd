@@ -11,10 +11,11 @@ func _ready():
 	# Initialization here
 	pass
 
-func get_forward():
+func get_input(delta):
 	var y = 0;
 	var x = 0;
-	var cursorAngle = (position - get_viewport().get_mouse_position());
+	var cursorAngle = Vector2();
+	cursorAngle = (position - get_viewport().get_mouse_position());
 	
 	if Input.is_action_pressed('Up'):
         y -= 1
@@ -25,15 +26,28 @@ func get_forward():
 	if Input.is_action_pressed('Right'):
         x -= 1
 	
-	velocity = cursorAngle * y ;
-	velocity += cursorAngle.tangent() * x;
-	velocity = velocity.normalized() * speed;
+	if (x == y ):
+		x *= sqrt(2)/2
+		y *= sqrt(2)/2
 	
-
+	velocity = cursorAngle * y ;
+	velocity = velocity.normalized() * speed;
+	position += velocity;
+	
+	cursorAngle = (position - get_viewport().get_mouse_position());
+	var newAngle = 0;
+	if (position.distance_to(get_viewport().get_mouse_position()) != 0 ):
+		newAngle = -(x * speed)/((get_viewport().get_mouse_position()).distance_to(position)) + cursorAngle.angle();
+	var rotOffset = Vector2();
+	rotOffset.y = sin(newAngle);
+	rotOffset.x = cos(newAngle);
+	printerr(newAngle);
+	if(x != 0):
+		position = get_viewport().get_mouse_position() + (rotOffset.normalized() * cursorAngle.length());
+	rotation = newAngle;
+	
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
-	get_forward();
-	position += velocity;
-	
+	get_input(delta);
 	pass
