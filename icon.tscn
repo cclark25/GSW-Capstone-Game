@@ -1,13 +1,14 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://proxy.duckduckgo.com.png" type="Texture" id=1]
 [ext_resource path="res://icon.gd" type="Script" id=2]
 
 [node name="icon" type="Sprite" index="0"]
 
-position = Vector2( 417, 206 )
+position = Vector2( 578.815, 359.603 )
+scale = Vector2( 0.245554, 0.161021 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-speed = 10
+speed = 5
 
 
