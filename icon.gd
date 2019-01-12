@@ -6,9 +6,12 @@ extends Sprite
 var velocity = Vector2();
 export (int) var speed = 5;
 var targeting = false;
-var jumpTime = .25;
+var jumpTime = .10;
+var jumpElapsed = jumpTime;
+var jumpModifier = 15;
 var inJump = false;
 var forward = 0;
+var jDir = Vector2();
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -65,30 +68,37 @@ func move_normal(delta):
 		velocity = newVelocity.normalized() * speed;
 		position += velocity;
 
-func jump(delta):
+func jump(delta):	
+	
 	if !inJump:
+		jDir.y = 0;
+		jDir.x = 1;
+		jDir = jDir.rotated(rotation);
 		inJump = true;
-		forward = !Input.is_action_pressed("Down");
+		if Input.is_action_pressed("Left"):
+			jDir = jDir.rotated(PI/2);
+		if Input.is_action_pressed("Right"):
+			jDir = jDir.rotated(-PI/2);
+		if Input.is_action_pressed("Down"):
+			jDir = jDir.rotated(PI);
+	
 	
 	if targeting:
-		var x = 1;
-		if !forward:
-			x = -1;
-		printerr(x);
-		position += velocity.normalized() * speed * (1 + sin(PI * jumpTime/0.25)) * x;
+		position += jDir.normalized() * (speed + jumpModifier * sin(PI * jumpElapsed/jumpTime));
 	else:
-		position += velocity.normalized() * speed * (1 + sin(PI * jumpTime/0.25));
+		position += velocity.normalized() * (speed + jumpModifier * sin(PI * jumpElapsed/jumpTime));
 	
-	jumpTime -= delta;
-	if jumpTime <= 0:
+	jumpElapsed -= delta;
+	if jumpElapsed <= 0:
 		inJump = false;
-		jumpTime = .25;
+		jumpElapsed = jumpTime;
 
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
 	if Input.is_action_just_pressed("Target"):
 		targeting = !targeting;
+	
 	
 	if Input.is_action_just_pressed("Jump") || inJump:
 		jump(delta);
