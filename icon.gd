@@ -12,6 +12,7 @@ var jumpModifier = 15;
 var inJump = false;
 var forward = 0;
 var jDir = Vector2();
+var animationTime = 0;
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -110,5 +111,31 @@ func _process(delta):
 		move_normal(delta);
 	
 	rotation = velocity.angle();
-	
+	printerr(rotation);
+	var dir = 0;
+	if( rotation > 0 ):
+		dir = 0
+	if( rotation > PI/4):
+		dir = 1
+	if( rotation > PI/2):
+		dir = 2
+	if( rotation > 3*PI/4):
+		dir = 3
+	if( rotation > PI):
+		dir = 4
+	if( rotation < -PI/4):
+		dir = 7
+	if( rotation < -PI/2):
+		dir = 6
+	if( rotation < -3*PI/4):
+		dir = 5
+	if( rotation > 2*PI):
+		dir = 0
+	rotation = 0
+	animationTime += delta;
+	if(velocity.length() > 0):
+		frame = 3*dir + int(floor(animationTime/.15))%3
+	else:
+		frame = 3*dir
+	velocity *= 0;
 	pass
