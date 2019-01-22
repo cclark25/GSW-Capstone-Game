@@ -2,21 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Down.0.png-0ec2707d50d3617f112ea395f40ca267.stex"
+path="res://.import/DownRight.png-94f0c525312521f5cfd9d590f3243024.stex"
 
 [deps]
 
-source_file="res://Sprites/Player/Down.0.png"
-dest_files=[ "res://.import/Down.0.png-0ec2707d50d3617f112ea395f40ca267.stex" ]
+source_file="res://Sprites/Player/DownRight.png"
+dest_files=[ "res://.import/DownRight.png-94f0c525312521f5cfd9d590f3243024.stex" ]
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
-compress/normal_map=2
+compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

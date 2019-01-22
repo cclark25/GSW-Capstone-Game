@@ -13,6 +13,7 @@ var inJump = false;
 var forward = 0;
 var jDir = Vector2();
 var animationTime = 0;
+var isMoving = false;
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -24,15 +25,19 @@ func get_input(delta):
 	var x = 0;
 	var cursorAngle = Vector2();
 	cursorAngle = (position - get_viewport().get_mouse_position());
-	
+	isMoving = false;
 	if Input.is_action_pressed('Up'):
-        y -= 1
+		y -= 1
+		isMoving = true;
 	if Input.is_action_pressed('Down'):
-        y += 1
+		y += 1
+		isMoving = true;
 	if Input.is_action_pressed('Left'):
-        x += 1
+		x += 1
+		isMoving = true;
 	if Input.is_action_pressed('Right'):
-        x -= 1
+		x -= 1
+		isMoving = true;
 	
 	if (x == y ):
 		x *= sqrt(2)/2
@@ -57,24 +62,30 @@ func get_input(delta):
 	
 func move_normal(delta):
 	var newVelocity = Vector2();
+	isMoving = false;
 	if Input.is_action_pressed('Up'):
-        newVelocity.y -= 1
+		newVelocity.y -= 1
+		isMoving = true;
 	if Input.is_action_pressed('Down'):
-        newVelocity.y += 1
+		newVelocity.y += 1
+		isMoving = true;
 	if Input.is_action_pressed('Left'):
-        newVelocity.x -= 1
+		newVelocity.x -= 1
+		isMoving = true;
 	if Input.is_action_pressed('Right'):
-        newVelocity.x += 1
+		newVelocity.x += 1
+		isMoving = true;
 	if (newVelocity.length() != 0):
 		velocity = newVelocity.normalized() * speed;
 		position += velocity;
+	
 
 func jump(delta):	
 	
 	if !inJump:
 		jDir.y = 0;
 		jDir.x = 1;
-		jDir = jDir.rotated(rotation);
+		jDir = jDir.rotated(velocity.angle());
 		inJump = true;
 		if Input.is_action_pressed("Left"):
 			jDir = jDir.rotated(PI/2);
@@ -115,27 +126,29 @@ func _process(delta):
 	var dir = 0;
 	if( rotation > 0 ):
 		dir = 0
-	if( rotation > PI/4):
+	if( rotation > PI/8):
 		dir = 1
-	if( rotation > PI/2):
+	if( rotation > 3*PI/8):
 		dir = 2
-	if( rotation > 3*PI/4):
+	if( rotation > 5*PI/8):
 		dir = 3
-	if( rotation > PI):
+	if( rotation > 7*PI/8):
 		dir = 4
-	if( rotation < -PI/4):
+	if( rotation < -PI/8):
 		dir = 7
-	if( rotation < -PI/2):
+	if( rotation < -3*PI/9):
 		dir = 6
-	if( rotation < -3*PI/4):
+	if( rotation < -5*PI/8):
 		dir = 5
-	if( rotation > 2*PI):
-		dir = 0
+	if( rotation < -7*PI/8):
+		dir = 4
+	
 	rotation = 0
 	animationTime += delta;
-	if(velocity.length() > 0):
+	if(isMoving):
 		frame = 3*dir + int(floor(animationTime/.15))%3
 	else:
 		frame = 3*dir
-	velocity *= 0;
+	
+	
 	pass

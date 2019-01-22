@@ -14,6 +14,16 @@ config/name="New Game Project"
 run/main_scene="res://icon.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=640
+window/size/height=360
+
+[global]
+
+gen_mip=false
+filter=false
+
 [input]
 
 Left=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":65,"unicode":0,"echo":false,"script":null)
