@@ -8,7 +8,7 @@ export (int) var speed = 5;
 var targeting = false;
 var jumpTime = .10;
 var jumpElapsed = jumpTime;
-var jumpModifier = 15;
+var jumpModifier = 2;
 var inJump = false;
 var forward = 0;
 var jDir = Vector2();
@@ -44,13 +44,14 @@ func get_input(delta):
 		y *= sqrt(2)/2
 	
 	velocity = cursorAngle * y ;
-	velocity = velocity.normalized() * speed;
-	position += velocity;
+	velocity = velocity.normalized() * speed * delta / .015;
+	if(y > 0 || position.distance_to(get_viewport().get_mouse_position()) > velocity.length()):
+		position += velocity;
 	
 	cursorAngle = (position - get_viewport().get_mouse_position());
 	var newAngle = 0;
 	if (position.distance_to(get_viewport().get_mouse_position()) != 0 ):
-		newAngle = -(x * speed)/((get_viewport().get_mouse_position()).distance_to(position)) + cursorAngle.angle();
+		newAngle = -(x * speed * delta / .015)/((get_viewport().get_mouse_position()).distance_to(position)) + cursorAngle.angle();
 	var rotOffset = Vector2();
 	rotOffset.y = sin(newAngle);
 	rotOffset.x = cos(newAngle);
@@ -76,7 +77,7 @@ func move_normal(delta):
 		newVelocity.x += 1
 		isMoving = true;
 	if (newVelocity.length() != 0):
-		velocity = newVelocity.normalized() * speed;
+		velocity = newVelocity.normalized() * speed * delta / .015;
 		position += velocity;
 	
 
@@ -96,9 +97,11 @@ func jump(delta):
 	
 	
 	if targeting:
-		position += jDir.normalized() * (speed + jumpModifier * sin(PI * jumpElapsed/jumpTime));
+		var tmp = jDir.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
+		if(position.distance_to(get_viewport().get_mouse_position()) > tmp.length()):
+			position += tmp;
 	else:
-		position += velocity.normalized() * (speed + jumpModifier * sin(PI * jumpElapsed/jumpTime));
+		position += velocity.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
 	
 	jumpElapsed -= delta;
 	if jumpElapsed <= 0:
@@ -122,7 +125,7 @@ func _process(delta):
 		move_normal(delta);
 	
 	rotation = velocity.angle();
-	printerr(rotation);
+	
 	var dir = 0;
 	if( rotation > 0 ):
 		dir = 0
@@ -145,8 +148,14 @@ func _process(delta):
 	
 	rotation = 0
 	animationTime += delta;
+	var anim = Array();
+	anim.append(0);
+	anim.append(1);
+	anim.append(0);
+	anim.append(2);
+	
 	if(isMoving):
-		frame = 3*dir + int(floor(animationTime/.15))%3
+		frame = 3*dir + anim[int(floor(animationTime/.15))%4];
 	else:
 		frame = 3*dir
 	
