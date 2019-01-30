@@ -6,9 +6,9 @@ extends Sprite
 var velocity = Vector2();
 export (int) var speed = 5;
 var targeting = false;
-var jumpTime = .10;
+var jumpTime = .30;
 var jumpElapsed = jumpTime;
-var jumpModifier = 15;
+var jumpModifier = 2;
 var inJump = false;
 var forward = 0;
 var jDir = Vector2();
@@ -44,13 +44,14 @@ func get_input(delta):
 		y *= sqrt(2)/2
 	
 	velocity = cursorAngle * y ;
-	velocity = velocity.normalized() * speed;
-	position += velocity;
+	velocity = velocity.normalized() * speed * delta / .015;
+	if(y > 0 || position.distance_to(get_viewport().get_mouse_position()) > velocity.length()):
+		position += velocity;
 	
 	cursorAngle = (position - get_viewport().get_mouse_position());
 	var newAngle = 0;
 	if (position.distance_to(get_viewport().get_mouse_position()) != 0 ):
-		newAngle = -(x * speed)/((get_viewport().get_mouse_position()).distance_to(position)) + cursorAngle.angle();
+		newAngle = -(x * speed * delta / .015)/((get_viewport().get_mouse_position()).distance_to(position)) + cursorAngle.angle();
 	var rotOffset = Vector2();
 	rotOffset.y = sin(newAngle);
 	rotOffset.x = cos(newAngle);
@@ -76,7 +77,7 @@ func move_normal(delta):
 		newVelocity.x += 1
 		isMoving = true;
 	if (newVelocity.length() != 0):
-		velocity = newVelocity.normalized() * speed;
+		velocity = newVelocity.normalized() * speed * delta / .015;
 		position += velocity;
 	
 
@@ -95,15 +96,50 @@ func jump(delta):
 			jDir = jDir.rotated(PI);
 	
 	
+	
 	if targeting:
-		position += jDir.normalized() * (speed + jumpModifier * sin(PI * jumpElapsed/jumpTime));
+		var tmp = jDir.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
+		if(position.distance_to(get_viewport().get_mouse_position()) > tmp.length()):
+			position += tmp;
+		var jFrame = 0;
+		if (jumpElapsed/jumpTime <= .667):
+			jFrame = 1;
+		if (jumpElapsed/jumpTime <= .333):
+			jFrame = 2;
+		if (jumpElapsed/jumpTime <= 0):
+			jFrame = 0;
+		
+		frame = 18 + 3*GetDir(jDir.angle()) + jFrame ;
+		
 	else:
-		position += velocity.normalized() * (speed + jumpModifier * sin(PI * jumpElapsed/jumpTime));
+		position += velocity.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
 	
 	jumpElapsed -= delta;
 	if jumpElapsed <= 0:
 		inJump = false;
 		jumpElapsed = jumpTime;
+
+func GetDir(var angle):
+	var dir = 0;
+	if( angle > 0 ):
+		dir = 0
+	if( angle > PI/8):
+		dir = 1
+	if( angle > 3*PI/8):
+		dir = 2
+	if( angle > 5*PI/8):
+		dir = 3
+	if( angle > 7*PI/8):
+		dir = 4
+	if( angle < -PI/8):
+		dir = 7
+	if( angle < -3*PI/9):
+		dir = 6
+	if( angle < -5*PI/8):
+		dir = 5
+	if( angle < -7*PI/8):
+		dir = 4
+	return dir;
 
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
@@ -122,31 +158,19 @@ func _process(delta):
 		move_normal(delta);
 	
 	rotation = velocity.angle();
-	printerr(rotation);
-	var dir = 0;
-	if( rotation > 0 ):
-		dir = 0
-	if( rotation > PI/8):
-		dir = 1
-	if( rotation > 3*PI/8):
-		dir = 2
-	if( rotation > 5*PI/8):
-		dir = 3
-	if( rotation > 7*PI/8):
-		dir = 4
-	if( rotation < -PI/8):
-		dir = 7
-	if( rotation < -3*PI/9):
-		dir = 6
-	if( rotation < -5*PI/8):
-		dir = 5
-	if( rotation < -7*PI/8):
-		dir = 4
 	
+	
+	var dir = GetDir(rotation);
 	rotation = 0
 	animationTime += delta;
+	var anim = Array();
+	anim.append(0);
+	anim.append(1);
+	anim.append(0);
+	anim.append(2);
+	
 	if(isMoving):
-		frame = 3*dir + int(floor(animationTime/.15))%3
+		frame = 3*dir + anim[int(floor(animationTime/.15))%4];
 	else:
 		frame = 3*dir
 	
