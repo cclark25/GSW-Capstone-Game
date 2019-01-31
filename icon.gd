@@ -4,7 +4,7 @@ extends Sprite
 # var a = 2
 # var b = "textvar"
 var velocity = Vector2();
-export (int) var speed = 5;
+export (int) var speed = 7;
 var targeting = false;
 var jumpTime = .30;
 var jumpElapsed = jumpTime;
@@ -95,24 +95,24 @@ func jump(delta):
 		if Input.is_action_pressed("Down"):
 			jDir = jDir.rotated(PI);
 	
+	var jFrame = 0;
+	if (jumpElapsed/jumpTime <= .667):
+		jFrame = 1;
+	if (jumpElapsed/jumpTime <= .333):
+		jFrame = 2;
+	if (jumpElapsed/jumpTime <= 0):
+		jFrame = 0;
 	
 	
 	if targeting:
 		var tmp = jDir.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
 		if(position.distance_to(get_viewport().get_mouse_position()) > tmp.length()):
 			position += tmp;
-		var jFrame = 0;
-		if (jumpElapsed/jumpTime <= .667):
-			jFrame = 1;
-		if (jumpElapsed/jumpTime <= .333):
-			jFrame = 2;
-		if (jumpElapsed/jumpTime <= 0):
-			jFrame = 0;
 		
-		frame = 18 + 3*GetDir(jDir.angle()) + jFrame ;
 		
 	else:
 		position += velocity.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
+	frame = 24 + 3*GetDir(jDir.angle()) + jFrame;
 	
 	jumpElapsed -= delta;
 	if jumpElapsed <= 0:

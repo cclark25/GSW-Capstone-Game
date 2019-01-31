@@ -11,12 +11,12 @@ position = Vector2( 574.815, 319.603 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -10 )
-vframes = 9
+vframes = 16
 hframes = 3
 frame = 3
 script = ExtResource( 2 )
 _sections_unfolded = [ "Animation", "Transform" ]
-speed = 5
+speed = 7
 
 [node name="Cursor" type="Sprite" parent="." index="0"]
 
