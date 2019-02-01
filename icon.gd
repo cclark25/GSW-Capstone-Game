@@ -8,7 +8,7 @@ export (int) var speed = 7;
 var targeting = false;
 var jumpTime = .30;
 var jumpElapsed = jumpTime;
-var jumpModifier = 2;
+var jumpModifier = 5;
 var inJump = false;
 var forward = 0;
 var jDir = Vector2();
@@ -88,12 +88,15 @@ func jump(delta):
 		jDir.x = 1;
 		jDir = jDir.rotated(velocity.angle());
 		inJump = true;
-		if Input.is_action_pressed("Left"):
-			jDir = jDir.rotated(PI/2);
-		if Input.is_action_pressed("Right"):
-			jDir = jDir.rotated(-PI/2);
-		if Input.is_action_pressed("Down"):
-			jDir = jDir.rotated(PI);
+		if(targeting):
+			if Input.is_action_pressed("Left"):
+				jDir = jDir.rotated(PI/2);
+			if Input.is_action_pressed("Right"):
+				jDir = jDir.rotated(-PI/2);
+			if Input.is_action_pressed("Down"):
+				jDir = jDir.rotated(PI);
+			
+		
 	
 	var jFrame = 0;
 	if (jumpElapsed/jumpTime <= .667):
@@ -112,6 +115,7 @@ func jump(delta):
 		
 	else:
 		position += velocity.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
+	
 	frame = 24 + 3*GetDir(jDir.angle()) + jFrame;
 	
 	jumpElapsed -= delta;
