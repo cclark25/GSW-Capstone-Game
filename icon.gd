@@ -10,6 +10,7 @@ var jumpTime = .30;
 var jumpElapsed = jumpTime;
 var jumpModifier = 5;
 var inJump = false;
+var inSlash = false;
 var forward = 0;
 var jDir = Vector2();
 var animationTime = 0;
@@ -81,6 +82,27 @@ func move_normal(delta):
 		position += velocity;
 	
 
+func slash(delta):
+	if !inSlash:
+		inSlash = true;
+		animationTime = 0;
+		position.x += 12;
+	frame = 48;
+	if animationTime / (jumpTime / 2) > 0.20:
+		frame += 1;
+	if animationTime / (jumpTime / 2) > 0.50:
+		frame += 1;
+	if animationTime / (jumpTime / 2) > .80:
+		frame -= 2;
+	
+	if animationTime / (jumpTime / 2) >= 1:
+		inSlash = false;
+		animationTime = 0;
+		position.x -= 12;
+		return;
+		
+	animationTime += delta;
+
 func jump(delta):	
 	
 	if !inJump:
@@ -119,6 +141,9 @@ func jump(delta):
 	frame = 24 + 3*GetDir(jDir.angle()) + jFrame;
 	
 	jumpElapsed -= delta;
+	if Input.is_action_just_pressed("Left Click"):
+		inSlash = true;
+		animationTime = 0;
 	if jumpElapsed <= 0:
 		inJump = false;
 		jumpElapsed = jumpTime;
@@ -156,6 +181,9 @@ func _process(delta):
 		jump(delta);
 		return;
 	
+	if Input.is_action_just_pressed("Left Click") || inSlash:
+		slash(delta);
+	
 	if targeting: 
 		get_input(delta);
 	else:
@@ -173,10 +201,11 @@ func _process(delta):
 	anim.append(0);
 	anim.append(2);
 	
-	if(isMoving):
-		frame = 3*dir + anim[int(floor(animationTime/.15))%4];
-	else:
-		frame = 3*dir
+	if !inSlash:
+		if(isMoving):
+			frame = 3*dir + anim[int(floor(animationTime/.15))%4];
+		else:
+			frame = 3*dir
 	
 	
 	pass
