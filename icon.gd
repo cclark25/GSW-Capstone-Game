@@ -86,19 +86,32 @@ func slash(delta):
 	if !inSlash:
 		inSlash = true;
 		animationTime = 0;
-		position.x += 12;
-	frame = 48;
-	if animationTime / (jumpTime / 2) > 0.20:
-		frame += 1;
-	if animationTime / (jumpTime / 2) > 0.50:
-		frame += 1;
-	if animationTime / (jumpTime / 2) > .80:
-		frame -= 2;
+		get_child(1).show();
+		#position.x += 12;
+	#frame = ((frame/3)%8)*3 + 16*3;
 	
-	if animationTime / (jumpTime / 2) >= 1:
+	get_child(1).rotation = ((frame/3)%8) * PI/4 - PI/4;
+	
+	if (((frame/3)%8) >= 7 || ((frame/3)%8) <= 2):
+		get_child(1).z_index = 1;
+	else:
+		get_child(1).z_index = -1;
+	
+	var totalTime = jumpTime / 2;
+	get_child(1).rotation += (PI/2)*animationTime / totalTime;
+	
+#	if animationTime / totalTime > 0.20:
+#		frame += 1;
+#	if animationTime / totalTime > 0.50:
+#		frame += 1;
+#	if animationTime / totalTime > .80:
+#		frame -= 2;
+	
+	if animationTime / totalTime >= 1:
 		inSlash = false;
-		animationTime = 0;
-		position.x -= 12;
+		#animationTime = 0;
+		get_child(1).hide();
+		#position.x -= 12;
 		return;
 		
 	animationTime += delta;
@@ -143,9 +156,9 @@ func jump(delta):
 	jumpElapsed -= delta;
 	if Input.is_action_just_pressed("Left Click"):
 		inSlash = true;
-		animationTime = 0;
 	if jumpElapsed <= 0:
 		inJump = false;
+		animationTime = 0;
 		jumpElapsed = jumpTime;
 
 func GetDir(var angle):
@@ -201,11 +214,10 @@ func _process(delta):
 	anim.append(0);
 	anim.append(2);
 	
-	if !inSlash:
-		if(isMoving):
-			frame = 3*dir + anim[int(floor(animationTime/.15))%4];
-		else:
-			frame = 3*dir
+	if(isMoving):
+		frame = 3*dir + anim[int(floor(animationTime/.15))%4];
+	else:
+		frame = 3*dir
 	
 	
 	pass
