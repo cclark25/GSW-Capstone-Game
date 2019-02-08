@@ -1,29 +1,14 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
-[sub_resource type="ProceduralSky" id=1]
+[ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=1]
+[ext_resource path="res://icon.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Player/Cursor/Cursor.png" type="Texture" id=3]
+[ext_resource path="res://Cursor.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/Player/Sword/Sword.png" type="Texture" id=5]
 
-radiance_size = 4
-sky_top_color = Color( 0.0470588, 0.454902, 0.976471, 1 )
-sky_horizon_color = Color( 0.556863, 0.823529, 0.909804, 1 )
-sky_curve = 0.25
-sky_energy = 1.0
-ground_bottom_color = Color( 0.101961, 0.145098, 0.188235, 1 )
-ground_horizon_color = Color( 0.482353, 0.788235, 0.952941, 1 )
-ground_curve = 0.01
-ground_energy = 1.0
-sun_color = Color( 1, 1, 1, 1 )
-sun_latitude = 35.0
-sun_longitude = 0.0
-sun_angle_min = 1.0
-sun_angle_max = 100.0
-sun_curve = 0.05
-sun_energy = 16.0
-texture_size = 2
+[sub_resource type="Environment" id=1]
 
-[resource]
-
-background_mode = 2
-background_sky = SubResource( 1 )
+background_mode = 4
 background_sky_custom_fov = 0.0
 background_color = Color( 0, 0, 0, 1 )
 background_energy = 1.0
@@ -98,5 +83,38 @@ adjustment_enabled = false
 adjustment_brightness = 1.0
 adjustment_contrast = 1.0
 adjustment_saturation = 1.0
-_sections_unfolded = [ "Background" ]
+
+[node name="WorldEnvironment" type="WorldEnvironment" index="0"]
+
+environment = SubResource( 1 )
+_sections_unfolded = [ "Pause" ]
+
+[node name="Player" type="Sprite" parent="." index="0"]
+
+position = Vector2( 311.288, 192.681 )
+texture = ExtResource( 1 )
+vframes = 24
+hframes = 3
+script = ExtResource( 2 )
+_sections_unfolded = [ "Animation" ]
+speed = 7
+
+[node name="Cursor" type="Sprite" parent="Player" index="0"]
+
+position = Vector2( -82.5345, -68.4764 )
+texture = ExtResource( 3 )
+hframes = 3
+script = ExtResource( 4 )
+_sections_unfolded = [ "Animation" ]
+speed = 10
+
+[node name="Sword" type="Sprite" parent="Player" index="1"]
+
+visible = false
+position = Vector2( 0.912079, 8.94334 )
+texture = ExtResource( 5 )
+centered = false
+offset = Vector2( 0, -6 )
+_sections_unfolded = [ "Offset" ]
+
 
