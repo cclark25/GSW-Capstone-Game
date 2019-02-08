@@ -8,14 +8,14 @@
 
 [node name="Player" type="Sprite" index="0"]
 
-position = Vector2( 574.815, 319.603 )
+position = Vector2( 367.24, 221.23 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -10 )
 vframes = 24
 hframes = 3
 script = ExtResource( 2 )
-_sections_unfolded = [ "Animation", "Transform", "Z Index" ]
+_sections_unfolded = [ "Animation", "Transform", "Visibility", "Z Index" ]
 speed = 7
 
 [node name="Cursor" type="Sprite" parent="." index="0"]
@@ -29,6 +29,7 @@ speed = 10
 
 [node name="Sword" type="Sprite" parent="." index="1"]
 
+visible = false
 position = Vector2( -0.299347, -1.49684 )
 z_index = 1
 texture = ExtResource( 5 )
