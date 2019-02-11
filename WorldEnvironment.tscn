@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://icon.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Sprites/Player/Sword/Sword.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Boss/VineGuy/Entity.png" type="Texture" id=6]
 [ext_resource path="res://Entity.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/Enemies/Dryad/Dryad.png" type="Texture" id=8]
 
 [sub_resource type="Environment" id=1]
 
@@ -86,6 +87,14 @@ adjustment_brightness = 1.0
 adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 
+[sub_resource type="AtlasTexture" id=2]
+
+flags = 4
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 105, 256 )
+margin = Rect2( 0, 0, 0, 0 )
+filter_clip = false
+
 [node name="WorldEnvironment" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
@@ -128,6 +137,14 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
 hframes = 3
 script = ExtResource( 7 )
+_sections_unfolded = [ "Animation" ]
+
+[node name="Sprite" type="Sprite" parent="." index="2"]
+
+position = Vector2( 97.7672, 186.713 )
+texture = SubResource( 2 )
+vframes = 4
+hframes = 3
 _sections_unfolded = [ "Animation" ]
 
 
