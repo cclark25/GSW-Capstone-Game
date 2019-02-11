@@ -4,12 +4,13 @@ extends Sprite
 # var a = 2
 # var b = "textvar"
 var velocity = Vector2();
-export (int) var speed = 5;
+export (int) var speed = 7;
 var targeting = false;
 var jumpTime = .30;
 var jumpElapsed = jumpTime;
-var jumpModifier = 2;
+var jumpModifier = 5;
 var inJump = false;
+var inSlash = false;
 var forward = 0;
 var jDir = Vector2();
 var animationTime = 0;
@@ -81,6 +82,40 @@ func move_normal(delta):
 		position += velocity;
 	
 
+func slash(delta):
+	if !inSlash:
+		inSlash = true;
+		animationTime = 0;
+		get_child(1).show();
+		#position.x += 12;
+	#frame = ((frame/3)%8)*3 + 16*3;
+	
+	get_child(1).rotation = ((frame/3)%8) * PI/4 - PI/4;
+	
+	if (((frame/3)%8) >= 7 || ((frame/3)%8) <= 2):
+		get_child(1).z_index = 1;
+	else:
+		get_child(1).z_index = -1;
+	
+	var totalTime = jumpTime / 2;
+	get_child(1).rotation += (PI/2)*animationTime / totalTime;
+	
+#	if animationTime / totalTime > 0.20:
+#		frame += 1;
+#	if animationTime / totalTime > 0.50:
+#		frame += 1;
+#	if animationTime / totalTime > .80:
+#		frame -= 2;
+	
+	if animationTime / totalTime >= 1:
+		inSlash = false;
+		#animationTime = 0;
+		get_child(1).hide();
+		#position.x -= 12;
+		return;
+		
+	animationTime += delta;
+
 func jump(delta):	
 	
 	if !inJump:
@@ -88,35 +123,42 @@ func jump(delta):
 		jDir.x = 1;
 		jDir = jDir.rotated(velocity.angle());
 		inJump = true;
-		if Input.is_action_pressed("Left"):
-			jDir = jDir.rotated(PI/2);
-		if Input.is_action_pressed("Right"):
-			jDir = jDir.rotated(-PI/2);
-		if Input.is_action_pressed("Down"):
-			jDir = jDir.rotated(PI);
+		if(targeting):
+			if Input.is_action_pressed("Left"):
+				jDir = jDir.rotated(PI/2);
+			if Input.is_action_pressed("Right"):
+				jDir = jDir.rotated(-PI/2);
+			if Input.is_action_pressed("Down"):
+				jDir = jDir.rotated(PI);
+			
+		
 	
+	var jFrame = 0;
+	if (jumpElapsed/jumpTime <= .667):
+		jFrame = 1;
+	if (jumpElapsed/jumpTime <= .333):
+		jFrame = 2;
+	if (jumpElapsed/jumpTime <= 0):
+		jFrame = 0;
 	
 	
 	if targeting:
 		var tmp = jDir.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
 		if(position.distance_to(get_viewport().get_mouse_position()) > tmp.length()):
 			position += tmp;
-		var jFrame = 0;
-		if (jumpElapsed/jumpTime <= .667):
-			jFrame = 1;
-		if (jumpElapsed/jumpTime <= .333):
-			jFrame = 2;
-		if (jumpElapsed/jumpTime <= 0):
-			jFrame = 0;
 		
-		frame = 18 + 3*GetDir(jDir.angle()) + jFrame ;
 		
 	else:
 		position += velocity.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
 	
+	frame = 24 + 3*GetDir(jDir.angle()) + jFrame;
+	
 	jumpElapsed -= delta;
+	if Input.is_action_just_pressed("Left Click"):
+		inSlash = true;
 	if jumpElapsed <= 0:
 		inJump = false;
+		animationTime = 0;
 		jumpElapsed = jumpTime;
 
 func GetDir(var angle):
@@ -151,6 +193,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("Jump") || inJump:
 		jump(delta);
 		return;
+	
+	if Input.is_action_just_pressed("Left Click") || inSlash:
+		slash(delta);
 	
 	if targeting: 
 		get_input(delta);
