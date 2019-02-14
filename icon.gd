@@ -16,6 +16,7 @@ var jDir = Vector2();
 var animationTime = 0;
 var isMoving = false;
 
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -186,6 +187,10 @@ func GetDir(var angle):
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
+	
+	printerr(modulate);
+	self_modulate.r = 2 + sin((animationTime - floor(animationTime))*2*PI);
+	
 	if Input.is_action_just_pressed("Target"):
 		targeting = !targeting;
 	

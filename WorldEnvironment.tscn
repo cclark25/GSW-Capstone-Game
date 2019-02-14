@@ -101,17 +101,16 @@ texture = ExtResource( 1 )
 vframes = 24
 hframes = 3
 script = ExtResource( 2 )
-_sections_unfolded = [ "Animation" ]
+_sections_unfolded = [ "Animation", "Transform", "Visibility" ]
 speed = 7
 
 [node name="Cursor" type="Sprite" parent="Player" index="0"]
 
-position = Vector2( -82.5345, -68.4764 )
-scale = Vector2( 2, 2 )
+position = Vector2( -81.632, -67.5739 )
 texture = ExtResource( 3 )
 hframes = 3
 script = ExtResource( 4 )
-_sections_unfolded = [ "Animation" ]
+_sections_unfolded = [ "Animation", "Transform" ]
 speed = 10
 
 [node name="Sword" type="Sprite" parent="Player" index="1"]
@@ -121,11 +120,11 @@ position = Vector2( 0.912079, 8.94334 )
 texture = ExtResource( 5 )
 centered = false
 offset = Vector2( 0, -6 )
-_sections_unfolded = [ "Offset" ]
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Eye" type="Sprite" parent="." index="1"]
 
-position = Vector2( 512.224, 156.956 )
+position = Vector2( 511.322, 156.956 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
 vframes = 3
