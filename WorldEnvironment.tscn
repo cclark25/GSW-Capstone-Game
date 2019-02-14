@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://icon.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Eye.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/Boss/VineBoss/Vines.png" type="Texture" id=8]
 [ext_resource path="res://Vines.gd" type="Script" id=9]
+[ext_resource path="res://Sprites/Enemies/Katydid/Katydid.png" type="Texture" id=10]
+[ext_resource path="res://Katydid.gd" type="Script" id=11]
 
 [sub_resource type="Environment" id=1]
 
@@ -140,5 +142,14 @@ texture = ExtResource( 8 )
 vframes = 3
 script = ExtResource( 9 )
 _sections_unfolded = [ "Animation", "Transform", "Z Index" ]
+
+[node name="Katydid" type="Sprite" parent="." index="2"]
+
+position = Vector2( 406.373, 96.2332 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+vframes = 3
+script = ExtResource( 11 )
+_sections_unfolded = [ "Animation", "Transform" ]
 
 
