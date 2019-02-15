@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://icon.gd" type="Script" id=2]
@@ -11,8 +11,9 @@
 [ext_resource path="res://Vines.gd" type="Script" id=9]
 [ext_resource path="res://Sprites/Enemies/Katydid/Katydid.png" type="Texture" id=10]
 [ext_resource path="res://Katydid.gd" type="Script" id=11]
+[ext_resource path="res://Area2D.gd" type="Script" id=12]
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="Environment" id=3]
 
 background_mode = 4
 background_sky_custom_fov = 0.0
@@ -90,9 +91,20 @@ adjustment_brightness = 1.0
 adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 6.92908, 10.4658 )
+
+[sub_resource type="CapsuleShape2D" id=4]
+
+custom_solver_bias = 0.0
+radius = 3.66267
+height = 2.21225
+
 [node name="WorldEnvironment" type="WorldEnvironment" index="0"]
 
-environment = SubResource( 1 )
+environment = SubResource( 3 )
 _sections_unfolded = [ "Pause" ]
 
 [node name="Player" type="Sprite" parent="." index="0"]
@@ -105,6 +117,7 @@ hframes = 3
 script = ExtResource( 2 )
 _sections_unfolded = [ "Animation", "Transform", "Visibility" ]
 speed = 7
+damaged = false
 
 [node name="Cursor" type="Sprite" parent="Player" index="0"]
 
@@ -123,6 +136,25 @@ texture = ExtResource( 5 )
 centered = false
 offset = Vector2( 0, -6 )
 _sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Area2D" type="Area2D" parent="Player" index="2"]
+
+position = Vector2( -1.52588e-05, 0.451248 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D" index="0"]
+
+position = Vector2( 0, -1.782 )
+scale = Vector2( 1, 1.69225 )
+shape = SubResource( 2 )
 
 [node name="Eye" type="Sprite" parent="." index="1"]
 
@@ -151,5 +183,26 @@ texture = ExtResource( 10 )
 vframes = 3
 script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Area2D" type="Area2D" parent="Katydid" index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 12 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Katydid/Area2D" index="0"]
+
+position = Vector2( -0.751748, 1.9563 )
+rotation = 0.785398
+scale = Vector2( 1.13273, 1.09403 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
 
 

@@ -15,6 +15,8 @@ var forward = 0;
 var jDir = Vector2();
 var animationTime = 0;
 var isMoving = false;
+var lifePoints = 20;
+export (bool) var damaged = false;
 
 
 func _ready():
@@ -184,11 +186,26 @@ func GetDir(var angle):
 		dir = 4
 	return dir;
 
+func Damage(amount):
+	if(!damaged):
+		printerr(lifePoints);
+		damaged = true;
+		animationTime = 0;
+		lifePoints -= amount;
+		if(lifePoints <= 0):
+			self_modulate.b = 4;
+	pass
+
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
 	
-	self_modulate.r = 2 + sin((animationTime - floor(animationTime))*2*PI);
+	if(damaged):
+		var tmp = 2 + sin((animationTime - floor(animationTime))*2*PI);
+		self_modulate.r = tmp;
+		if(animationTime >= .75):
+			damaged = false;
+			self_modulate.r = 1;
 	
 	if Input.is_action_just_pressed("Target"):
 		targeting = !targeting;
