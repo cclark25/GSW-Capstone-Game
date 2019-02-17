@@ -11,7 +11,7 @@ func _ready():
 	pass
 
 func DealDamage(body):
-	body.get_parent().Damage(4);
+	body.get_parent().Damage(4, get_parent().position);
 	pass;
 
 

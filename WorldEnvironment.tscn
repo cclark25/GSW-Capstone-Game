@@ -13,7 +13,7 @@
 [ext_resource path="res://Katydid.gd" type="Script" id=11]
 [ext_resource path="res://Area2D.gd" type="Script" id=12]
 
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=1]
 
 background_mode = 4
 background_sky_custom_fov = 0.0
@@ -96,7 +96,7 @@ adjustment_saturation = 1.0
 custom_solver_bias = 0.0
 extents = Vector2( 6.92908, 10.4658 )
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=3]
 
 custom_solver_bias = 0.0
 radius = 3.66267
@@ -104,7 +104,7 @@ height = 2.21225
 
 [node name="WorldEnvironment" type="WorldEnvironment" index="0"]
 
-environment = SubResource( 3 )
+environment = SubResource( 1 )
 _sections_unfolded = [ "Pause" ]
 
 [node name="Player" type="Sprite" parent="." index="0"]
@@ -202,7 +202,7 @@ _sections_unfolded = [ "Collision" ]
 position = Vector2( -0.751748, 1.9563 )
 rotation = 0.785398
 scale = Vector2( 1.13273, 1.09403 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
 
