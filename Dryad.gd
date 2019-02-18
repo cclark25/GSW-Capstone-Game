@@ -17,19 +17,16 @@ func _process(delta):
 	var anim = Array();
 	anim.append(0);
 	anim.append(1);
-	anim.append(0);
 	anim.append(2);
 	anim.append(3);
 	anim.append(4);
-	anim.append(3);
 	anim.append(5);
 	anim.append(6);
 	anim.append(7);
-	anim.append(6);
 	anim.append(8);
 	anim.append(9);
 	anim.append(10);
-	anim.append(9);
 	anim.append(11);
 	
-	frame = anim[int(floor(animationTime/.5))%12];
+	frame = anim[int(floor(animationTime/.25))%12];
+
