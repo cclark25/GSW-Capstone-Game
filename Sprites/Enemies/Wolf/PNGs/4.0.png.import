@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Up.0.png-f918be9918e61ec0755656ee912e2d35.stex"
+path="res://.import/4.0.png-ba638528cbb65a2f764b1b9dc25762d0.stex"
 
 [deps]
 
-source_file="res://Sprites/Enemies/Wolf/Up.0.png"
-dest_files=[ "res://.import/Up.0.png-f918be9918e61ec0755656ee912e2d35.stex" ]
+source_file="res://Sprites/Enemies/Wolf/PNGs/4.0.png"
+dest_files=[ "res://.import/4.0.png-ba638528cbb65a2f764b1b9dc25762d0.stex" ]
 
 [params]
 

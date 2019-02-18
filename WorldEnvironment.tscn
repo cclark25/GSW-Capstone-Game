@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://icon.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Entity.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/Enemies/Dryad/Dryad.png" type="Texture" id=8]
 [ext_resource path="res://Dryad.gd" type="Script" id=9]
+[ext_resource path="res://Sprites/Enemies/Wolf/Wolf.png" type="Texture" id=10]
 
 [sub_resource type="Environment" id=1]
 
@@ -148,6 +149,16 @@ texture = SubResource( 2 )
 vframes = 4
 hframes = 3
 script = ExtResource( 9 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Wolf" type="Sprite" parent="." index="3"]
+
+position = Vector2( 347.906, 65.555 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+vframes = 4
+hframes = 3
+frame = 1
 _sections_unfolded = [ "Animation", "Transform" ]
 
 
