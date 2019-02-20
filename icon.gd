@@ -15,6 +15,9 @@ var forward = 0;
 var jDir = Vector2();
 var animationTime = 0;
 var isMoving = false;
+var lifePoints = 20;
+export (bool) var damaged = false;
+
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -87,18 +90,29 @@ func slash(delta):
 		inSlash = true;
 		animationTime = 0;
 		get_child(1).show();
+		#printerr(get_child(1).position)
 		#position.x += 12;
 	#frame = ((frame/3)%8)*3 + 16*3;
+	var baseDir = ((frame/3)%8) * PI/4;
+	get_child(1).rotation = baseDir - PI/4;
+	if(cos(baseDir) < 0 && int(cos(baseDir)) != 0):
+		get_child(1).rotation *= -1;
 	
-	get_child(1).rotation = ((frame/3)%8) * PI/4 - PI/4;
-	
-	if (((frame/3)%8) >= 7 || ((frame/3)%8) <= 2):
+	if (((frame/3)%8) <= 3):
 		get_child(1).z_index = 1;
 	else:
 		get_child(1).z_index = -1;
 	
 	var totalTime = jumpTime / 2;
-	get_child(1).rotation += (PI/2)*animationTime / totalTime;
+	if(cos(baseDir) < 0 && int(cos(baseDir)) != 0):
+		get_child(1).rotation -= (PI/2)*animationTime / totalTime;
+	else:
+		get_child(1).rotation += (PI/2)*animationTime / totalTime;
+	
+	#var tmp = Vector2(1,0);
+	#tmp = tmp.rotated(baseDir + PI/2);
+	#get_child(1).position += 5*tmp * (animationTime/totalTime);
+	
 	
 #	if animationTime / totalTime > 0.20:
 #		frame += 1;
@@ -112,6 +126,8 @@ func slash(delta):
 		#animationTime = 0;
 		get_child(1).hide();
 		#position.x -= 12;
+		#get_child(1).position.x = 0.912079; #tmp * (animationTime / totalTime);
+		#get_child(1).position.y = 8.94334;
 		return;
 		
 	animationTime += delta;
@@ -183,9 +199,29 @@ func GetDir(var angle):
 		dir = 4
 	return dir;
 
+func Damage(amount, sourceLocation):
+	if(!damaged):
+		damaged = true;
+		animationTime = 0;
+		lifePoints -= amount;
+		if(lifePoints <= 0):
+			self_modulate.b = 4;
+		position += (position - sourceLocation ).normalized() * 75;
+	pass
+
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
+	
+	animationTime += delta;
+	if(damaged):
+		var tmp = 2 + sin((animationTime - floor(animationTime))*2*PI);
+		self_modulate.r = tmp;
+		if(animationTime >= .15):
+			damaged = false;
+			self_modulate.r = 1;
+			return;
+	
 	if Input.is_action_just_pressed("Target"):
 		targeting = !targeting;
 	
@@ -207,7 +243,6 @@ func _process(delta):
 	
 	var dir = GetDir(rotation);
 	rotation = 0
-	animationTime += delta;
 	var anim = Array();
 	anim.append(0);
 	anim.append(1);
