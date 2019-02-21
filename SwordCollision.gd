@@ -11,15 +11,12 @@ func _ready():
 	pass
 
 func DealDamage(body):
-	
-	body.TakeDamage(4, get_parent().position);
+	if(get_parent().visible): body.TakeDamage(8, get_parent().position);
 	pass;
 	
-func TakeDamage(amount, source):
-	get_parent().damaged = true;
-	get_parent().lifePoints -= amount;
-	get_parent().animationTime = 0;
-	pass;
+func TakeDamage(amount, sourceLocation):
+	pass
+
 
 
 #func _process(delta):
