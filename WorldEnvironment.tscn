@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://icon.gd" type="Script" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://Sprites/Enemies/Katydid/Katydid.png" type="Texture" id=12]
 [ext_resource path="res://Katydid.gd" type="Script" id=13]
 [ext_resource path="res://Area2D.gd" type="Script" id=14]
+[ext_resource path="res://Sprites/Familiars/Snake/Entity.png" type="Texture" id=15]
+[ext_resource path="res://demo/bin/gdexample.gdns" type="Script" id=16]
 
 [sub_resource type="Environment" id=1]
 
@@ -214,6 +216,7 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Area2D" type="Area2D" parent="Katydid" index="0"]
 
+position = Vector2( -1, 1.00001 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -232,5 +235,15 @@ rotation = 0.785398
 scale = Vector2( 1.13273, 1.09403 )
 shape = SubResource( 4 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Entity" type="Sprite" parent="." index="3"]
+
+pause_mode = 2
+position = Vector2( 150, 230 )
+texture = ExtResource( 15 )
+vframes = 8
+hframes = 4
+script = ExtResource( 16 )
+_sections_unfolded = [ "Animation", "Pause" ]
 
 

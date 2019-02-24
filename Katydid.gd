@@ -36,7 +36,6 @@ func _process(delta):
 		var tmp = animationTime / .15;
 		self_modulate.a *= tmp;
 		if(animationTime >= .15):
-			printerr("Here");
 			queue_free();
 		return;
 	

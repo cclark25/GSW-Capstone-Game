@@ -1,0 +1,8 @@
+[gd_resource type="GDNativeLibrary" format=2]
+
+[resource]
+
+load_once = true
+symbol_prefix = "godot_"
+reloadable = true
+

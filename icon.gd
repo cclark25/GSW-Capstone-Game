@@ -208,7 +208,6 @@ func _process(delta):
 	if(damaged):
 		var tmp = 2 + sin((animationTime - floor(animationTime))*2*PI);
 		self_modulate.r *=  tmp;
-		printerr(self_modulate.r);
 		if(animationTime >= .15):
 			damaged = false;
 			self_modulate.r = 1;
