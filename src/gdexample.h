@@ -6,7 +6,7 @@
 
 namespace godot {
 
-class gdexample : public godot::GodotScript<Sprite> {
+class gdexample : public GodotScript<Sprite> {
     GODOT_CLASS(gdexample)
 
 private:
