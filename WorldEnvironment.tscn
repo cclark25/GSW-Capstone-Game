@@ -258,13 +258,14 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Sword" type="Sprite" parent="Dryad" index="1"]
 
-visible = false
-position = Vector2( 18.9526, 13.5376 )
+position = Vector2( -7.21997, 15.3426 )
 texture = ExtResource( 15 )
-_sections_unfolded = [ "Visibility" ]
+offset = Vector2( 14, 0 )
+_sections_unfolded = [ "Offset", "Visibility" ]
 
 [node name="DryadSword" type="Area2D" parent="Dryad/Sword" index="0"]
 
+position = Vector2( -80.774, 32.9414 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -277,8 +278,8 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dryad/Sword/DryadSword" index="0"]
 
-position = Vector2( 2.32571, -1.2173 )
-scale = Vector2( 1.82237, 0.624812 )
+position = Vector2( 95.9495, -34.1587 )
+scale = Vector2( 2.01244, 0.624812 )
 shape = SubResource( 6 )
 
 

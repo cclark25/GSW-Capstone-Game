@@ -38,7 +38,7 @@ func _process(delta):
 	anim.append(10);
 	anim.append(11);
 	
-	if (position - get_parent().get_child(0).position).length() <= 100 || inSlash:
+	if (position - get_parent().get_child(0).position).length() <= 150 || inSlash:
 		slash(delta);
 		
 	if (position - get_parent().get_child(0).position).length() <= 500 || isAggro:
@@ -62,21 +62,21 @@ func _process(delta):
 		["Right"]:
 			animOffset = 0;
 			moveAngle = 0;
-			get_child(1).position = Vector2(15,15);
+			get_child(1).position = Vector2(5,15);
 		["Down"]:
 			animOffset = 1;
 			moveAngle = PI/2;
-			get_child(1).position = Vector2(0,30);
+			get_child(1).position = Vector2(5,20);
 		["Left"]:
 			animOffset = 2;
 			moveAngle = PI;
-			get_child(1).position = Vector2(-15,15);
+			get_child(1).position = Vector2(-5,15);
 		["Up"]:
 			animOffset = 3;
 			moveAngle = 3*PI/2;
-			get_child(1).position = Vector2(0,-30);
+			get_child(1).position = Vector2(0,-20);
 	
-	if isMoving:
+	if isMoving || isAggro:
 		frame = anim[int(floor(animationTime/.25))%3 + 3 * animOffset];
 		position += delta * (movement.rotated(moveAngle));
 
@@ -126,7 +126,7 @@ func aggro(delta):
 	if (angle <= -PI/4 && angle >= -3*PI/4):
 		moveDirection = "Down";
 	var distance = (position - get_parent().get_child(0).position).length();
-	position -= delta * (movement.rotated(angle * 2*sin(2*PI * (animationTime))))
+	position -= delta * (movement.rotated(angle))
 	if (position - get_parent().get_child(0).position).length() >= 500:
 		isAggro = false;
 	
