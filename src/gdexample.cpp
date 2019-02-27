@@ -31,8 +31,9 @@ gdexample::~gdexample() {
 void gdexample::_process(float delta) {
     time_passed += delta;
     if(time_passed > 3){
+	   // gdexample *x = new gdexample();
+	   //owner->get_parent()->get_parent()->add_child(x->owner, false);
 
-	   owner->get_parent()->add_child(new Sprite(), true);
 	   //owner->queue_free(); 
     }
 

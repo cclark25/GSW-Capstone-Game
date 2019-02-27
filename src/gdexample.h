@@ -7,6 +7,7 @@
 namespace godot {
 
 class gdexample : public GodotScript<Sprite> {
+//class example : public Sprite {
     GODOT_CLASS(gdexample)
 
 private:
