@@ -22,4 +22,6 @@ func _process(delta):
 	
 	frame = anim[int(floor(animationTime/.15))%4];
 	
+	#var x = load("res://demo/bin/gdexample.gdns");
+	
 	pass
