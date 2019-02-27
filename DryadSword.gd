@@ -11,13 +11,8 @@ func _ready():
 	pass
 
 func DealDamage(body):
-  body.TakeDamage(4, get_parent().position);
-	pass;
-	
-func TakeDamage(amount, source):
-	get_parent().damaged = true;
-	get_parent().lifePoints -= amount;
-	get_parent().animationTime = 0;
+	if (body.get_parent() == body.get_parent().get_parent().get_child(0)):
+		body.get_parent().Damage(4, get_parent().position);
 	pass;
 
 

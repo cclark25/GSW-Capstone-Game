@@ -5,6 +5,7 @@
 [ext_resource path="res://Sprites/Player/Cursor/Cursor.png" type="Texture" id=3]
 [ext_resource path="res://Cursor.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/Player/Sword/Sword.png" type="Texture" id=5]
+
 [ext_resource path="res://SwordCollision.gd" type="Script" id=6]
 [ext_resource path="res://Player.CollisionBox.gd" type="Script" id=7]
 [ext_resource path="res://Sprites/Boss/VineBoss/Eye.png" type="Texture" id=8]
@@ -111,6 +112,24 @@ custom_solver_bias = 0.0
 radius = 3.66267
 height = 2.21225
 
+[sub_resource type="AtlasTexture" id=4]
+
+flags = 0
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 105, 252 )
+margin = Rect2( 0, 0, 0, 0 )
+filter_clip = false
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8.86888, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
 [node name="WorldEnvironment" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
@@ -144,7 +163,7 @@ position = Vector2( 0.912079, 8.94334 )
 texture = ExtResource( 5 )
 centered = false
 offset = Vector2( 0, -6 )
-_sections_unfolded = [ "Offset", "Transform" ]
+_sections_unfolded = [ "Offset", "Transform", "Visibility" ]
 
 [node name="Area2D" type="Area2D" parent="Player/Sword" index="0"]
 
@@ -168,7 +187,7 @@ shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="Player" index="2"]
 
-position = Vector2( -1.52588e-05, 0.451248 )
+position = Vector2( -1.52588e-005, 0.451248 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -236,14 +255,61 @@ scale = Vector2( 1.13273, 1.09403 )
 shape = SubResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Entity" type="Sprite" parent="." index="3"]
 
-pause_mode = 2
-position = Vector2( 150, 230 )
+[node name="Dryad" type="Sprite" parent="." index="3"]
+
+position = Vector2( 116.423, 178.696 )
+scale = Vector2( 2, 2 )
+texture = SubResource( 4 )
+vframes = 4
+hframes = 3
+script = ExtResource( 14 )
+_sections_unfolded = [ "Animation", "Transform" ]
+damaged = false
+
+[node name="DryadCollision" type="Area2D" parent="Dryad" index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dryad/DryadCollision" index="0"]
+
+position = Vector2( -1.50993, 3.06961 )
+scale = Vector2( 1.17862, 2.75959 )
+shape = SubResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sword" type="Sprite" parent="Dryad" index="1"]
+
+position = Vector2( -7.21997, 15.3426 )
 texture = ExtResource( 15 )
-vframes = 8
-hframes = 4
+offset = Vector2( 14, 0 )
+_sections_unfolded = [ "Offset", "Visibility" ]
+
+[node name="DryadSword" type="Area2D" parent="Dryad/Sword" index="0"]
+
+position = Vector2( -80.774, 32.9414 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 script = ExtResource( 16 )
-_sections_unfolded = [ "Animation", "Pause" ]
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dryad/Sword/DryadSword" index="0"]
+
+position = Vector2( 95.9495, -34.1587 )
+scale = Vector2( 2.01244, 0.624812 )
+shape = SubResource( 6 )
+
 
 
