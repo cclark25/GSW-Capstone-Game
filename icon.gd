@@ -3,7 +3,7 @@ extends Sprite
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-var velocity = Vector2();
+var velocity = Vector2(0,-1);
 export (int) var speed = 4;
 var targeting = false;
 var jumpTime = .30;

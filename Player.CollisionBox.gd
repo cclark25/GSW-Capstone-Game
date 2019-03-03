@@ -10,13 +10,13 @@ func _ready():
 	pass
 	
 func TakeDamage(amount, sourceLocation):
-	if(!(get_parent().damaged)):
-		get_parent().damaged = true;
-		get_parent().animationTime = 0;
-		get_parent().lifePoints -= amount;
-		if(get_parent().lifePoints <= 0):
-			get_parent().self_modulate.b = 4;
-		get_parent().position += (get_parent().position - sourceLocation ).normalized() * 75;
+	if(!(get_child(1).damaged)):
+		get_child(1).damaged = true;
+		get_child(1).animationTime = 0;
+		get_child(1).lifePoints -= amount;
+		if(get_child(1).lifePoints <= 0):
+			get_tree().change_scene("res://GameOverScreen.tscn");
+		move_and_collide((position - sourceLocation ).normalized() * 75);
 	pass
 
 #func _process(delta):

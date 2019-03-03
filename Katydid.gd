@@ -36,14 +36,15 @@ func _process(delta):
 		var tmp = animationTime / .15;
 		self_modulate.a *= tmp;
 		if(animationTime >= .15):
+			get_parent().get_child(1).unlock();
 			queue_free();
 		return;
 	
 	if(animationTime / waitTime >= 1 && !inFlight):
 		inFlight = true;
 		animationTime = 0;
-		var angle = position.angle_to_point(get_parent().get_child(0).position);# (((randi()%180)/180) * PI)
-		var distance = (position - get_parent().get_child(0).position).length();
+		var angle = position.angle_to_point(get_parent().get_child(3).position);# (((randi()%180)/180) * PI)
+		var distance = (position - get_parent().get_child(3).position).length();
 		movement = Vector2(max(distance * 1.5, 300), 0);
 		moveAngle = (randf() * PI/4) - PI/8;
 		movement = movement.rotated(angle);

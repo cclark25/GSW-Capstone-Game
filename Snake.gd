@@ -8,6 +8,7 @@ var destination = Vector2();
 var hooked = false;
 var inJump = false;
 var jumpRatio;
+var jumpDir = Vector2();
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -17,8 +18,10 @@ func _ready():
 	pass
 
 func Jump():
-	inJump = true;
-	jumpRatio = scale.x;
+	if(hooked):
+		inJump = true;
+		jumpRatio = scale.x;
+		jumpDir = -(get_parent().get_parent().position - destination).normalized();
 	return hooked;
 
 func Use():
@@ -26,8 +29,8 @@ func Use():
 	set_process(true);
 	time = 0;
 	visible = true;
-	var cursorAngle = Vector2();
-	cursorAngle = (get_parent().get_parent().position - get_viewport().get_mouse_position()).normalized();
+	var cursorAngle = Vector2(1,0);
+	cursorAngle = cursorAngle.rotated(((get_parent().frame / 3) % 8) * PI/4).rotated(PI) #(get_parent().get_parent().position - get_viewport().get_mouse_position()).normalized();
 	cursorAngle *= 41;
 	destination = get_parent().get_parent().position - cursorAngle;
 	get_child(0).get_child(0).disabled = false;
@@ -62,8 +65,11 @@ func _process(delta):
 	rotation = (-get_parent().get_parent().position + destination).angle();
 	
 	if(inJump):
-		get_parent().get_parent().position += Vector2(5,0).rotated(rotation);
-		return;
+		get_parent().get_parent().position += jumpDir*5;
+		if(scale.x > abs(jumpRatio)):
+			printerr("Jump Completed");
+			inJump = false;
+			UnHook();
 	
 	#get_parent().get_parent().get_parent().get_child(4).position = destination;
 	if(hooked):
