@@ -1,0 +1,579 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://BossRoom.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Boss_Room/Background/Boss_Room.png" type="Texture" id=2]
+[ext_resource path="res://North_Door.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/Dungeon Floors/Dungeon Doors/PNGs/Rows/Sheet/Entity.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Boss_Room/Limb/Limb.png" type="Texture" id=5]
+[ext_resource path="res://Limb.gd" type="Script" id=6]
+[ext_resource path="res://Sprites/Boss/VineBoss/Eye.png" type="Texture" id=7]
+[ext_resource path="res://Eye.gd" type="Script" id=8]
+[ext_resource path="res://Sprites/Boss/VineBoss/Vines.png" type="Texture" id=9]
+[ext_resource path="res://Vines.gd" type="Script" id=10]
+[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=11]
+[ext_resource path="res://Torch.gd" type="Script" id=12]
+
+[sub_resource type="Environment" id=1]
+
+background_mode = 4
+background_sky_custom_fov = 0.0
+background_color = Color( 0, 0, 0, 1 )
+background_energy = 1.0
+background_canvas_max_layer = 0
+ambient_light_color = Color( 0, 0, 0, 1 )
+ambient_light_energy = 1.0
+ambient_light_sky_contribution = 1.0
+fog_enabled = false
+fog_color = Color( 0.5, 0.6, 0.7, 1 )
+fog_sun_color = Color( 1, 0.9, 0.7, 1 )
+fog_sun_amount = 0.0
+fog_depth_enabled = true
+fog_depth_begin = 10.0
+fog_depth_curve = 1.0
+fog_transmit_enabled = false
+fog_transmit_curve = 1.0
+fog_height_enabled = false
+fog_height_min = 0.0
+fog_height_max = 100.0
+fog_height_curve = 1.0
+tonemap_mode = 0
+tonemap_exposure = 1.0
+tonemap_white = 1.0
+auto_exposure_enabled = false
+auto_exposure_scale = 0.4
+auto_exposure_min_luma = 0.05
+auto_exposure_max_luma = 8.0
+auto_exposure_speed = 0.5
+ss_reflections_enabled = false
+ss_reflections_max_steps = 64
+ss_reflections_fade_in = 0.15
+ss_reflections_fade_out = 2.0
+ss_reflections_depth_tolerance = 0.2
+ss_reflections_roughness = true
+ssao_enabled = false
+ssao_radius = 1.0
+ssao_intensity = 1.0
+ssao_radius2 = 0.0
+ssao_intensity2 = 1.0
+ssao_bias = 0.01
+ssao_light_affect = 0.0
+ssao_color = Color( 0, 0, 0, 1 )
+ssao_quality = 0
+ssao_blur = 3
+ssao_edge_sharpness = 4.0
+dof_blur_far_enabled = false
+dof_blur_far_distance = 10.0
+dof_blur_far_transition = 5.0
+dof_blur_far_amount = 0.1
+dof_blur_far_quality = 1
+dof_blur_near_enabled = false
+dof_blur_near_distance = 2.0
+dof_blur_near_transition = 1.0
+dof_blur_near_amount = 0.1
+dof_blur_near_quality = 1
+glow_enabled = false
+glow_levels/1 = false
+glow_levels/2 = false
+glow_levels/3 = true
+glow_levels/4 = false
+glow_levels/5 = true
+glow_levels/6 = false
+glow_levels/7 = false
+glow_intensity = 0.8
+glow_strength = 1.0
+glow_bloom = 0.0
+glow_blend_mode = 2
+glow_hdr_threshold = 1.0
+glow_hdr_scale = 2.0
+glow_bicubic_upscale = false
+adjustment_enabled = false
+adjustment_brightness = 1.0
+adjustment_contrast = 1.0
+adjustment_saturation = 1.0
+_sections_unfolded = [ "Background" ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 13.6841, 14.6107 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10.4, 13 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 20, 11.5556 )
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 12.1894, 10 )
+
+[sub_resource type="RectangleShape2D" id=6]
+
+custom_solver_bias = 0.0
+extents = Vector2( 13, 12.7484 )
+
+[sub_resource type="CircleShape2D" id=7]
+
+custom_solver_bias = 0.0
+radius = 10.0
+
+[node name="BossRoom" type="WorldEnvironment"]
+
+environment = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="Dungeon Floor Demo" type="Sprite" parent="." index="0"]
+
+editor/display_folded = true
+position = Vector2( 320, 180 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Z Index" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Dungeon Floor Demo" index="0"]
+
+editor/display_folded = true
+input_pickable = false
+collision_layer = 512
+collision_mask = 31775
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 0.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="RightWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="0"]
+
+position = Vector2( 301.5, -0.942311 )
+scale = Vector2( 1.65385, 13.9969 )
+shape = SubResource( 2 )
+
+[node name="LeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="1"]
+
+position = Vector2( -300, 0 )
+scale = Vector2( 1.65385, 13.9969 )
+shape = SubResource( 2 )
+
+[node name="BottomLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="2"]
+
+position = Vector2( -173.092, 160 )
+scale = Vector2( 9.67287, 1.26702 )
+shape = SubResource( 2 )
+
+[node name="BottomRightWall2" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="3"]
+
+position = Vector2( 170, 160 )
+scale = Vector2( 9.67287, 1.26702 )
+shape = SubResource( 2 )
+
+[node name="TopLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="4"]
+
+position = Vector2( -160, -160 )
+scale = Vector2( 9.50008, 1.2377 )
+shape = SubResource( 2 )
+
+[node name="TopRightWall3" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="5"]
+
+position = Vector2( 81.4121, -160 )
+scale = Vector2( 15.069, 1.26702 )
+shape = SubResource( 2 )
+
+[node name="CenterPit" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="6"]
+
+scale = Vector2( 11.5385, 4.49519 )
+shape = SubResource( 3 )
+
+[node name="LeftPit" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="7"]
+
+position = Vector2( -100, 1.52588e-05 )
+scale = Vector2( 1, 13.8462 )
+shape = SubResource( 4 )
+
+[node name="RightPit" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="8"]
+
+position = Vector2( 100, 0 )
+scale = Vector2( 1, 13.8462 )
+shape = SubResource( 4 )
+
+[node name="TopPit" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="9"]
+
+position = Vector2( 0, -50 )
+scale = Vector2( 24.6731, 1 )
+shape = SubResource( 5 )
+
+[node name="TopPit2" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="10"]
+
+position = Vector2( 0, 50 )
+scale = Vector2( 24.6731, 1 )
+shape = SubResource( 5 )
+
+[node name="South_Door" type="StaticBody2D" parent="." index="1"]
+
+editor/display_folded = true
+position = Vector2( 320, 340.049 )
+rotation = 3.14159
+scale = Vector2( 1, 0.96875 )
+input_pickable = false
+collision_layer = 512
+collision_mask = 31775
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+script = ExtResource( 3 )
+_sections_unfolded = [ "Collision", "Transform" ]
+is_locked = false
+
+[node name="S_Door" type="Sprite" parent="South_Door" index="0"]
+
+position = Vector2( -0.440155, -3.05176e-05 )
+texture = ExtResource( 4 )
+vframes = 4
+frame = 3
+_sections_unfolded = [ "Animation" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="South_Door" index="1"]
+
+position = Vector2( -1.14441e-05, 2.38419e-07 )
+scale = Vector2( 2.30769, 1.53846 )
+shape = SubResource( 6 )
+
+[node name="SpawnPoint" type="CollisionShape2D" parent="." index="2"]
+
+position = Vector2( 320, 310 )
+shape = SubResource( 7 )
+
+[node name="Limb_0" type="Sprite" parent="." index="3"]
+
+editor/display_folded = true
+position = Vector2( 221.878, 297.535 )
+rotation = -1.5708
+z_index = 4
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Area2D" type="Area2D" parent="Limb_0" index="0"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 16384
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_0/Area2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Limb_1" type="Sprite" parent="." index="4"]
+
+editor/display_folded = true
+position = Vector2( 420, 300 )
+rotation = -1.5708
+z_index = 4
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Area2D" type="Area2D" parent="Limb_1" index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 16384
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_1/Area2D" index="0"]
+
+visible = false
+build_mode = 0
+polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Limb_2" type="Sprite" parent="." index="5"]
+
+editor/display_folded = true
+position = Vector2( 60, 230 )
+z_index = 4
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Area2D" type="Area2D" parent="Limb_2" index="0"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 16384
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_2/Area2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Limb_3" type="Sprite" parent="." index="6"]
+
+editor/display_folded = true
+position = Vector2( 60, 130 )
+z_index = 4
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Area2D" type="Area2D" parent="Limb_3" index="0"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 16384
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_3/Area2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Limb_4" type="Sprite" parent="." index="7"]
+
+editor/display_folded = true
+position = Vector2( 220.513, 63.4583 )
+rotation = 1.5708
+z_index = 4
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Area2D" type="Area2D" parent="Limb_4" index="0"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 16384
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_4/Area2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Limb_5" type="Sprite" parent="." index="8"]
+
+editor/display_folded = true
+position = Vector2( 420.513, 63.4583 )
+rotation = 1.5708
+z_index = 4
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Area2D" type="Area2D" parent="Limb_5" index="0"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 16384
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_5/Area2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Limb_6" type="Sprite" parent="." index="9"]
+
+editor/display_folded = true
+position = Vector2( 574.811, 128.918 )
+rotation = 3.14159
+z_index = 4
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Area2D" type="Area2D" parent="Limb_6" index="0"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 16384
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_6/Area2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Limb_7" type="Sprite" parent="." index="10"]
+
+editor/display_folded = true
+position = Vector2( 573.513, 230.458 )
+rotation = 3.14159
+z_index = 4
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Area2D" type="Area2D" parent="Limb_7" index="0"]
+
+visible = false
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 16384
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 6 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_7/Area2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Area2D" type="Area2D" parent="." index="11"]
+
+editor/display_folded = true
+position = Vector2( 320, 180 )
+z_index = 10
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Z Index" ]
+
+[node name="Eye" type="Sprite" parent="Area2D" index="0"]
+
+texture = ExtResource( 7 )
+vframes = 3
+script = ExtResource( 8 )
+_sections_unfolded = [ "Animation", "Transform" ]
+closedTime = 7.0
+openTime = 2
+
+[node name="Vines" type="Sprite" parent="Area2D" index="1"]
+
+z_index = -1
+texture = ExtResource( 9 )
+vframes = 3
+script = ExtResource( 10 )
+_sections_unfolded = [ "Animation", "Transform", "Z Index" ]
+
+[node name="Torch_1" type="Sprite" parent="." index="12"]
+
+position = Vector2( 320, 60 )
+texture = ExtResource( 11 )
+vframes = 3
+script = ExtResource( 12 )
+_sections_unfolded = [ "Animation", "Material", "Z Index" ]
+
+[node name="Torch_2" type="Sprite" parent="." index="13"]
+
+position = Vector2( 120, 60 )
+texture = ExtResource( 11 )
+vframes = 3
+script = ExtResource( 12 )
+_sections_unfolded = [ "Animation", "Material", "Z Index" ]
+
+[node name="Torch_3" type="Sprite" parent="." index="14"]
+
+position = Vector2( 520, 60 )
+texture = ExtResource( 11 )
+vframes = 3
+script = ExtResource( 12 )
+_sections_unfolded = [ "Animation", "Material", "Z Index" ]
+
+[node name="Torch_4" type="Sprite" parent="." index="15"]
+
+position = Vector2( 520, 300 )
+rotation = 3.14159
+texture = ExtResource( 11 )
+vframes = 3
+script = ExtResource( 12 )
+_sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
+
+[node name="Torch_5" type="Sprite" parent="." index="16"]
+
+position = Vector2( 119.757, 300 )
+rotation = 3.14159
+texture = ExtResource( 11 )
+vframes = 3
+script = ExtResource( 12 )
+_sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
+
+[node name="Torch_6" type="Sprite" parent="." index="17"]
+
+position = Vector2( 578.931, 180.562 )
+rotation = 1.5708
+texture = ExtResource( 11 )
+vframes = 3
+script = ExtResource( 12 )
+_sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
+
+[node name="Torch_7" type="Sprite" parent="." index="18"]
+
+position = Vector2( 62.7367, 180.562 )
+rotation = -1.5708
+texture = ExtResource( 11 )
+vframes = 3
+script = ExtResource( 12 )
+_sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
+
+

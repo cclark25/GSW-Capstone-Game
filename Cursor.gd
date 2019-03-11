@@ -22,10 +22,10 @@ func _process(delta):
 	anim.append(0);
 	anim.append(2);
 	frame = anim[int(floor(animationTime/.15))%4];
-	if(get_parent().targeting):
+	if(get_parent().get_child(1).targeting):
 		
 		visible = true;
-		var curPosition = (get_viewport().get_mouse_position() - get_parent().position) / 2;
+		var curPosition = (get_viewport().get_mouse_position() - get_parent().position) ;
 		rotation = curPosition.angle_to_point(position);
 		var velocity = Vector2((delta/.01)*speed, 0);
 		

@@ -7,8 +7,8 @@ symbol_prefix="godot_"
 [entry]
 
 X11.64="res://demo/bin/x11/libgdexample.so"
-Windows.64="res://bin/win64/libgdexample.dll"
-OSX.64="res://bin/osx/libgdexample.dylib"
+Windows.64="res://demo/bin/win64/libgdexample.dll"
+OSX.64="res://demo/bin/osx/libgdexample.dylib"
 
 [dependencies]
 

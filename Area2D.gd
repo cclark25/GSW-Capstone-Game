@@ -7,11 +7,13 @@ extends Area2D
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	connect("area_entered", self, "DealDamage");
+	connect("body_entered", self, "DealDamage");
 	pass
 
 func DealDamage(body):
-  body.TakeDamage(4, get_parent().position);
+	if(body.has_method("TakeDamage")):
+		body.TakeDamage(4, get_parent().position);
+		printerr("Here");
 	pass;
 	
 func TakeDamage(amount, source):

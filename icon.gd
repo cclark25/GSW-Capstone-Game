@@ -3,8 +3,8 @@ extends Sprite
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-var velocity = Vector2();
-export (int) var speed = 7;
+var velocity = Vector2(0,-1);
+export (int) var speed = 4;
 var targeting = false;
 var jumpTime = .30;
 var jumpElapsed = jumpTime;
@@ -17,7 +17,7 @@ var animationTime = 0;
 var isMoving = false;
 export (bool) var damaged = false;
 var lifePoints = 20;
-
+export (int) var itemIndex = 0;
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -28,7 +28,8 @@ func get_input(delta):
 	var y = 0;
 	var x = 0;
 	var cursorAngle = Vector2();
-	cursorAngle = (position - get_viewport().get_mouse_position());
+	cursorAngle = (get_parent().position - get_viewport().get_mouse_position()).normalized();
+	printerr(position);
 	isMoving = false;
 	if Input.is_action_pressed('Up'):
 		y -= 1
@@ -49,20 +50,22 @@ func get_input(delta):
 	
 	velocity = cursorAngle * y ;
 	velocity = velocity.normalized() * speed * delta / .015;
-	if(y > 0 || position.distance_to(get_viewport().get_mouse_position()) > velocity.length()):
-		position += velocity;
+	if(y > 0 || get_parent().position.distance_to(get_viewport().get_mouse_position()) > velocity.length()):
+		#position += velocity;
+		get_parent().move_and_collide(velocity);
 	
-	cursorAngle = (position - get_viewport().get_mouse_position());
+	cursorAngle = (get_parent().position - get_viewport().get_mouse_position());
 	var newAngle = 0;
-	if (position.distance_to(get_viewport().get_mouse_position()) != 0 ):
-		newAngle = -(x * speed * delta / .015)/((get_viewport().get_mouse_position()).distance_to(position)) + cursorAngle.angle();
+	if (get_parent().position.distance_to(get_viewport().get_mouse_position()) != 0 ):
+		newAngle = -(x * speed * delta / .015)/((get_viewport().get_mouse_position()).distance_to(get_parent().position)) + cursorAngle.angle();
 	var rotOffset = Vector2();
 	rotOffset.y = sin(newAngle);
 	rotOffset.x = cos(newAngle);
 	if(x != 0):
-		position = get_viewport().get_mouse_position() + (rotOffset.normalized() * cursorAngle.length());
+		var newPosition = get_viewport().get_mouse_position() + (rotOffset.normalized() * cursorAngle.length());
+		get_parent().move_and_collide(newPosition - get_parent().position);
 	
-	velocity = get_viewport().get_mouse_position() - position;
+	velocity = get_viewport().get_mouse_position() - get_parent().position;
 	
 	
 func move_normal(delta):
@@ -82,32 +85,33 @@ func move_normal(delta):
 		isMoving = true;
 	if (newVelocity.length() != 0):
 		velocity = newVelocity.normalized() * speed * delta / .015;
-		position += velocity;
+		#position += velocity;
+		get_parent().move_and_collide(velocity);
 	
 
 func slash(delta):
 	if !inSlash:
 		inSlash = true;
 		animationTime = 0;
-		get_child(1).show();
+		get_child(0).show();
 		#printerr(get_child(1).position)
 		#position.x += 12;
 	#frame = ((frame/3)%8)*3 + 16*3;
 	var baseDir = ((frame/3)%8) * PI/4;
-	get_child(1).rotation = baseDir - PI/4;
+	get_child(0).rotation = baseDir - PI/4;
 	if(cos(baseDir) < 0 && int(cos(baseDir)) != 0):
-		get_child(1).rotation *= -1;
+		get_child(0).rotation *= -1;
 	
 	if (((frame/3)%8) <= 3):
-		get_child(1).z_index = 1;
+		get_child(0).z_index = 1;
 	else:
-		get_child(1).z_index = -1;
+		get_child(0).z_index = -1;
 	
 	var totalTime = jumpTime / 2;
 	if(cos(baseDir) < 0 && int(cos(baseDir)) != 0):
-		get_child(1).rotation -= (PI/2)*animationTime / totalTime;
+		get_child(0).rotation -= (PI/2)*animationTime / totalTime;
 	else:
-		get_child(1).rotation += (PI/2)*animationTime / totalTime;
+		get_child(0).rotation += (PI/2)*animationTime / totalTime;
 	
 	#var tmp = Vector2(1,0);
 	#tmp = tmp.rotated(baseDir + PI/2);
@@ -124,7 +128,7 @@ func slash(delta):
 	if animationTime / totalTime >= 1:
 		inSlash = false;
 		#animationTime = 0;
-		get_child(1).hide();
+		get_child(0).hide();
 		#position.x -= 12;
 		#get_child(1).position.x = 0.912079; #tmp * (animationTime / totalTime);
 		#get_child(1).position.y = 8.94334;
@@ -133,8 +137,10 @@ func slash(delta):
 	animationTime += delta;
 
 func jump(delta):	
-	
 	if !inJump:
+		if(get_child(itemIndex).has_method("Jump")):
+			if(get_child(itemIndex).Jump()):
+				return;
 		jDir.y = 0;
 		jDir.x = 1;
 		jDir = jDir.rotated(velocity.angle());
@@ -161,11 +167,11 @@ func jump(delta):
 	if targeting:
 		var tmp = jDir.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
 		if(position.distance_to(get_viewport().get_mouse_position()) > tmp.length()):
-			position += tmp;
+			get_parent().move_and_collide(tmp);
 		
 		
 	else:
-		position += velocity.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime));
+		get_parent().move_and_collide(velocity.normalized() * ((speed * delta / .015) + jumpModifier * sin(PI * jumpElapsed/jumpTime)));
 	
 	frame = 24 + 3*GetDir(jDir.angle()) + jFrame;
 	
@@ -199,12 +205,19 @@ func GetDir(var angle):
 		dir = 4
 	return dir;
 
-
+func _input(event):
+	if(event.is_action("Scroll_Up")):
+		itemIndex += .5;
+	if(event.is_action("Scroll_Down")):
+		itemIndex -= .5;
+	
+	
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
 	
 	animationTime += delta;
+	
 	if(damaged):
 		var tmp = 2 + sin((animationTime - floor(animationTime))*2*PI);
 		self_modulate.r *=  tmp;
@@ -221,8 +234,15 @@ func _process(delta):
 		jump(delta);
 		return;
 	
-	if Input.is_action_just_pressed("Left Click") || inSlash:
+	if(inSlash):
 		slash(delta);
+		
+	if Input.is_action_just_pressed("Left Click"):
+		printerr(itemIndex);
+		if(itemIndex == 0):
+			slash(delta);
+		if(itemIndex == 1):
+			get_child(itemIndex).Use();
 	
 	if targeting: 
 		get_input(delta);
