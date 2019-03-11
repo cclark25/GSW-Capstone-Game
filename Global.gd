@@ -19,7 +19,6 @@ func store_player(player):
 
 func retrieve_player():
 	return playerStorage;
-	playerStorage = null;
 	pass
 
 #func _process(delta):

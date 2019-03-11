@@ -121,13 +121,14 @@ extents = Vector2( 8.86888, 10 )
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="WorldEnvironment" type="WorldEnvironment"]
+[node name="WorldEnvironment" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
 _sections_unfolded = [ "Pause" ]
 
 [node name="Player" type="Sprite" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( 347.853, 187.141 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
@@ -137,6 +138,7 @@ script = ExtResource( 2 )
 _sections_unfolded = [ "Animation", "Transform", "Visibility" ]
 speed = 4
 damaged = false
+itemIndex = 0
 
 [node name="Cursor" type="Sprite" parent="Player" index="0"]
 
@@ -199,6 +201,7 @@ shape = SubResource( 3 )
 
 [node name="Eye" type="Sprite" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( 511.322, 156.956 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 8 )
@@ -218,6 +221,7 @@ _sections_unfolded = [ "Animation", "Transform", "Z Index" ]
 
 [node name="Katydid" type="Sprite" parent="." index="2"]
 
+editor/display_folded = true
 position = Vector2( 406.373, 96.2332 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 12 )
@@ -249,6 +253,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Dryad" type="Sprite" parent="." index="3"]
 
+editor/display_folded = true
 position = Vector2( 116.423, 178.696 )
 scale = Vector2( 2, 2 )
 vframes = 4

@@ -136,7 +136,7 @@ custom_solver_bias = 0.0
 radius = 3.66267
 height = 2.21225
 
-[node name="root" type="WorldEnvironment" index="0"]
+[node name="root" type="WorldEnvironment"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
@@ -199,6 +199,7 @@ shape = SubResource( 2 )
 
 [node name="North_Door" type="StaticBody2D" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( 320, 19 )
 scale = Vector2( 1, 0.96875 )
 input_pickable = false
@@ -226,6 +227,7 @@ shape = SubResource( 3 )
 
 [node name="North_Exit" type="Area2D" parent="North_Door" index="2"]
 
+editor/display_folded = true
 position = Vector2( 0, -50.5806 )
 scale = Vector2( 1, 1.03226 )
 input_pickable = true
@@ -275,6 +277,7 @@ shape = SubResource( 3 )
 
 [node name="PlayerBody" type="KinematicBody2D" parent="." index="3"]
 
+editor/display_folded = true
 position = Vector2( 320, 300 )
 input_pickable = false
 collision_layer = 1
@@ -291,6 +294,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Player" type="Sprite" parent="PlayerBody" index="1"]
 
+editor/display_folded = true
 z_index = 1
 texture = ExtResource( 7 )
 vframes = 24
@@ -334,7 +338,6 @@ shape = SubResource( 6 )
 
 [node name="Snake" type="Sprite" parent="PlayerBody/Player" index="1"]
 
-visible = false
 position = Vector2( 0, 10 )
 z_index = -1
 texture = ExtResource( 11 )
