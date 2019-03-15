@@ -11,10 +11,9 @@ func _ready():
 	pass
 
 func exit(body):
-	if(body == get_parent().get_parent().get_child(3)):
-		var player = get_tree().current_scene.get_child(3);
-		get_tree().current_scene.remove_child(player);
-		Global.store_player(player);
+	if(body == Global.Player):
+		get_tree().current_scene.remove_child(Global.Player);
+		printerr(Global.Player);
 		get_tree().change_scene("res://BossRoom.tscn");
 	pass;
 

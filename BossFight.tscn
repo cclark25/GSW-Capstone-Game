@@ -1,25 +1,13 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://BossFight.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Dungeon Floors/Dungeon Floor Demo.png" type="Texture" id=2]
 [ext_resource path="res://North_Door.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Dungeon Floors/Dungeon Doors/PNGs/Rows/Sheet/Entity.png" type="Texture" id=4]
 [ext_resource path="res://North_Exit.gd" type="Script" id=5]
-[ext_resource path="res://Player.CollisionBox.gd" type="Script" id=6]
-[ext_resource path="res://Sprites/Player/Player.png" type="Texture" id=7]
-[ext_resource path="res://icon.gd" type="Script" id=8]
-[ext_resource path="res://Sprites/Player/Sword/Sword.png" type="Texture" id=9]
-[ext_resource path="res://SwordCollision.gd" type="Script" id=10]
-[ext_resource path="res://Sprites/Familiars/Snake/Entity.png" type="Texture" id=11]
-[ext_resource path="res://Snake.gd" type="Script" id=12]
-[ext_resource path="res://Snake.Collision.gd" type="Script" id=13]
-[ext_resource path="res://Sprites/Player/Cursor/Cursor.png" type="Texture" id=14]
-[ext_resource path="res://Cursor.gd" type="Script" id=15]
-[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=16]
-[ext_resource path="res://Torch.gd" type="Script" id=17]
-[ext_resource path="res://Sprites/Enemies/Katydid/Katydid.png" type="Texture" id=18]
-[ext_resource path="res://Katydid.gd" type="Script" id=19]
-[ext_resource path="res://Area2D.gd" type="Script" id=20]
+[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=6]
+[ext_resource path="res://Torch.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Entities/Enemies/Katydid/Katydid.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Environment" id=1]
 
@@ -114,27 +102,6 @@ extents = Vector2( 13, 12.7484 )
 
 custom_solver_bias = 0.0
 extents = Vector2( 13, 14.186 )
-
-[sub_resource type="RectangleShape2D" id=5]
-
-custom_solver_bias = 0.0
-extents = Vector2( 6.92908, 10.4658 )
-
-[sub_resource type="RectangleShape2D" id=6]
-
-custom_solver_bias = 0.0
-extents = Vector2( 10.4718, 1.72896 )
-
-[sub_resource type="CircleShape2D" id=7]
-
-custom_solver_bias = 0.0
-radius = 10.0
-
-[sub_resource type="CapsuleShape2D" id=8]
-
-custom_solver_bias = 0.0
-radius = 3.66267
-height = 2.21225
 
 [node name="root" type="WorldEnvironment"]
 
@@ -275,206 +242,76 @@ position = Vector2( -1.14441e-05, 2.38419e-07 )
 scale = Vector2( 2.30769, 1.53846 )
 shape = SubResource( 3 )
 
-[node name="PlayerBody" type="KinematicBody2D" parent="." index="3"]
-
-editor/display_folded = true
-position = Vector2( 320, 300 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 18
-collision/safe_margin = 0.08
-script = ExtResource( 6 )
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionBox" type="CollisionShape2D" parent="PlayerBody" index="0"]
-
-scale = Vector2( 1, 1.69225 )
-shape = SubResource( 5 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Player" type="Sprite" parent="PlayerBody" index="1"]
-
-editor/display_folded = true
-z_index = 1
-texture = ExtResource( 7 )
-vframes = 24
-hframes = 3
-frame = 18
-script = ExtResource( 8 )
-_sections_unfolded = [ "Animation", "Transform", "Visibility", "Z Index" ]
-speed = 4
-damaged = false
-itemIndex = 1
-
-[node name="Sword" type="Sprite" parent="PlayerBody/Player" index="0"]
-
-editor/display_folded = true
-visible = false
-position = Vector2( 0.912079, 8.94334 )
-texture = ExtResource( 9 )
-centered = false
-offset = Vector2( 0, -6 )
-_sections_unfolded = [ "Offset", "Transform", "Visibility" ]
-
-[node name="Area2D" type="Area2D" parent="PlayerBody/Player/Sword" index="0"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-collision_layer = 0
-collision_mask = 2
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 10 )
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/Player/Sword/Area2D" index="0"]
-
-position = Vector2( 23.628, -0.263535 )
-scale = Vector2( 1.57525, 1 )
-shape = SubResource( 6 )
-
-[node name="Snake" type="Sprite" parent="PlayerBody/Player" index="1"]
-
-position = Vector2( 0, 10 )
-z_index = -1
-texture = ExtResource( 11 )
-vframes = 8
-hframes = 4
-frame = 3
-script = ExtResource( 12 )
-_sections_unfolded = [ "Animation", "Transform", "Visibility", "Z Index" ]
-
-[node name="Area2D" type="Area2D" parent="PlayerBody/Player/Snake" index="0"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-collision_layer = 32
-collision_mask = 16384
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 13 )
-_sections_unfolded = [ "Collision" ]
-
-[node name="Head" type="CollisionShape2D" parent="PlayerBody/Player/Snake/Area2D" index="0"]
-
-position = Vector2( 41, 0 )
-scale = Vector2( 0.5, 0.5 )
-shape = SubResource( 7 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Cursor" type="Sprite" parent="PlayerBody" index="2"]
-
-position = Vector2( -81.632, -67.5739 )
-texture = ExtResource( 14 )
-hframes = 3
-script = ExtResource( 15 )
-_sections_unfolded = [ "Animation", "Transform" ]
-speed = 10
-
-[node name="Torch_1" type="Sprite" parent="." index="4"]
+[node name="Torch_1" type="Sprite" parent="." index="3"]
 
 position = Vector2( 260, 60 )
-texture = ExtResource( 16 )
+texture = ExtResource( 6 )
 vframes = 3
-script = ExtResource( 17 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
-[node name="Torch_2" type="Sprite" parent="." index="5"]
+[node name="Torch_2" type="Sprite" parent="." index="4"]
 
 position = Vector2( 380, 60 )
-texture = ExtResource( 16 )
+texture = ExtResource( 6 )
 vframes = 3
-script = ExtResource( 17 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
-[node name="Torch_3" type="Sprite" parent="." index="6"]
+[node name="Torch_3" type="Sprite" parent="." index="5"]
 
 position = Vector2( 255, 303 )
 rotation = 3.14159
-texture = ExtResource( 16 )
+texture = ExtResource( 6 )
 vframes = 3
-script = ExtResource( 17 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
-[node name="Torch_4" type="Sprite" parent="." index="7"]
+[node name="Torch_4" type="Sprite" parent="." index="6"]
 
 position = Vector2( 375, 303 )
 rotation = 3.14159
-texture = ExtResource( 16 )
+texture = ExtResource( 6 )
 vframes = 3
-script = ExtResource( 17 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
-[node name="Torch_5" type="Sprite" parent="." index="8"]
+[node name="Torch_5" type="Sprite" parent="." index="7"]
 
 position = Vector2( 583, 94 )
 rotation = 1.5708
-texture = ExtResource( 16 )
+texture = ExtResource( 6 )
 vframes = 3
-script = ExtResource( 17 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_8" type="Sprite" parent="." index="9"]
+[node name="Torch_8" type="Sprite" parent="." index="8"]
 
 position = Vector2( 53, 95 )
 rotation = -1.5708
-texture = ExtResource( 16 )
+texture = ExtResource( 6 )
 vframes = 3
-script = ExtResource( 17 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_6" type="Sprite" parent="." index="10"]
+[node name="Torch_6" type="Sprite" parent="." index="9"]
 
 position = Vector2( 583, 262.687 )
 rotation = 1.5708
-texture = ExtResource( 16 )
+texture = ExtResource( 6 )
 vframes = 3
-script = ExtResource( 17 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_7" type="Sprite" parent="." index="11"]
+[node name="Torch_7" type="Sprite" parent="." index="10"]
 
 position = Vector2( 53, 263.687 )
 rotation = -1.5708
-texture = ExtResource( 16 )
+texture = ExtResource( 6 )
 vframes = 3
-script = ExtResource( 17 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Katydid" type="Sprite" parent="." index="12"]
-
-position = Vector2( 406.373, 96.2332 )
-texture = ExtResource( 18 )
-vframes = 3
-script = ExtResource( 19 )
-_sections_unfolded = [ "Transform", "Visibility" ]
-
-[node name="Area2D" type="Area2D" parent="Katydid" index="0"]
-
-position = Vector2( -1, 1.00001 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-collision_layer = 2
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 20 )
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Katydid/Area2D" index="0"]
-
-position = Vector2( -0.751748, 1.9563 )
-rotation = 0.785398
-scale = Vector2( 1.13273, 1.09403 )
-shape = SubResource( 8 )
-_sections_unfolded = [ "Transform" ]
+[node name="Katydid" parent="." index="11" instance=ExtResource( 8 )]
 
 

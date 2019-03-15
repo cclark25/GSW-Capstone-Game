@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/Player/Cursor/Right.0.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Player/Cursor/Right.1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Cursor/Right.2.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Entities/Familiars/Bird/Bird.gd" type="Script" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Bird" type="AnimatedSprite"]
+
+position = Vector2( 230, 120 )
+frames = SubResource( 1 )
+animation = "default"
+script = ExtResource( 4 )
+hoverDistance = 25
+speed = 10
+
+
