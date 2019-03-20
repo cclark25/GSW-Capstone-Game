@@ -1,6 +1,6 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=34 format=2]
 
-[ext_resource path="res://BossFight.gd" type="Script" id=1]
+[ext_resource path="res://DryadRoom.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Dungeon Floors/Dungeon Floor Demo.png" type="Texture" id=2]
 [ext_resource path="res://North_Door.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/Dungeon Floors/Dungeon Doors/PNGs/Rows/Sheet/Entity.png" type="Texture" id=4]
@@ -20,6 +20,9 @@
 [ext_resource path="res://Sprites/Enemies/Katydid/Katydid.png" type="Texture" id=18]
 [ext_resource path="res://Katydid.gd" type="Script" id=19]
 [ext_resource path="res://Area2D.gd" type="Script" id=20]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/DryadRanger.png" type="Texture" id=21]
+[ext_resource path="res://DryadRanger.gd" type="Script" id=22]
+[ext_resource path="res://DryadSwordsman.gd" type="Script" id=23]
 
 [sub_resource type="Environment" id=1]
 
@@ -136,7 +139,20 @@ custom_solver_bias = 0.0
 radius = 3.66267
 height = 2.21225
 
-[node name="root" type="WorldEnvironment"]
+[sub_resource type="AtlasTexture" id=9]
+
+flags = 4
+atlas = ExtResource( 21 )
+region = Rect2( 0, 0, 105, 252 )
+margin = Rect2( 0, 0, 0, 0 )
+filter_clip = false
+
+[sub_resource type="RectangleShape2D" id=10]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="root" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
@@ -144,6 +160,7 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="Dungeon Floor Demo" type="Sprite" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( 320, 180 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Z Index" ]
@@ -276,14 +293,13 @@ shape = SubResource( 3 )
 
 [node name="PlayerBody" type="KinematicBody2D" parent="." index="3"]
 
-editor/display_folded = true
 position = Vector2( 320, 300 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 18
 collision/safe_margin = 0.08
 script = ExtResource( 6 )
-_sections_unfolded = [ "Collision" ]
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionBox" type="CollisionShape2D" parent="PlayerBody" index="0"]
 
@@ -293,7 +309,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Player" type="Sprite" parent="PlayerBody" index="1"]
 
-editor/display_folded = true
 z_index = 1
 texture = ExtResource( 7 )
 vframes = 24
@@ -475,5 +490,61 @@ rotation = 0.785398
 scale = Vector2( 1.13273, 1.09403 )
 shape = SubResource( 8 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="DryadRanger" type="Sprite" parent="." index="13"]
+
+position = Vector2( 195.842, 159.742 )
+texture = SubResource( 9 )
+vframes = 4
+hframes = 3
+script = ExtResource( 22 )
+_sections_unfolded = [ "Animation" ]
+damaged = false
+
+[node name="Area2D" type="Area2D" parent="DryadRanger" index="0"]
+
+position = Vector2( 139.887, -3.60999 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DryadRanger/Area2D" index="0"]
+
+position = Vector2( -139.908, 5.20253 )
+scale = Vector2( 0.998461, 2.01327 )
+shape = SubResource( 10 )
+
+[node name="DryadSwordsman" type="Sprite" parent="." index="14"]
+
+position = Vector2( 289.702, 155.23 )
+texture = SubResource( 9 )
+vframes = 4
+hframes = 3
+script = ExtResource( 23 )
+_sections_unfolded = [ "Animation" ]
+damaged = false
+
+[node name="Area2D" type="Area2D" parent="DryadSwordsman" index="0"]
+
+position = Vector2( 147.108, 0.902527 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DryadSwordsman/Area2D" index="0"]
+
+position = Vector2( -148.03, 3.39746 )
+scale = Vector2( 0.998461, 2.01327 )
+shape = SubResource( 10 )
 
 
