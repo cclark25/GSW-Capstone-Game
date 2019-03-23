@@ -11,11 +11,9 @@ func _ready():
 	pass
 
 func exit(body):
-	if(body == get_parent().get_parent().get_child(3)):
-		var player = get_tree().current_scene.get_child(3);
-		get_tree().current_scene.remove_child(player);
-		Global.store_player(player);
-		get_tree().change_scene("res://BossRoom.tscn");
+	if(body == Global.Player):
+		Global.set_current_scene("demo_BossRoom");
+		
 	pass;
 
 #func _process(delta):
