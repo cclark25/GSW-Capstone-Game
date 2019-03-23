@@ -5,35 +5,38 @@ extends AnimatedSprite
 # var b = "textvar"
 var target = null;
 var onReturn = false;
+var onSend = false;
 export (float) var hoverDistance = 25;
-export (int) var speed = 20;
+export (int) var speed = 400;
 var time = 0;
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	set_process(false);
-	position *= 0;
-	
+	visible = false;
+		
 	pass
 
-func Send(newTarget):
-	assert typeof(newTarget) == typeof(Node2D);
-	printerr("Sending...");
-	
+func Send(to, from):
+	assert typeof(to) == typeof(Node2D);
+	if(!onSend && !onReturn):
+		global_position = from.global_position;
 	visible = true;
 	play("default");
-	target = newTarget;
+	target = to;
 	set_process(true);
 	onReturn = false;
+	onSend = true;
 
-func Return(newTarget):
-	target = newTarget;
+func Return(to, from):
+	target = to;
 	onReturn = true;
+	onSend = false;
 
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
-	# Update game logic here.
+	# Update game logic here.	
 	time += delta;
 	var angle = (target.global_position - global_position);
 	
@@ -42,18 +45,18 @@ func _process(delta):
 		set_process(false);
 		stop();
 		return;
-	
+		
+	look_at(target.global_position);
 	if(angle.length() > hoverDistance):
-		position += angle.normalized() * speed;
-		printerr(angle.length());
+		global_position += angle.normalized() * speed * delta;
 	else:
 		var relAngle = time;
 		angle = angle.rotated(PI/2);
 		#position += angle.normalized() * speed / 10;
 		#printerr(relAngle);
-		global_position = target.global_position + Vector2(angle.length(), 0).rotated(relAngle);
-		look_at(target.global_position);
-		rotate(-PI/2);
+		#global_position = target.global_position + Vector2(1, 0).rotated(relAngle).normalized()*hoverDistance;
+		global_position += angle.normalized()*speed*delta;
+		rotate(PI/2);
 	
 	
 	pass

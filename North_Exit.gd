@@ -12,9 +12,8 @@ func _ready():
 
 func exit(body):
 	if(body == Global.Player):
-		get_tree().current_scene.remove_child(Global.Player);
-		printerr(Global.Player);
-		get_tree().change_scene("res://BossRoom.tscn");
+		Global.set_current_scene("demo_BossRoom");
+		
 	pass;
 
 #func _process(delta):

@@ -6,6 +6,11 @@ extends KinematicBody2D
 var direction = Vector2(0,0);
 export (int) var speed = 5;
 export (float) var jumpModifier = 1.75;
+onready var activeItem = get_node("Sword");
+var targetCursor = preload("res://Scenes/Entities/Familiars/Bird/Bird.tscn").instance();
+
+func get_direction():
+	return direction;
 
 class _target extends Node2D:
 	func _init():
@@ -14,7 +19,9 @@ class _target extends Node2D:
 		set_process(false);
 		pass;
 	func _process(delta):
-		global_position = get_viewport().get_mouse_position();
+		var new_pos = get_viewport().get_mouse_position();
+		#if(new_pos.distance_to(global_position) >= 10):
+		global_position = new_pos; #- Vector2(10,0).rotated(new_pos.angle());
 		pass;
 		
 var targetBody = _target.new();
@@ -25,7 +32,16 @@ func _ready():
 	# Initialization here
 	set_process(false);
 	targetBody.set_name("TargetBody");
-	add_child(targetBody);
+	
+	#if(Global.get_current_scene() == null):
+	#	Global.set_current_scene(self);
+	
+	Global.SpawnNode(targetCursor);
+	Global.SpawnNode(targetBody);
+	targetCursor.global_position = targetBody.global_position;
+	
+	set_collision_layer_bit(Global.CollisionType.player, true);
+	#printerr(Global.get_current_scene().name);
 	pass
 	
 func TakeDamage(amount, sourceLocation):
@@ -52,14 +68,14 @@ func Move(delta):
 	pass;
 
 func Target():
-	printerr(targetBody.name);
-	if(targetBody.position.length() == 0):
-		targetBody.position = get_local_mouse_position();
-		get_node("Bird").Send(targetBody);
+	if(!targetBody.is_processing()):
+		targetBody.global_position = get_viewport().get_mouse_position();
+		targetCursor.Send(targetBody, self);
 		targetBody.set_process(true);
 	else:
-		targetBody.position *= 0;
-		get_node("Bird").Return(targetBody);
+		#targetBody.position *= 0;
+		targetBody.global_position = global_position;
+		targetCursor.Return(targetBody, self);
 		targetBody.set_process(false);
 	pass;
 
@@ -90,10 +106,11 @@ func _input(event):
 	if(event.is_action_pressed("Target")):
 		Target();
 	
-	
+	if(event.is_action_pressed("Left Click") && activeItem != null && activeItem.has_method("Use")):
+		activeItem.Use();
 	
 	animator.Update();
-	pass
+	pass;
 
 func _process(delta):
 	Move(delta);

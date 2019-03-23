@@ -21,6 +21,6 @@ frames = SubResource( 1 )
 animation = "default"
 script = ExtResource( 4 )
 hoverDistance = 25
-speed = 10
+speed = 400
 
 

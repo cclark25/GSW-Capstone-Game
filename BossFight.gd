@@ -5,11 +5,17 @@ extends WorldEnvironment
 # var b = "textvar"
 var time = 0;
 
+func _init():
+	Global.AddScene(self, "demo_BossFight");
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	set_process(false);
-	add_child(Global.Player);
+	
+	if(Global.get_current_scene() == null):
+		Global.set_current_scene("demo_BossFight");
+	
 	pass
 
 func _process(delta):

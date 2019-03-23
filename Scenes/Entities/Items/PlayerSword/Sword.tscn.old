@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/Player/Sword/Sword.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10.4718, 1.72896 )
+
+[node name="SwordSprite" type="Sprite" index="0"]
+
+position = Vector2( 0.912079, 8.94333 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( 0, -6 )
+_sections_unfolded = [ "Offset", "Transform", "Visibility" ]
+
+[node name="Sword" type="Area2D" parent="." index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword" index="0"]
+
+position = Vector2( 23.628, -0.263535 )
+scale = Vector2( 1.57525, 1 )
+shape = SubResource( 1 )
+
+
