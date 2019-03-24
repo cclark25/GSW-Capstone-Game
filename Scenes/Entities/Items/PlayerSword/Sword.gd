@@ -4,6 +4,7 @@ extends Area2D
 # var a = 2
 # var b = "textvar"
 var dir = 0;
+var invert = false;
 export (float) var radPerSec = 5*PI;
 
 func _ready():
@@ -20,9 +21,18 @@ func DealDamage(body):
 
 func Use():
 	if(!is_processing() && get_parent().has_method("get_direction")):
-		dir = get_parent().get_direction().angle();
-		if(sin(dir) < 0):
-			dir *= -1;
+		dir = get_parent().get_direction() * PI/4;
+		
+		if(dir > PI/2 || dir < -PI/2):
+			invert = true;
+		else:
+			invert = false;
+		
+		if(invert):
+			dir += PI/2 - PI/6;
+		else:
+			dir -= PI/2 - PI/6;
+			
 		set_process(true);
 		rotation = dir;
 		visible = true;
@@ -32,11 +42,16 @@ func Use():
 func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
-	var speed = (dir + PI/2 - rotation) / (PI/2);
 	
-	rotate(delta * radPerSec * speed);
-	if(rotation >= dir + PI/2 - .001):
-		set_process(false);
-		get_node("CollisionShape2D").disabled = true;
-		visible = false;
-	pass
+	if(invert):
+		rotation -= delta*radPerSec;
+		if(rotation <= dir - 2*PI/3):
+			set_process(false);
+			visible = false;
+	else:
+		rotation += delta*radPerSec;
+		if(rotation >= dir + 2*PI/3):
+			set_process(false);
+			visible = false;
+	#set_process(false);
+	return;

@@ -10,7 +10,7 @@ onready var activeItem = get_node("Sword");
 var targetCursor = preload("res://Scenes/Entities/Familiars/Bird/Bird.tscn").instance();
 
 func get_direction():
-	return direction;
+	return get_node("Animation").dir;
 
 class _target extends Node2D:
 	func _init():
