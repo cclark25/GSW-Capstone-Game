@@ -103,7 +103,7 @@ extents = Vector2( 13, 12.7484 )
 custom_solver_bias = 0.0
 extents = Vector2( 13, 14.186 )
 
-[node name="root" type="WorldEnvironment" index="0"]
+[node name="root" type="WorldEnvironment"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
@@ -193,7 +193,6 @@ shape = SubResource( 3 )
 
 [node name="North_Exit" type="Area2D" parent="North_Door" index="2"]
 
-editor/display_folded = true
 position = Vector2( 0, -50.5806 )
 scale = Vector2( 1, 1.03226 )
 input_pickable = true
@@ -201,8 +200,8 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-collision_layer = 16
-collision_mask = 513
+collision_layer = 0
+collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 5 )

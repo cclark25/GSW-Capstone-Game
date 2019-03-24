@@ -33,16 +33,18 @@ func _ready():
 	set_process(false);
 	targetBody.set_name("TargetBody");
 	
+	
 	#if(Global.get_current_scene() == null):
 	#	Global.set_current_scene(self);
 	
 	Global.SpawnNode(targetCursor);
 	Global.SpawnNode(targetBody);
-	targetCursor.global_position = targetBody.global_position;
+	#targetCursor.global_position = targetBody.global_position;
 	
 	set_collision_layer_bit(Global.CollisionType.player, true);
 	#printerr(Global.get_current_scene().name);
-	pass
+	
+	return;
 	
 func TakeDamage(amount, sourceLocation):
 	#if(!(get_child(1).damaged)):
