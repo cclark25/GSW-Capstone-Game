@@ -13,7 +13,6 @@ func _ready():
 func DealDamage(body):
 	if(body.has_method("TakeDamage")):
 		body.TakeDamage(4, get_parent().position);
-		printerr("Here");
 	pass;
 	
 func TakeDamage(amount, source):

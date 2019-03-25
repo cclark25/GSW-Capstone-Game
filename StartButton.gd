@@ -10,7 +10,9 @@ func _ready():
 	pass
 
 func _pressed():
-	get_tree().change_scene("res://BossRoom.tscn");
+	var scene = get_parent().get_node("OptionButton").get_item_text(get_parent().get_node("OptionButton").get_selected_id() - 1);
+	#printerr(scene);
+	get_tree().change_scene(scene);
 	pass;
 
 #func _process(delta):

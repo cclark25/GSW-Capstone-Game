@@ -60,7 +60,6 @@ func _process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
 	time += delta;
-	
 	var f = int(time / .05);
 	rotation = (-get_parent().get_parent().position + destination).angle();
 	

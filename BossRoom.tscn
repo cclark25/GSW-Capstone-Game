@@ -122,7 +122,7 @@ extents = Vector2( 13, 12.7484 )
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="BossRoom" type="WorldEnvironment"]
+[node name="BossRoom" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
