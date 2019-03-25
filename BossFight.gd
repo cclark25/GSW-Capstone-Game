@@ -11,7 +11,11 @@ func _ready():
 	set_process(false);
 	#if(Global.get_current_scene() == null):
 	#	Global.set_current_scene("demo_BossFight");
-	
+	var sword = preload("Scenes/Entities/Items/PlayerSword/Sword.tscn").instance();
+	add_child(sword);
+	sword.visible = false;
+	sword.global_position = Vector2(100,100);
+	Global.Player.AddItem(sword);
 	pass
 
 func _process(delta):

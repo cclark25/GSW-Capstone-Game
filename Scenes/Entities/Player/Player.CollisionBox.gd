@@ -6,7 +6,8 @@ extends KinematicBody2D
 var direction = Vector2(0,0);
 export (int) var speed = 5;
 export (float) var jumpModifier = 1.75;
-onready var activeItem = get_node("Sword");
+var activeItem = null;
+var itemList = [];
 var targetCursor = preload("res://Scenes/Entities/Familiars/Bird/Bird.tscn").instance();
 
 func get_direction():
@@ -45,7 +46,26 @@ func _ready():
 	#printerr(Global.get_current_scene().name);
 	
 	return;
-	
+
+func SwitchItem(index):
+	activeItem = itemList[index % itemList.size()];
+	return;
+
+func AddItem(item):
+	itemList.push_back(item);
+	if(item.get_parent() != null):
+		item.get_parent().remove_child(item);
+	add_child(item);
+	item.position *= 0;
+	return;
+
+func RemoveItem(item):
+	itemList.remove(itemList.find(item));
+	if(activeItem == item):
+		activeItem = null;
+	remove_child(item);
+	return item;
+
 func TakeDamage(amount, sourceLocation):
 	#if(!(get_child(1).damaged)):
 	#	get_child(1).damaged = true;
@@ -111,6 +131,27 @@ func _input(event):
 	if(event.is_action_pressed("Left Click") && activeItem != null && activeItem.has_method("Use")):
 		activeItem.Use();
 	
+	if(event.is_action_pressed("Num1") && itemList.size() > 0):
+		SwitchItem(1);
+	if(event.is_action_pressed("Num2") && itemList.size() > 0):
+		SwitchItem(2);
+	if(event.is_action_pressed("Num3") && itemList.size() > 0):
+		SwitchItem(3);
+	if(event.is_action_pressed("Num4") && itemList.size() > 0):
+		SwitchItem(4);
+	if(event.is_action_pressed("Num5") && itemList.size() > 0):
+		SwitchItem(5);
+	if(event.is_action_pressed("Num6") && itemList.size() > 0):
+		SwitchItem(6);
+	if(event.is_action_pressed("Num7") && itemList.size() > 0):
+		SwitchItem(7);
+	if(event.is_action_pressed("Num8") && itemList.size() > 0):
+		SwitchItem(8);
+	if(event.is_action_pressed("Num9") && itemList.size() > 0):
+		SwitchItem(9);
+	if(event.is_action_pressed("Num0") && itemList.size() > 0):
+		SwitchItem(10);
+		
 	animator.Update();
 	pass;
 

@@ -1,17 +1,16 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://BossRoom.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Boss_Room/Background/Boss_Room.png" type="Texture" id=2]
-[ext_resource path="res://North_Door.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/Dungeon Floors/Dungeon Doors/PNGs/Rows/Sheet/Entity.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Boss_Room/Limb/Limb.png" type="Texture" id=5]
-[ext_resource path="res://Limb.gd" type="Script" id=6]
-[ext_resource path="res://Sprites/Boss/VineBoss/Eye.png" type="Texture" id=7]
-[ext_resource path="res://Eye.gd" type="Script" id=8]
-[ext_resource path="res://Sprites/Boss/VineBoss/Vines.png" type="Texture" id=9]
-[ext_resource path="res://Vines.gd" type="Script" id=10]
-[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=11]
-[ext_resource path="res://Torch.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Entities/Static/DungeonDoor/Door.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Boss_Room/Limb/Limb.png" type="Texture" id=4]
+[ext_resource path="res://Limb.gd" type="Script" id=5]
+[ext_resource path="res://Sprites/Boss/VineBoss/Eye.png" type="Texture" id=6]
+[ext_resource path="res://Eye.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/Boss/VineBoss/Vines.png" type="Texture" id=8]
+[ext_resource path="res://Vines.gd" type="Script" id=9]
+[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=10]
+[ext_resource path="res://Torch.gd" type="Script" id=11]
 
 [sub_resource type="Environment" id=1]
 
@@ -95,7 +94,7 @@ _sections_unfolded = [ "Background" ]
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 13.6841, 14.6107 )
+extents = Vector2( 14.4735, 14.6107 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
@@ -112,17 +111,12 @@ extents = Vector2( 20, 11.5556 )
 custom_solver_bias = 0.0
 extents = Vector2( 12.1894, 10 )
 
-[sub_resource type="RectangleShape2D" id=6]
-
-custom_solver_bias = 0.0
-extents = Vector2( 13, 12.7484 )
-
 [sub_resource type="CircleShape2D" id=7]
 
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="BossRoom" type="WorldEnvironment"]
+[node name="BossRoom" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
@@ -136,7 +130,6 @@ _sections_unfolded = [ "Z Index" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Dungeon Floor Demo" index="0"]
 
-editor/display_folded = true
 input_pickable = false
 collision_layer = 512
 collision_mask = 31775
@@ -160,14 +153,14 @@ shape = SubResource( 2 )
 
 [node name="BottomLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="2"]
 
-position = Vector2( -173.092, 160 )
+position = Vector2( -170, 160 )
 scale = Vector2( 9.67287, 1.26702 )
 shape = SubResource( 2 )
 
 [node name="BottomRightWall2" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="3"]
 
-position = Vector2( 170, 160 )
-scale = Vector2( 9.67287, 1.26702 )
+position = Vector2( 165.692, 160 )
+scale = Vector2( 9.93111, 1.26702 )
 shape = SubResource( 2 )
 
 [node name="TopLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="4"]
@@ -211,36 +204,11 @@ position = Vector2( 0, 50 )
 scale = Vector2( 24.6731, 1 )
 shape = SubResource( 5 )
 
-[node name="South_Door" type="StaticBody2D" parent="." index="1"]
+[node name="Door" parent="." index="1" instance=ExtResource( 3 )]
 
-editor/display_folded = true
-position = Vector2( 320, 340.049 )
+position = Vector2( 320.183, 340.124 )
 rotation = 3.14159
-scale = Vector2( 1, 0.96875 )
-input_pickable = false
-collision_layer = 512
-collision_mask = 31775
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-script = ExtResource( 3 )
 _sections_unfolded = [ "Collision", "Transform" ]
-is_locked = false
-
-[node name="S_Door" type="Sprite" parent="South_Door" index="0"]
-
-position = Vector2( -0.440155, -3.05176e-05 )
-texture = ExtResource( 4 )
-vframes = 4
-frame = 3
-_sections_unfolded = [ "Animation" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="South_Door" index="1"]
-
-position = Vector2( -1.14441e-05, 2.38419e-07 )
-scale = Vector2( 2.30769, 1.53846 )
-shape = SubResource( 6 )
 
 [node name="PlayerBodySpawnPoint" type="CollisionShape2D" parent="." index="2"]
 
@@ -253,7 +221,7 @@ editor/display_folded = true
 position = Vector2( 221.878, 297.535 )
 rotation = -1.5708
 z_index = 4
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Area2D" type="Area2D" parent="Limb_0" index="0"]
@@ -268,7 +236,7 @@ collision_layer = 16384
 collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_0/Area2D" index="0"]
@@ -283,7 +251,7 @@ editor/display_folded = true
 position = Vector2( 420, 300 )
 rotation = -1.5708
 z_index = 4
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Area2D" type="Area2D" parent="Limb_1" index="0"]
@@ -297,7 +265,7 @@ collision_layer = 16384
 collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_1/Area2D" index="0"]
@@ -312,7 +280,7 @@ _sections_unfolded = [ "Transform" ]
 editor/display_folded = true
 position = Vector2( 60, 230 )
 z_index = 4
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Area2D" type="Area2D" parent="Limb_2" index="0"]
@@ -327,7 +295,7 @@ collision_layer = 16384
 collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_2/Area2D" index="0"]
@@ -341,7 +309,7 @@ _sections_unfolded = [ "Transform" ]
 editor/display_folded = true
 position = Vector2( 60, 130 )
 z_index = 4
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Area2D" type="Area2D" parent="Limb_3" index="0"]
@@ -356,7 +324,7 @@ collision_layer = 16384
 collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_3/Area2D" index="0"]
@@ -371,7 +339,7 @@ editor/display_folded = true
 position = Vector2( 220.513, 63.4583 )
 rotation = 1.5708
 z_index = 4
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Area2D" type="Area2D" parent="Limb_4" index="0"]
@@ -386,7 +354,7 @@ collision_layer = 16384
 collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_4/Area2D" index="0"]
@@ -401,7 +369,7 @@ editor/display_folded = true
 position = Vector2( 420.513, 63.4583 )
 rotation = 1.5708
 z_index = 4
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Area2D" type="Area2D" parent="Limb_5" index="0"]
@@ -416,7 +384,7 @@ collision_layer = 16384
 collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_5/Area2D" index="0"]
@@ -431,7 +399,7 @@ editor/display_folded = true
 position = Vector2( 574.811, 128.918 )
 rotation = 3.14159
 z_index = 4
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Area2D" type="Area2D" parent="Limb_6" index="0"]
@@ -446,7 +414,7 @@ collision_layer = 16384
 collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_6/Area2D" index="0"]
@@ -461,7 +429,7 @@ editor/display_folded = true
 position = Vector2( 573.513, 230.458 )
 rotation = 3.14159
 z_index = 4
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="Area2D" type="Area2D" parent="Limb_7" index="0"]
@@ -476,7 +444,7 @@ collision_layer = 16384
 collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Collision" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb_7/Area2D" index="0"]
@@ -501,9 +469,9 @@ _sections_unfolded = [ "Z Index" ]
 
 [node name="Eye" type="Sprite" parent="Area2D" index="0"]
 
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 vframes = 3
-script = ExtResource( 8 )
+script = ExtResource( 7 )
 _sections_unfolded = [ "Animation", "Transform" ]
 closedTime = 7.0
 openTime = 2
@@ -511,69 +479,69 @@ openTime = 2
 [node name="Vines" type="Sprite" parent="Area2D" index="1"]
 
 z_index = -1
-texture = ExtResource( 9 )
+texture = ExtResource( 8 )
 vframes = 3
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 _sections_unfolded = [ "Animation", "Transform", "Z Index" ]
 
 [node name="Torch_1" type="Sprite" parent="." index="12"]
 
 position = Vector2( 320, 60 )
-texture = ExtResource( 11 )
+texture = ExtResource( 10 )
 vframes = 3
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
 [node name="Torch_2" type="Sprite" parent="." index="13"]
 
 position = Vector2( 120, 60 )
-texture = ExtResource( 11 )
+texture = ExtResource( 10 )
 vframes = 3
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
 [node name="Torch_3" type="Sprite" parent="." index="14"]
 
 position = Vector2( 520, 60 )
-texture = ExtResource( 11 )
+texture = ExtResource( 10 )
 vframes = 3
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
 [node name="Torch_4" type="Sprite" parent="." index="15"]
 
 position = Vector2( 520, 300 )
 rotation = 3.14159
-texture = ExtResource( 11 )
+texture = ExtResource( 10 )
 vframes = 3
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 [node name="Torch_5" type="Sprite" parent="." index="16"]
 
 position = Vector2( 119.757, 300 )
 rotation = 3.14159
-texture = ExtResource( 11 )
+texture = ExtResource( 10 )
 vframes = 3
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 [node name="Torch_6" type="Sprite" parent="." index="17"]
 
 position = Vector2( 578.931, 180.562 )
 rotation = 1.5708
-texture = ExtResource( 11 )
+texture = ExtResource( 10 )
 vframes = 3
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 [node name="Torch_7" type="Sprite" parent="." index="18"]
 
 position = Vector2( 62.7367, 180.562 )
 rotation = -1.5708
-texture = ExtResource( 11 )
+texture = ExtResource( 10 )
 vframes = 3
-script = ExtResource( 12 )
+script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 

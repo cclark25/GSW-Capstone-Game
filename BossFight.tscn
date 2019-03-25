@@ -1,15 +1,14 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://BossFight.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Dungeon Floors/Dungeon Floor Demo.png" type="Texture" id=2]
-[ext_resource path="res://North_Door.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Entities/Static/DungeonDoor/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Dungeon Floors/Dungeon Doors/PNGs/Rows/Sheet/Entity.png" type="Texture" id=4]
-[ext_resource path="res://North_Exit.gd" type="Script" id=5]
-[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=6]
-[ext_resource path="res://Torch.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Entities/Enemies/Katydid/Katydid.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=5]
+[ext_resource path="res://Torch.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Entities/Enemies/Katydid/Katydid.tscn" type="PackedScene" id=7]
 
-[sub_resource type="Environment" id=1]
+[sub_resource type="Environment" id=2]
 
 background_mode = 4
 background_sky_custom_fov = 0.0
@@ -88,24 +87,19 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Background" ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 13.6841, 14.6107 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 13, 12.7484 )
 
-[sub_resource type="RectangleShape2D" id=4]
-
-custom_solver_bias = 0.0
-extents = Vector2( 13, 14.186 )
-
 [node name="root" type="WorldEnvironment"]
 
-environment = SubResource( 1 )
+environment = SubResource( 2 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
 
@@ -132,86 +126,39 @@ _sections_unfolded = [ "Collision" ]
 
 position = Vector2( 301.5, -0.942311 )
 scale = Vector2( 1.65385, 13.9969 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="LeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="1"]
 
 position = Vector2( -300, 0 )
 scale = Vector2( 1.65385, 13.9969 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="BottomLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="2"]
 
 position = Vector2( -173.092, 160 )
 scale = Vector2( 9.67287, 1.26702 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="BottomRightWall2" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="3"]
 
 position = Vector2( 170, 160 )
 scale = Vector2( 9.67287, 1.26702 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="TopLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="4"]
 
 position = Vector2( -160, -160 )
 scale = Vector2( 9.50008, 1.2377 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="TopRightWall3" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="5"]
 
 position = Vector2( 166.412, -160 )
 scale = Vector2( 9.9743, 1.26702 )
-shape = SubResource( 2 )
-
-[node name="North_Door" type="StaticBody2D" parent="." index="1"]
-
-position = Vector2( 320, 19 )
-scale = Vector2( 1, 0.96875 )
-input_pickable = false
-collision_layer = 512
-collision_mask = 31775
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-script = ExtResource( 3 )
-_sections_unfolded = [ "Collision" ]
-is_locked = true
-
-[node name="N_Door" type="Sprite" parent="North_Door" index="0"]
-
-texture = ExtResource( 4 )
-vframes = 4
-_sections_unfolded = [ "Animation" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="North_Door" index="1"]
-
-position = Vector2( -1.14441e-05, 2.38419e-07 )
-scale = Vector2( 2.30769, 1.53846 )
 shape = SubResource( 3 )
 
-[node name="North_Exit" type="Area2D" parent="North_Door" index="2"]
-
-position = Vector2( 0, -50.5806 )
-scale = Vector2( 1, 1.03226 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-collision_layer = 0
-collision_mask = 0
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 5 )
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="North_Door/North_Exit" index="0"]
-
-position = Vector2( 0, -3.8147e-06 )
-scale = Vector2( 3.07692, 2.18389 )
-shape = SubResource( 4 )
+[node name="Door" parent="." index="1" instance=ExtResource( 3 )]
 
 [node name="South_Door" type="StaticBody2D" parent="." index="2"]
 
@@ -238,78 +185,78 @@ _sections_unfolded = [ "Animation" ]
 
 position = Vector2( -1.14441e-05, 2.38419e-07 )
 scale = Vector2( 2.30769, 1.53846 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Torch_1" type="Sprite" parent="." index="3"]
 
 position = Vector2( 260, 60 )
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 vframes = 3
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
 [node name="Torch_2" type="Sprite" parent="." index="4"]
 
 position = Vector2( 380, 60 )
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 vframes = 3
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
 [node name="Torch_3" type="Sprite" parent="." index="5"]
 
 position = Vector2( 255, 303 )
 rotation = 3.14159
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 vframes = 3
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
 [node name="Torch_4" type="Sprite" parent="." index="6"]
 
 position = Vector2( 375, 303 )
 rotation = 3.14159
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 vframes = 3
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
 [node name="Torch_5" type="Sprite" parent="." index="7"]
 
 position = Vector2( 583, 94 )
 rotation = 1.5708
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 vframes = 3
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 [node name="Torch_8" type="Sprite" parent="." index="8"]
 
 position = Vector2( 53, 95 )
 rotation = -1.5708
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 vframes = 3
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 [node name="Torch_6" type="Sprite" parent="." index="9"]
 
 position = Vector2( 583, 262.687 )
 rotation = 1.5708
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 vframes = 3
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 [node name="Torch_7" type="Sprite" parent="." index="10"]
 
 position = Vector2( 53, 263.687 )
 rotation = -1.5708
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 vframes = 3
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Katydid" parent="." index="11" instance=ExtResource( 8 )]
+[node name="Katydid" parent="." index="11" instance=ExtResource( 7 )]
 
 

@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Entities/Static/DungeonDoor/Door.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Dungeon Floors/Dungeon Doors/PNGs/Rows/Sheet/Entity.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Entities/Static/DungeonDoor/Exit.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 13, 12.7484 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 13, 14.186 )
+
+[node name="Door" type="StaticBody2D"]
+
+position = Vector2( 320, 19 )
+scale = Vector2( 1, 0.96875 )
+input_pickable = false
+collision_layer = 512
+collision_mask = 31775
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
+is_locked = true
+
+[node name="N_Door" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+vframes = 4
+_sections_unfolded = [ "Animation" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( -1.14441e-05, 2.38419e-07 )
+scale = Vector2( 2.30769, 1.53846 )
+shape = SubResource( 1 )
+
+[node name="Exit" type="Area2D" parent="." index="2"]
+
+position = Vector2( 0, -50.5806 )
+scale = Vector2( 1, 1.03226 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 3 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit" index="0"]
+
+position = Vector2( 0, -3.8147e-06 )
+scale = Vector2( 3.07692, 2.18389 )
+shape = SubResource( 2 )
+
+

@@ -17,7 +17,7 @@ func _ready():
 	#Global.Player.show();
 	
 	#get_child(1).lock();
-	printerr(get_child(2).name);
+	get_node("Door").lock();
 	pass
 
 #func _process(delta):
