@@ -1,17 +1,16 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://BossRoom.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Boss_Room/Background/Boss_Room.png" type="Texture" id=2]
-[ext_resource path="res://North_Door.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/Dungeon Floors/Dungeon Doors/PNGs/Rows/Sheet/Entity.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Entities/Static/DungeonWalls/DungeonWalls.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Entities/Static/BossFloor/BossFloor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Entities/Static/DungeonDoor/Door.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Sprites/Boss_Room/Limb/Limb.png" type="Texture" id=5]
 [ext_resource path="res://Limb.gd" type="Script" id=6]
 [ext_resource path="res://Sprites/Boss/VineBoss/Eye.png" type="Texture" id=7]
 [ext_resource path="res://Eye.gd" type="Script" id=8]
 [ext_resource path="res://Sprites/Boss/VineBoss/Vines.png" type="Texture" id=9]
 [ext_resource path="res://Vines.gd" type="Script" id=10]
-[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=11]
-[ext_resource path="res://Torch.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Entities/Static/Torch/Torch.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Environment" id=1]
 
@@ -92,160 +91,24 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Background" ]
 
-[sub_resource type="RectangleShape2D" id=2]
-
-custom_solver_bias = 0.0
-extents = Vector2( 13.6841, 14.6107 )
-
-[sub_resource type="RectangleShape2D" id=3]
-
-custom_solver_bias = 0.0
-extents = Vector2( 10.4, 13 )
-
-[sub_resource type="RectangleShape2D" id=4]
-
-custom_solver_bias = 0.0
-extents = Vector2( 20, 11.5556 )
-
-[sub_resource type="RectangleShape2D" id=5]
-
-custom_solver_bias = 0.0
-extents = Vector2( 12.1894, 10 )
-
-[sub_resource type="RectangleShape2D" id=6]
-
-custom_solver_bias = 0.0
-extents = Vector2( 13, 12.7484 )
-
-[sub_resource type="CircleShape2D" id=7]
-
-custom_solver_bias = 0.0
-radius = 10.0
-
 [node name="BossRoom" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
 
-[node name="Dungeon Floor Demo" type="Sprite" parent="." index="0"]
+[node name="DungeonWalls" parent="." index="0" instance=ExtResource( 2 )]
 
-editor/display_folded = true
-position = Vector2( 320, 180 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Z Index" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Dungeon Floor Demo" index="0"]
+[node name="BossFloor" parent="." index="1" instance=ExtResource( 3 )]
 
-editor/display_folded = true
-input_pickable = false
-collision_layer = 512
-collision_mask = 31775
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 0.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
+[node name="Door" parent="." index="2" instance=ExtResource( 4 )]
 
-[node name="RightWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="0"]
-
-position = Vector2( 301.5, -0.942311 )
-scale = Vector2( 1.65385, 13.9969 )
-shape = SubResource( 2 )
-
-[node name="LeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="1"]
-
-position = Vector2( -300, 0 )
-scale = Vector2( 1.65385, 13.9969 )
-shape = SubResource( 2 )
-
-[node name="BottomLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="2"]
-
-position = Vector2( -173.092, 160 )
-scale = Vector2( 9.67287, 1.26702 )
-shape = SubResource( 2 )
-
-[node name="BottomRightWall2" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="3"]
-
-position = Vector2( 170, 160 )
-scale = Vector2( 9.67287, 1.26702 )
-shape = SubResource( 2 )
-
-[node name="TopLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="4"]
-
-position = Vector2( -160, -160 )
-scale = Vector2( 9.50008, 1.2377 )
-shape = SubResource( 2 )
-
-[node name="TopRightWall3" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="5"]
-
-position = Vector2( 81.4121, -160 )
-scale = Vector2( 15.069, 1.26702 )
-shape = SubResource( 2 )
-
-[node name="CenterPit" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="6"]
-
-scale = Vector2( 11.5385, 4.49519 )
-shape = SubResource( 3 )
-
-[node name="LeftPit" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="7"]
-
-position = Vector2( -100, 1.52588e-05 )
-scale = Vector2( 1, 13.8462 )
-shape = SubResource( 4 )
-
-[node name="RightPit" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="8"]
-
-position = Vector2( 100, 0 )
-scale = Vector2( 1, 13.8462 )
-shape = SubResource( 4 )
-
-[node name="TopPit" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="9"]
-
-position = Vector2( 0, -50 )
-scale = Vector2( 24.6731, 1 )
-shape = SubResource( 5 )
-
-[node name="TopPit2" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="10"]
-
-position = Vector2( 0, 50 )
-scale = Vector2( 24.6731, 1 )
-shape = SubResource( 5 )
-
-[node name="South_Door" type="StaticBody2D" parent="." index="1"]
-
-editor/display_folded = true
-position = Vector2( 320, 340.049 )
+position = Vector2( 320.183, 340.124 )
 rotation = 3.14159
-scale = Vector2( 1, 0.96875 )
-input_pickable = false
-collision_layer = 512
-collision_mask = 31775
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-script = ExtResource( 3 )
-_sections_unfolded = [ "Collision", "Transform" ]
-is_locked = false
-
-[node name="S_Door" type="Sprite" parent="South_Door" index="0"]
-
-position = Vector2( -0.440155, -3.05176e-05 )
-texture = ExtResource( 4 )
-vframes = 4
-frame = 3
-_sections_unfolded = [ "Animation" ]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="South_Door" index="1"]
-
-position = Vector2( -1.14441e-05, 2.38419e-07 )
-scale = Vector2( 2.30769, 1.53846 )
-shape = SubResource( 6 )
-
-[node name="SpawnPoint" type="CollisionShape2D" parent="." index="2"]
-
-position = Vector2( 320, 310 )
-shape = SubResource( 7 )
+doorId = "bossS"
+exitScene = "demo_BossFight"
+exitTo = "fightN"
 
 [node name="Limb_0" type="Sprite" parent="." index="3"]
 
@@ -516,64 +379,36 @@ vframes = 3
 script = ExtResource( 10 )
 _sections_unfolded = [ "Animation", "Transform", "Z Index" ]
 
-[node name="Torch_1" type="Sprite" parent="." index="12"]
+[node name="Torch" parent="." index="12" instance=ExtResource( 11 )]
 
-position = Vector2( 320, 60 )
-texture = ExtResource( 11 )
-vframes = 3
-script = ExtResource( 12 )
-_sections_unfolded = [ "Animation", "Material", "Z Index" ]
-
-[node name="Torch_2" type="Sprite" parent="." index="13"]
+[node name="Torch2" parent="." index="13" instance=ExtResource( 11 )]
 
 position = Vector2( 120, 60 )
-texture = ExtResource( 11 )
-vframes = 3
-script = ExtResource( 12 )
-_sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
-[node name="Torch_3" type="Sprite" parent="." index="14"]
+[node name="Torch3" parent="." index="14" instance=ExtResource( 11 )]
 
 position = Vector2( 520, 60 )
-texture = ExtResource( 11 )
-vframes = 3
-script = ExtResource( 12 )
-_sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
-[node name="Torch_4" type="Sprite" parent="." index="15"]
+[node name="Torch5" parent="." index="15" instance=ExtResource( 11 )]
 
-position = Vector2( 520, 300 )
+position = Vector2( 115, 303 )
 rotation = 3.14159
-texture = ExtResource( 11 )
-vframes = 3
-script = ExtResource( 12 )
-_sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_5" type="Sprite" parent="." index="16"]
+[node name="Torch6" parent="." index="16" instance=ExtResource( 11 )]
 
-position = Vector2( 119.757, 300 )
+position = Vector2( 515, 303 )
 rotation = 3.14159
-texture = ExtResource( 11 )
-vframes = 3
-script = ExtResource( 12 )
-_sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_6" type="Sprite" parent="." index="17"]
+[node name="Torch7" parent="." index="17" instance=ExtResource( 11 )]
 
-position = Vector2( 578.931, 180.562 )
+position = Vector2( 578.523, 181.926 )
 rotation = 1.5708
-texture = ExtResource( 11 )
-vframes = 3
-script = ExtResource( 12 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_7" type="Sprite" parent="." index="18"]
+[node name="Torch8" parent="." index="18" instance=ExtResource( 11 )]
 
-position = Vector2( 62.7367, 180.562 )
+position = Vector2( 64.3001, 181.926 )
 rotation = -1.5708
-texture = ExtResource( 11 )
-vframes = 3
-script = ExtResource( 12 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 

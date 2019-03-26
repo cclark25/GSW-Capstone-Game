@@ -5,13 +5,34 @@ extends StaticBody2D
 # var b = "textvar"
 export (bool) var is_locked = true;
 var animationTime = 0;
+export (String) var doorId;
+export (String) var exitScene;
+export (String) var exitTo;
+export (bool) var locksOnEnter = false;
+var respawn = [];
 
+func get_door_id():
+	return doorId;
+
+func _SceneReload():
+	get_node("Exit")._ready();
+	return;
+
+func GetRespawnables():
+	return respawn;
+
+func GetSpawnPoint():
+	return get_node("Door").global_position + Vector2(0, 40).rotated(rotation);
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	#connect("body_entered", self, "unlock")
 	set_process(false);
+	if(is_locked):
+		lock();
+	else:
+		unlock();
 	pass
 	
 func unlock():
