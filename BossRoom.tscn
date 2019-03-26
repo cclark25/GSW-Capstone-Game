@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://BossRoom.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Boss_Room/Background/Boss_Room.png" type="Texture" id=2]
@@ -111,12 +111,7 @@ extents = Vector2( 20, 11.5556 )
 custom_solver_bias = 0.0
 extents = Vector2( 12.1894, 10 )
 
-[sub_resource type="CircleShape2D" id=7]
-
-custom_solver_bias = 0.0
-radius = 10.0
-
-[node name="BossRoom" type="WorldEnvironment" index="0"]
+[node name="BossRoom" type="WorldEnvironment"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
@@ -208,14 +203,11 @@ shape = SubResource( 5 )
 
 position = Vector2( 320.183, 340.124 )
 rotation = 3.14159
-_sections_unfolded = [ "Collision", "Transform" ]
+doorId = "bossS"
+exitScene = "demo_BossFight"
+exitTo = "fightN"
 
-[node name="PlayerBodySpawnPoint" type="CollisionShape2D" parent="." index="2"]
-
-position = Vector2( 320, 310 )
-shape = SubResource( 7 )
-
-[node name="Limb_0" type="Sprite" parent="." index="3"]
+[node name="Limb_0" type="Sprite" parent="." index="2"]
 
 editor/display_folded = true
 position = Vector2( 221.878, 297.535 )
@@ -245,7 +237,7 @@ build_mode = 0
 polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Limb_1" type="Sprite" parent="." index="4"]
+[node name="Limb_1" type="Sprite" parent="." index="3"]
 
 editor/display_folded = true
 position = Vector2( 420, 300 )
@@ -275,7 +267,7 @@ build_mode = 0
 polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Limb_2" type="Sprite" parent="." index="5"]
+[node name="Limb_2" type="Sprite" parent="." index="4"]
 
 editor/display_folded = true
 position = Vector2( 60, 230 )
@@ -304,7 +296,7 @@ build_mode = 0
 polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Limb_3" type="Sprite" parent="." index="6"]
+[node name="Limb_3" type="Sprite" parent="." index="5"]
 
 editor/display_folded = true
 position = Vector2( 60, 130 )
@@ -333,7 +325,7 @@ build_mode = 0
 polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Limb_4" type="Sprite" parent="." index="7"]
+[node name="Limb_4" type="Sprite" parent="." index="6"]
 
 editor/display_folded = true
 position = Vector2( 220.513, 63.4583 )
@@ -363,7 +355,7 @@ build_mode = 0
 polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Limb_5" type="Sprite" parent="." index="8"]
+[node name="Limb_5" type="Sprite" parent="." index="7"]
 
 editor/display_folded = true
 position = Vector2( 420.513, 63.4583 )
@@ -393,7 +385,7 @@ build_mode = 0
 polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Limb_6" type="Sprite" parent="." index="9"]
+[node name="Limb_6" type="Sprite" parent="." index="8"]
 
 editor/display_folded = true
 position = Vector2( 574.811, 128.918 )
@@ -423,7 +415,7 @@ build_mode = 0
 polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Limb_7" type="Sprite" parent="." index="10"]
+[node name="Limb_7" type="Sprite" parent="." index="9"]
 
 editor/display_folded = true
 position = Vector2( 573.513, 230.458 )
@@ -453,7 +445,7 @@ build_mode = 0
 polygon = PoolVector2Array( -10, 0, -30, 10, -30, 0, -10, -10, 10, 0, 20, 0, 30, 0, 20, 10, -10, 0 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Area2D" type="Area2D" parent="." index="11"]
+[node name="Area2D" type="Area2D" parent="." index="10"]
 
 editor/display_folded = true
 position = Vector2( 320, 180 )
@@ -484,7 +476,7 @@ vframes = 3
 script = ExtResource( 9 )
 _sections_unfolded = [ "Animation", "Transform", "Z Index" ]
 
-[node name="Torch_1" type="Sprite" parent="." index="12"]
+[node name="Torch_1" type="Sprite" parent="." index="11"]
 
 position = Vector2( 320, 60 )
 texture = ExtResource( 10 )
@@ -492,7 +484,7 @@ vframes = 3
 script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
-[node name="Torch_2" type="Sprite" parent="." index="13"]
+[node name="Torch_2" type="Sprite" parent="." index="12"]
 
 position = Vector2( 120, 60 )
 texture = ExtResource( 10 )
@@ -500,7 +492,7 @@ vframes = 3
 script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
-[node name="Torch_3" type="Sprite" parent="." index="14"]
+[node name="Torch_3" type="Sprite" parent="." index="13"]
 
 position = Vector2( 520, 60 )
 texture = ExtResource( 10 )
@@ -508,7 +500,7 @@ vframes = 3
 script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Z Index" ]
 
-[node name="Torch_4" type="Sprite" parent="." index="15"]
+[node name="Torch_4" type="Sprite" parent="." index="14"]
 
 position = Vector2( 520, 300 )
 rotation = 3.14159
@@ -517,7 +509,7 @@ vframes = 3
 script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_5" type="Sprite" parent="." index="16"]
+[node name="Torch_5" type="Sprite" parent="." index="15"]
 
 position = Vector2( 119.757, 300 )
 rotation = 3.14159
@@ -526,7 +518,7 @@ vframes = 3
 script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_6" type="Sprite" parent="." index="17"]
+[node name="Torch_6" type="Sprite" parent="." index="16"]
 
 position = Vector2( 578.931, 180.562 )
 rotation = 1.5708
@@ -535,7 +527,7 @@ vframes = 3
 script = ExtResource( 11 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_7" type="Sprite" parent="." index="18"]
+[node name="Torch_7" type="Sprite" parent="." index="17"]
 
 position = Vector2( 62.7367, 180.562 )
 rotation = -1.5708

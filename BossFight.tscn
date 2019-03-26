@@ -8,7 +8,7 @@
 [ext_resource path="res://Torch.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Entities/Enemies/Katydid/Katydid.tscn" type="PackedScene" id=7]
 
-[sub_resource type="Environment" id=2]
+[sub_resource type="Environment" id=1]
 
 background_mode = 4
 background_sky_custom_fov = 0.0
@@ -87,19 +87,19 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Background" ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 13.6841, 14.6107 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 13, 12.7484 )
 
-[node name="root" type="WorldEnvironment"]
+[node name="BossFight" type="WorldEnvironment"]
 
-environment = SubResource( 2 )
+environment = SubResource( 1 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
 
@@ -126,39 +126,43 @@ _sections_unfolded = [ "Collision" ]
 
 position = Vector2( 301.5, -0.942311 )
 scale = Vector2( 1.65385, 13.9969 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="LeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="1"]
 
 position = Vector2( -300, 0 )
 scale = Vector2( 1.65385, 13.9969 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="BottomLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="2"]
 
 position = Vector2( -173.092, 160 )
 scale = Vector2( 9.67287, 1.26702 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="BottomRightWall2" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="3"]
 
 position = Vector2( 170, 160 )
 scale = Vector2( 9.67287, 1.26702 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="TopLeftWall" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="4"]
 
 position = Vector2( -160, -160 )
 scale = Vector2( 9.50008, 1.2377 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="TopRightWall3" type="CollisionShape2D" parent="Dungeon Floor Demo/StaticBody2D" index="5"]
 
 position = Vector2( 166.412, -160 )
 scale = Vector2( 9.9743, 1.26702 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Door" parent="." index="1" instance=ExtResource( 3 )]
+
+doorId = "fightN"
+exitScene = "demo_BossRoom"
+exitTo = "bossS"
 
 [node name="South_Door" type="StaticBody2D" parent="." index="2"]
 
@@ -185,7 +189,7 @@ _sections_unfolded = [ "Animation" ]
 
 position = Vector2( -1.14441e-05, 2.38419e-07 )
 scale = Vector2( 2.30769, 1.53846 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Torch_1" type="Sprite" parent="." index="3"]
 

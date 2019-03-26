@@ -24,6 +24,11 @@ func AddScene(scene, id):
 		printerr("Error: Scene Exists already!");
 	return;
 
+func _input(event):
+	if(event.is_action_pressed("DEBUG")):
+		pass;
+	return;
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -59,18 +64,30 @@ func DespawnSpawned():
 	spawned.clear();
 	return;
 
-func SpawnPending():
+func SpawnPending(doorEntered=null):
 	for e in spawn_pending:
 		if(e.get_parent() != null):
 			e.get_parent().remove_child(e);
 		current_scene.add_child(e);
-		if(current_scene.has_node(e.name + "SpawnPoint")):
-			e.global_position = current_scene.get_node(e.name + "SpawnPoint").global_position;
+		#if(current_scene.has_node(e.name + "SpawnPoint")):
+		#	e.global_position = current_scene.get_node(e.name + "SpawnPoint").global_position;
+				
 		spawned.push_back(e);
+	
+	if(doorEntered != null && doorEntered.has_method("GetRespawnables")):
+		for o in current_scene.get_children():
+			if(o.has_method("get_door_id") && o.get_door_id() == doorEntered.exitTo):
+				var entities = doorEntered.GetRespawnables();
+				entities.push_back(Player);
+				for i in entities:
+					i.global_position = o.GetSpawnPoint();
+				if(o.has_method("_SceneReload")): o._SceneReload();
+				break;
+	
 	spawn_pending.clear();
 	return;
 
-func set_current_scene(id):
+func set_current_scene(id, doorway=null):
 	var newScene = GetScene(id);
 	if(newScene == null):
 		printerr("Error: newScene is null!");
@@ -82,7 +99,7 @@ func set_current_scene(id):
 	current_scene = newScene;
 	
 	DespawnSpawned();
-	SpawnPending();
+	SpawnPending(doorway);
 	return;
 
 #func _process(delta):
