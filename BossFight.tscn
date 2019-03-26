@@ -1,12 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://BossFight.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Dungeon Floors/Dungeon Floor Demo.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Entities/Static/DungeonDoor/Door.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprites/Dungeon Floors/Dungeon Doors/PNGs/Rows/Sheet/Entity.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=5]
-[ext_resource path="res://Torch.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Entities/Enemies/Katydid/Katydid.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Entities/Enemies/Katydid/Katydid.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Entities/Static/Torch/Torch.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Environment" id=1]
 
@@ -191,76 +190,40 @@ position = Vector2( -1.14441e-05, 2.38419e-07 )
 scale = Vector2( 2.30769, 1.53846 )
 shape = SubResource( 3 )
 
-[node name="Torch_1" type="Sprite" parent="." index="3"]
+[node name="Katydid" parent="." index="3" instance=ExtResource( 5 )]
 
-position = Vector2( 260, 60 )
-texture = ExtResource( 5 )
-vframes = 3
-script = ExtResource( 6 )
-_sections_unfolded = [ "Animation", "Material", "Z Index" ]
+[node name="Torch" parent="." index="4" instance=ExtResource( 6 )]
 
-[node name="Torch_2" type="Sprite" parent="." index="4"]
-
-position = Vector2( 380, 60 )
-texture = ExtResource( 5 )
-vframes = 3
-script = ExtResource( 6 )
-_sections_unfolded = [ "Animation", "Material", "Z Index" ]
-
-[node name="Torch_3" type="Sprite" parent="." index="5"]
-
-position = Vector2( 255, 303 )
-rotation = 3.14159
-texture = ExtResource( 5 )
-vframes = 3
-script = ExtResource( 6 )
-_sections_unfolded = [ "Animation", "Material", "Z Index" ]
-
-[node name="Torch_4" type="Sprite" parent="." index="6"]
-
-position = Vector2( 375, 303 )
-rotation = 3.14159
-texture = ExtResource( 5 )
-vframes = 3
-script = ExtResource( 6 )
-_sections_unfolded = [ "Animation", "Material", "Z Index" ]
-
-[node name="Torch_5" type="Sprite" parent="." index="7"]
-
-position = Vector2( 583, 94 )
+position = Vector2( 579.742, 176.838 )
 rotation = 1.5708
-texture = ExtResource( 5 )
-vframes = 3
-script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_8" type="Sprite" parent="." index="8"]
+[node name="Torch2" parent="." index="5" instance=ExtResource( 6 )]
 
-position = Vector2( 53, 95 )
+position = Vector2( 58.1987, 176.838 )
 rotation = -1.5708
-texture = ExtResource( 5 )
-vframes = 3
-script = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_6" type="Sprite" parent="." index="9"]
+[node name="Torch3" parent="." index="6" instance=ExtResource( 6 )]
 
-position = Vector2( 583, 262.687 )
-rotation = 1.5708
-texture = ExtResource( 5 )
-vframes = 3
-script = ExtResource( 6 )
+position = Vector2( 150, 60 )
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch_7" type="Sprite" parent="." index="10"]
+[node name="Torch6" parent="." index="7" instance=ExtResource( 6 )]
 
-position = Vector2( 53, 263.687 )
-rotation = -1.5708
-texture = ExtResource( 5 )
-vframes = 3
-script = ExtResource( 6 )
+position = Vector2( 155, 303 )
+rotation = 3.14159
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Katydid" parent="." index="11" instance=ExtResource( 7 )]
+[node name="Torch4" parent="." index="8" instance=ExtResource( 6 )]
+
+position = Vector2( 480, 60 )
+_sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
+
+[node name="Torch5" parent="." index="9" instance=ExtResource( 6 )]
+
+position = Vector2( 485, 303 )
+rotation = 3.14159
+_sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 
