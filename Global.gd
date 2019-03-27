@@ -16,62 +16,91 @@ var spawned = [];
 enum Directions { Right, DownRight, Down, DownLeft, Left, UpLeft, Up, UpRight }
 enum CollisionType {player, enemy, weapon};
 
+func AddScene(scene, id):
+	if(!SceneNames.has(id)):
+		SceneNames.push_back(id);
+		SceneList.push_back(scene);
+	else:
+		printerr("Error: Scene Exists already!");
+	return;
+
+func _input(event):
+	if(event.is_action_pressed("DEBUG")):
+		pass;
+	return;
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	SpawnNode(Player);
-	pass;
+	var sceneFile = File.new();
+	sceneFile.open("res://Scenes/SceneList.cfg", File.READ);
+	var fileText = sceneFile.get_as_text();
+	sceneFile.close();
+	var a1 = fileText.split("\n", false);
+#
+	for e in a1:
+		var sp = e.split(":");
+		var loc = "res://" + sp[0];
+		AddScene(load(loc).instance(), sp[1]);
 
-func AddScene(scene, id):
-	if(SceneNames.has(id)):
-		printerr("Scene " + id + "already exists in tree.");
-	else:
-		SceneNames.push_back(id);
-		SceneList.push_back(scene);
-	pass;
+	if(current_scene == null):
+		set_current_scene("start_menu");
+	SpawnNode(Player);
+
+	return;
+
+func SpawnNode(entity):
+	spawn_pending.push_back(entity);
+	return;
 
 func GetScene(id):
-	var index = SceneNames.find(id);
-	if(index >= 0):
-		return SceneList[index];
+	return SceneList[SceneNames.find(id)];
 
-func SpawnNode(node):
-	spawn_pending.push_back(node);
-	if(current_scene != null):
-		SpawnAll();
-	pass;
+func DespawnSpawned():
+	for e in spawned:
+		if(e.get_parent() != null):
+			e.get_parent().remove_child(e);
+		spawn_pending.push_back(e);
+	spawned.clear();
+	return;
 
-func SpawnAll():
-	if(current_scene == null):
-		printerr("Error: no scene loaded. Cannot spawn entities.");
-		return;
+func SpawnPending(doorEntered=null):
 	for e in spawn_pending:
-		#printerr("Spawning " + e.name + " to " + current_scene.name);
 		if(e.get_parent() != null):
 			e.get_parent().remove_child(e);
 		current_scene.add_child(e);
-		e.owner = current_scene;
+		#if(current_scene.has_node(e.name + "SpawnPoint")):
+		#	e.global_position = current_scene.get_node(e.name + "SpawnPoint").global_position;
+				
 		spawned.push_back(e);
+	
+	if(doorEntered != null && doorEntered.has_method("GetRespawnables")):
+		for o in current_scene.get_children():
+			if(o.has_method("get_door_id") && o.get_door_id() == doorEntered.exitTo):
+				var entities = doorEntered.GetRespawnables();
+				entities.push_back(Player);
+				for i in entities:
+					i.global_position = o.GetSpawnPoint();
+				if(o.has_method("_SceneReload")): o._SceneReload();
+				break;
+	
 	spawn_pending.clear();
-	pass;
+	return;
 
-func get_current_scene():
-	return current_scene;
-
-func set_current_scene(scene):
-	assert(typeof(scene) == TYPE_STRING);
+func set_current_scene(id, doorway=null):
+	var newScene = GetScene(id);
+	if(newScene == null):
+		printerr("Error: newScene is null!");
+		return;
 	
-	var sceneIndex = SceneNames.find(scene);
-	assert(sceneIndex >= 0);
+	if(current_scene != null):
+		remove_child(current_scene);
+	add_child(newScene);
+	current_scene = newScene;
 	
-	for e in spawned:
-		spawn_pending.append(e);
-	spawned.clear();
-	
-	get_tree().set_current_scene(GetScene(scene));
-	current_scene = get_tree().get_current_scene();
-	
-	SpawnAll();
+	DespawnSpawned();
+	SpawnPending(doorway);
+	return;
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

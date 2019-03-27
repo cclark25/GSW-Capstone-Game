@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/Dungeon Floors/DungeonWallTemplate.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 13.6841, 14.6107 )
+
+[node name="DungeonWalls" type="Sprite"]
+
+editor/display_folded = true
+position = Vector2( 320, 180 )
+z_index = 1
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Z Index" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
+
+editor/display_folded = true
+visible = false
+input_pickable = false
+collision_layer = 512
+collision_mask = 31775
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 0.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="RightWall" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+
+position = Vector2( 301.5, -0.942311 )
+scale = Vector2( 1.65385, 13.9969 )
+shape = SubResource( 1 )
+
+[node name="LeftWall" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+
+position = Vector2( -300, 0 )
+scale = Vector2( 1.65385, 13.9969 )
+shape = SubResource( 1 )
+
+[node name="BottomLeftWall" type="CollisionShape2D" parent="StaticBody2D" index="2"]
+
+position = Vector2( -173.092, 160 )
+scale = Vector2( 9.67287, 1.26702 )
+shape = SubResource( 1 )
+
+[node name="BottomRightWall2" type="CollisionShape2D" parent="StaticBody2D" index="3"]
+
+position = Vector2( 170, 160 )
+scale = Vector2( 9.67287, 1.26702 )
+shape = SubResource( 1 )
+
+[node name="TopLeftWall" type="CollisionShape2D" parent="StaticBody2D" index="4"]
+
+position = Vector2( -160, -160 )
+scale = Vector2( 9.50008, 1.2377 )
+shape = SubResource( 1 )
+
+[node name="TopRightWall3" type="CollisionShape2D" parent="StaticBody2D" index="5"]
+
+position = Vector2( 166.412, -160 )
+scale = Vector2( 9.9743, 1.26702 )
+shape = SubResource( 1 )
+
+

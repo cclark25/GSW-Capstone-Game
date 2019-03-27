@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 12.6964, 1.72896 )
 
-[node name="Sword" type="Area2D"]
+[node name="Sword" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -16,7 +16,7 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 collision_layer = 0
-collision_mask = 2
+collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )

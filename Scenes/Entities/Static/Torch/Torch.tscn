@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/Torch/PNGs/Rows/Sheet/Entity.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Entities/Static/Torch/Torch.gd" type="Script" id=2]
+
+[node name="Torch" type="Sprite"]
+
+position = Vector2( 320, 60 )
+z_index = 3
+texture = ExtResource( 1 )
+vframes = 3
+script = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Material", "Z Index" ]
+
+
