@@ -12,6 +12,7 @@ var isMoving = true;
 var movement = Vector2(90,0);
 var isAggro = false;
 var lifePoints = 15;
+var angleToPlayer = 1;
 export (bool) var isAttacking = false;
 export (bool) var damaged = false;
 
@@ -39,7 +40,7 @@ func _process(delta):
 	anim.append(11);
 	
 		
-	if (position - get_parent().get_child(0).position).length() <= 500 || isAggro:
+	if (position - Global.Player.position).length() <= 500 || isAggro:
 		aggro(delta);
 		
 	
@@ -60,19 +61,15 @@ func _process(delta):
 		["Right"]:
 			animOffset = 0;
 			moveAngle = 0;
-			get_child(1).position = Vector2(5,15);
 		["Down"]:
 			animOffset = 1;
 			moveAngle = PI/2;
-			get_child(1).position = Vector2(5,20);
 		["Left"]:
 			animOffset = 2;
 			moveAngle = PI;
-			get_child(1).position = Vector2(-5,15);
 		["Up"]:
 			animOffset = 3;
 			moveAngle = 3*PI/2;
-			get_child(1).position = Vector2(0,-20);
 	
 	if isMoving || isAggro:
 		frame = anim[int(floor(animationTime/.25))%3 + 3 * animOffset];

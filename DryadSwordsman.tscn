@@ -22,7 +22,7 @@ extents = Vector2( 10, 10 )
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="Dryad" type="Sprite" index="0"]
+[node name="Dryad" type="Sprite"]
 
 position = Vector2( 129.367, 124.723 )
 texture = SubResource( 1 )

@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://WolfBody.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Enemies/Wolf/Wolf.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Entities/Enemies/Wolf/WolfSprite.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="CircleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 24.699
+
+[sub_resource type="AtlasTexture" id=3]
+
+flags = 0
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 96, 128 )
+margin = Rect2( 0, 0, 0, 0 )
+filter_clip = false
+
+[node name="WolfBody" type="KinematicBody2D" index="0"]
+
+position = Vector2( 104.157, 87.5715 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+isAttacking = false
+damaged = false
+
+[node name="WolfCollisionAreaBody" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( -3.34454, 3.75653 )
+scale = Vector2( 1.30132, 0.816518 )
+shape = SubResource( 1 )
+
+[node name="WolfCollisionAreaHead" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 9.26042, -3 )
+scale = Vector2( 0.339725, 0.26423 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="WolfSprite" type="Sprite" parent="." index="2"]
+
+texture = SubResource( 3 )
+vframes = 4
+hframes = 3
+script = ExtResource( 3 )
+_sections_unfolded = [ "Animation" ]
+
+

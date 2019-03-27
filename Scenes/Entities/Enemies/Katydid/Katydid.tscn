@@ -10,7 +10,7 @@ custom_solver_bias = 0.0
 radius = 3.66267
 height = 2.21225
 
-[node name="Katydid" type="Sprite" index="0"]
+[node name="Katydid" type="Sprite"]
 
 position = Vector2( 406.373, 96.2332 )
 z_index = 2
