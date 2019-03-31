@@ -110,6 +110,10 @@ func ReloadScenes(scene):
 		ReloadScenes(child);
 		if(child.has_method("_SceneReload")): child._SceneReload();
 
+func GetCurrentSceneId():
+	var index = SceneList.find(current_scene);
+	return SceneNames[index];
+
 func set_current_scene(id, doorway=null):
 	var newScene = GetScene(id);
 	if(newScene == null):
