@@ -36,7 +36,7 @@ func _process(delta):
 		var tmp = animationTime / .15;
 		self_modulate.a *= tmp;
 		if(animationTime >= .15):
-			get_parent().get_node("Door").unlock();
+			Global.GetDoor("North").unlock();
 			queue_free();
 		return;
 	

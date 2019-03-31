@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Sprites/Dungeon Floors/DungeonWallTemplate.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Entities/Static/DungeonWalls/DungeonWalls.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Entities/Static/DungeonDoor/Door.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -9,16 +11,19 @@ extents = Vector2( 13.6841, 14.6107 )
 
 [node name="DungeonWalls" type="Sprite"]
 
-editor/display_folded = true
 position = Vector2( 320, 180 )
 z_index = 1
 texture = ExtResource( 1 )
+script = ExtResource( 2 )
 _sections_unfolded = [ "Z Index" ]
+NorthDoor = true
+SouthDoor = true
+EastDoor = true
+WestDoor = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
 
 editor/display_folded = true
-visible = false
 input_pickable = false
 collision_layer = 512
 collision_mask = 31775
@@ -30,38 +35,73 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="RightWall" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 
-position = Vector2( 301.5, -0.942311 )
-scale = Vector2( 1.65385, 13.9969 )
+position = Vector2( 300, -106.624 )
+scale = Vector2( 1.65385, 5.48665 )
 shape = SubResource( 1 )
 
-[node name="LeftWall" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+[node name="RightWall3" type="CollisionShape2D" parent="StaticBody2D" index="1"]
 
-position = Vector2( -300, 0 )
-scale = Vector2( 1.65385, 13.9969 )
+position = Vector2( -302.407, -103.376 )
+scale = Vector2( 1.65385, 5.48665 )
 shape = SubResource( 1 )
 
-[node name="BottomLeftWall" type="CollisionShape2D" parent="StaticBody2D" index="2"]
+[node name="RightWall2" type="CollisionShape2D" parent="StaticBody2D" index="2"]
+
+position = Vector2( 300, 111.624 )
+scale = Vector2( 1.65385, 5.20273 )
+shape = SubResource( 1 )
+
+[node name="RightWall4" type="CollisionShape2D" parent="StaticBody2D" index="3"]
+
+position = Vector2( -302.407, 114.871 )
+scale = Vector2( 1.65385, 5.20273 )
+shape = SubResource( 1 )
+
+[node name="BottomLeftWall" type="CollisionShape2D" parent="StaticBody2D" index="4"]
 
 position = Vector2( -173.092, 160 )
 scale = Vector2( 9.67287, 1.26702 )
 shape = SubResource( 1 )
 
-[node name="BottomRightWall2" type="CollisionShape2D" parent="StaticBody2D" index="3"]
+[node name="BottomRightWall2" type="CollisionShape2D" parent="StaticBody2D" index="5"]
 
 position = Vector2( 170, 160 )
 scale = Vector2( 9.67287, 1.26702 )
 shape = SubResource( 1 )
 
-[node name="TopLeftWall" type="CollisionShape2D" parent="StaticBody2D" index="4"]
+[node name="TopLeftWall" type="CollisionShape2D" parent="StaticBody2D" index="6"]
 
 position = Vector2( -160, -160 )
 scale = Vector2( 9.50008, 1.2377 )
 shape = SubResource( 1 )
 
-[node name="TopRightWall3" type="CollisionShape2D" parent="StaticBody2D" index="5"]
+[node name="TopRightWall3" type="CollisionShape2D" parent="StaticBody2D" index="7"]
 
 position = Vector2( 166.412, -160 )
 scale = Vector2( 9.9743, 1.26702 )
 shape = SubResource( 1 )
+
+[node name="NorthDoor" parent="." index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 0, -160 )
+doorId = "North"
+
+[node name="SouthDoor" parent="." index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 0, 160 )
+rotation = 3.14159
+doorId = "South"
+
+[node name="EastDoor" parent="." index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 296.226, 4.77182 )
+rotation = 1.5708
+doorId = "East"
+
+[node name="WestDoor" parent="." index="4" instance=ExtResource( 3 )]
+
+position = Vector2( -297.55, 4.77182 )
+rotation = -1.5708
+doorId = "West"
 
 

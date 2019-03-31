@@ -16,6 +16,18 @@ var spawned = [];
 enum Directions { Right, DownRight, Down, DownLeft, Left, UpLeft, Up, UpRight }
 enum CollisionType {player, enemy, weapon};
 
+func GetDoor(name, root=current_scene):
+	var door = null;
+	for child in root.get_children():
+		if(child.has_method("get_door_id") && child.get_door_id() == name):
+			door = child;
+			return door;
+		else:
+			door = GetDoor(name, child);
+			if(door != null):
+				return door;
+	return door;
+
 func AddScene(scene, id):
 	if(!SceneNames.has(id)):
 		SceneNames.push_back(id);
@@ -75,15 +87,20 @@ func SpawnPending(doorEntered=null):
 		spawned.push_back(e);
 	
 	if(doorEntered != null && doorEntered.has_method("GetRespawnables")):
-		for o in current_scene.get_children():
-			if(o.has_method("get_door_id") && o.get_door_id() == doorEntered.exitTo):
-				var entities = doorEntered.GetRespawnables();
-				entities.push_back(Player);
-				for i in entities:
-					i.global_position = o.GetSpawnPoint();
-				if(o.has_method("_SceneReload")): o._SceneReload();
-				break;
-	
+#		for o in current_scene.get_children():
+#			if(o.has_method("get_door_id") && o.get_door_id() == doorEntered.exitTo):
+#				var entities = doorEntered.GetRespawnables();
+#				entities.push_back(Player);
+#				for i in entities:
+#					i.global_position = o.GetSpawnPoint();
+#				if(o.has_method("_SceneReload")): o._SceneReload();
+#				break;
+		var dest = GetDoor(doorEntered.exitTo);
+		var entities = doorEntered.GetRespawnables();
+		entities.push_back(Player);
+		for i in entities:
+			i.global_position = dest.GetSpawnPoint();
+			if(dest.has_method("_SceneReload")): dest._SceneReload();
 	spawn_pending.clear();
 	return;
 
