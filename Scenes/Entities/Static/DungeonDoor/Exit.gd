@@ -8,7 +8,7 @@ var tmp = false;
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	connect("body_exited", self, "exit");
+	if(!is_connected("body_exited", self, "exit")): connect("body_exited", self, "exit");
 	set_collision_mask_bit(Global.CollisionType.player, true);
 	#get_node("ExitTrigger").disabled = false;
 	#tmp = false;

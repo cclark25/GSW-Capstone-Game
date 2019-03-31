@@ -100,9 +100,15 @@ func SpawnPending(doorEntered=null):
 		entities.push_back(Player);
 		for i in entities:
 			i.global_position = dest.GetSpawnPoint();
-			if(dest.has_method("_SceneReload")): dest._SceneReload();
+			if(dest.has_method("_SceneReload")): 
+				dest._SceneReload();
 	spawn_pending.clear();
 	return;
+
+func ReloadScenes(scene):
+	for child in scene.get_children():
+		ReloadScenes(child);
+		if(child.has_method("_SceneReload")): child._SceneReload();
 
 func set_current_scene(id, doorway=null):
 	var newScene = GetScene(id);
@@ -117,6 +123,10 @@ func set_current_scene(id, doorway=null):
 	
 	DespawnSpawned();
 	SpawnPending(doorway);
+	
+	ReloadScenes(current_scene);
+	
+	print("Scene changed to \"" + id + "\".");
 	return;
 
 #func _process(delta):
