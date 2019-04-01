@@ -35,7 +35,10 @@ func ListScenes(next=""):
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	ListScenes("res://Scenes");
+	clear();
+	for id in Global.SceneNames:
+		add_item(id);
+	
 	get_parent().get_node("Start").disabled = false;
 	pass
 
