@@ -30,7 +30,7 @@ func Use():
 	time = 0;
 	visible = true;
 	var cursorAngle = Vector2(1,0);
-	cursorAngle = cursorAngle.rotated(((get_parent().frame / 3) % 8) * PI/4).rotated(PI) #(get_parent().get_parent().position - get_viewport().get_mouse_position()).normalized();
+	cursorAngle = cursorAngle.rotated(((get_parent().get_node("Animation").frame / 3) % 8) * PI/4).rotated(PI) #(get_parent().get_parent().position - get_viewport().get_mouse_position()).normalized();
 	cursorAngle *= 41;
 	destination = get_parent().get_parent().position - cursorAngle;
 	get_child(0).get_child(0).disabled = false;

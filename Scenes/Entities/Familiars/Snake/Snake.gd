@@ -1,24 +1,18 @@
-extends WorldEnvironment
+extends Area2D
 
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
 
-
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	#var player = Global.retrieve_player();
-	
-	#Global.Player.owner = self;
-	#Global.Player.set_position(get_child(2).position);
-	#Global.Player.show();
-	
-	#get_child(1).lock();
-	#get_node("Door").lock();
-	#get_node("Door").CloseOnEnter(true);
-	
 	pass
+
+func Use():
+	visible = true;
+	get_node("Animation").Play(get_parent().get_direction(), get_node("Animation").Extend);
+	return;
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
