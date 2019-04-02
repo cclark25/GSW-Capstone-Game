@@ -14,7 +14,7 @@ var spawn_pending = [];
 var spawned = [];
 
 enum Directions { Right, DownRight, Down, DownLeft, Left, UpLeft, Up, UpRight }
-enum CollisionType {player, enemy, weapon};
+enum CollisionType {player, enemy, weapon, hookable};
 
 func GetDoor(name, root=current_scene):
 	var door = null;

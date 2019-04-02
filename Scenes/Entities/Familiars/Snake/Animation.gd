@@ -16,6 +16,7 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	connect("animation_finished", self, "ExtendStopped");
+	set_process(false);
 	pass
 
 func ExtendStopped():
@@ -31,7 +32,7 @@ func ExtendStopped():
 	
 	return;
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _process(delta):
+	# Called every frame. Delta is time since last frame.
+	# Update game logic here.
+	pass

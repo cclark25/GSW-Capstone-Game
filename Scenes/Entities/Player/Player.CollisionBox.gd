@@ -10,6 +10,7 @@ var activeItem = null;
 var itemList = [];
 var targetCursor = preload("res://Scenes/Entities/Familiars/Bird/Bird.tscn").instance();
 
+
 func get_direction():
 	return get_node("Animation").dir;
 
@@ -27,6 +28,8 @@ class _target extends Node2D:
 		
 var targetBody = _target.new();
 
+func isTargeting():
+	return targetBody.is_processing();
 
 func _ready():
 	# Called when the node is added to the scene for the first time.

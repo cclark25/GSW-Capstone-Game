@@ -1,4 +1,4 @@
-extends Area2D
+extends KinematicBody2D
 
 # class member variables go here, for example:
 # var a = 2
@@ -7,6 +7,8 @@ extends Area2D
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	set_collision_layer_bit(Global.CollisionType.enemy, true);
+	set_collision_mask_bit(Global.CollisionType.weapon, true);
 	connect("body_entered", self, "DealDamage");
 	pass
 
