@@ -15,9 +15,8 @@ func _ready():
 func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
-	disabled = false;
+	if(!get_parent().get_overlapping_bodies().empty()): printerr(get_parent().get_overlapping_bodies());
 	var f = get_parent().get_node("Animation").frame;
-	position = Vector2(1,-4);
 	time += speed*delta;
 #	match f:
 #		0:
@@ -27,11 +26,13 @@ func _process(delta):
 #		2:
 #			position += Vector2(40, 4);
 #	position = position.rotated(get_parent().dir * PI/4);
+	var speed = Vector2(40, 4) * sin(PI * time / 0.6);
+	speed = speed.rotated(get_parent().dir * PI/4);
+	position += speed;
 	
-	position += Vector2(40, 4) * sin(PI * time / 0.6);
-	position = position.rotated(get_parent().dir * PI/4);
 	if(time >= 0.6):
 		time = 0.0;
+		printerr("Disabling Head Area2D.");
 		disabled = true;
 		set_process(false);
 	pass

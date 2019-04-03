@@ -8,6 +8,7 @@ var hookAble = true;
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	set_collision_layer_bit(Global.CollisionType.hookable, true);
 	pass
 
 func Is_Hookable():

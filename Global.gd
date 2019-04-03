@@ -8,6 +8,7 @@ signal spawn_node(node);
 var Player = preload("res://Scenes/Entities/Player/Player.tscn").instance();
 var current_scene = null;
 var SceneList = [];
+var PackedScenes = [];
 var SceneNames = [];
 
 var spawn_pending = [];
@@ -38,7 +39,10 @@ func AddScene(scene, id):
 
 func _input(event):
 	if(event.is_action_pressed("DEBUG")):
-		pass;
+		var index = SceneList.find(current_scene);
+		if(index >= 0):
+			SceneList[index] = PackedScenes[index].instance();
+			set_current_scene(SceneNames[index]);
 	return;
 
 func _ready():
@@ -53,7 +57,9 @@ func _ready():
 	for e in a1:
 		var sp = e.split(":");
 		var loc = "res://" + sp[0];
-		AddScene(load(loc).instance(), sp[1]);
+		var pScene = load(loc);
+		PackedScenes.push_back(pScene);
+		AddScene(pScene.instance(), sp[1]);
 
 	if(current_scene == null):
 		set_current_scene("start_menu");

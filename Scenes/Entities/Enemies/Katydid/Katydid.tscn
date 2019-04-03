@@ -19,24 +19,7 @@ vframes = 3
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
 
-[node name="Collision" type="KinematicBody2D" parent="." index="0"]
-
-position = Vector2( -1, 1.00001 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
-script = ExtResource( 3 )
-
-[node name="Shape" type="CollisionShape2D" parent="Collision" index="0"]
-
-position = Vector2( -0.75174, 1.9563 )
-rotation = 0.785398
-scale = Vector2( 1.13273, 1.09403 )
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="CollisionOld" type="Area2D" parent="." index="1"]
+[node name="Collision" type="Area2D" parent="." index="0"]
 
 position = Vector2( -1, 1.00001 )
 input_pickable = true
@@ -48,6 +31,15 @@ collision_layer = 0
 collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
+script = ExtResource( 3 )
 _sections_unfolded = [ "Collision" ]
+
+[node name="Shape" type="CollisionShape2D" parent="Collision" index="0"]
+
+position = Vector2( -0.75174, 1.9563 )
+rotation = 0.785398
+scale = Vector2( 1.13273, 1.09403 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 

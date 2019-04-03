@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 # class member variables go here, for example:
 # var a = 2
@@ -11,6 +11,7 @@ func _ready():
 	set_collision_mask_bit(Global.CollisionType.weapon, true);
 	connect("body_entered", self, "DealDamage");
 	pass
+
 
 func DealDamage(body):
 	if(body.has_method("TakeDamage")):
