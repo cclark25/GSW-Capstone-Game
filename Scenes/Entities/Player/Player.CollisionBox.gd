@@ -126,7 +126,10 @@ func _input(event):
 		direction.y -= 1;
 	
 	if(event.is_action_pressed("Jump")):
-		animator.CurrentMode = animator.Modes.Roll;
+	 if(activeItem.has_method("ItemJump")):
+	 	activeItem.ItemJump();
+	 else:
+	 	animator.CurrentMode = animator.Modes.Roll;
 	
 	if(event.is_action_pressed("Target")):
 		Target();

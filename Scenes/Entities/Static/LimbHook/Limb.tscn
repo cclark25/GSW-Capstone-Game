@@ -5,8 +5,6 @@
 
 [node name="Limb" type="Sprite"]
 
-position = Vector2( 221.878, 297.535 )
-rotation = -1.5708
 z_index = 4
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
@@ -25,6 +23,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 2 )
 _sections_unfolded = [ "Collision" ]
+jumpDest = Vector2( 30, 0 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Limb" index="0"]
 
