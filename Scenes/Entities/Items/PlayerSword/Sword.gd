@@ -13,6 +13,7 @@ func _ready():
 	connect("area_entered", self, "DealDamage");
 	set_process(false);
 	get_node("CollisionShape2D").disabled = true;
+	set_collision_layer_bit(Global.CollisionType.weapon, true);
 	set_collision_mask_bit(Global.CollisionType.enemy, true);
 	pass
 

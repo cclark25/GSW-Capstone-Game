@@ -7,8 +7,11 @@ extends Area2D
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	set_collision_layer_bit(Global.CollisionType.enemy, true);
+	set_collision_mask_bit(Global.CollisionType.weapon, true);
 	connect("body_entered", self, "DealDamage");
 	pass
+
 
 func DealDamage(body):
 	if(body.has_method("TakeDamage")):

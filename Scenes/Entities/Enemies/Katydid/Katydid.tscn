@@ -10,7 +10,7 @@ custom_solver_bias = 0.0
 radius = 3.66267
 height = 2.21225
 
-[node name="Katydid" type="Sprite" index="0"]
+[node name="Katydid" type="Sprite"]
 
 position = Vector2( 406.373, 96.2332 )
 z_index = 2
@@ -27,7 +27,8 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-collision_layer = 2
+collision_layer = 0
+collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 3 )
@@ -35,7 +36,7 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="Shape" type="CollisionShape2D" parent="Collision" index="0"]
 
-position = Vector2( -0.751748, 1.9563 )
+position = Vector2( -0.75174, 1.9563 )
 rotation = 0.785398
 scale = Vector2( 1.13273, 1.09403 )
 shape = SubResource( 1 )
