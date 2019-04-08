@@ -6,14 +6,17 @@ extends AnimatedSprite
 
 
 func _ready():
-	set_process(false);
+	set_process(true);
 	connect("animation_finished", self, "OnAnimationFinish");
 	pass
 
 func _process(delta):
-	var dir = int((get_parent().angleToPlayer()) / (PI/8));
+	var dir = 2 * int((get_parent().position.angle_to_point((Global.Player.position))) / (PI/3)) - 4;
 	Play(dir);
 	pass
 
 func Play(dir):
 	play("Walk." + Global.Directions.keys()[dir]);
+	
+func OnAnimationFinish():
+	pass

@@ -1,7 +1,9 @@
 extends KinematicBody2D
 
 var lifePoints = 15;
-export (bool) var isAttacking = false;
+var vectorToPlayer = Vector2(0,0);
+var attackCounter = 0;
+var avoidCounter = -1;
 export (bool) var damaged = false;
 
 func _ready():
@@ -11,13 +13,33 @@ func _ready():
 	pass
 
 func _process(delta):
-	var vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y);
+	
+	attackCounter = attackCounter - delta;
+	if position.distance_to(Global.Player.position) < 200:
+		if position.distance_to(Global.Player.position) < 70:
+			vectorToPlayer = Vector2((position.y - Global.Player.position.y),(position.x - Global.Player.position.x));
+		else:
+			vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y);
+	else:
+		vectorToPlayer = Vector2(0,0);
+		
+	if position.distance_to(Global.Player.position) < 70  && attackCounter < 5 * delta:
+		JumpAttack(delta);
+	
 	
 	translate(-delta * vectorToPlayer)
-	# Called every frame. Delta is time since last frame.
-	# Update game logic here.
 	
+	
+	if avoidCounter != -1:
+		avoidCounter = avoidCounter + delta
+	
+	if avoidCounter > 10 * delta:
+		AvoidAttack(delta);
 
+func _input(event):
+	
+	if(event.is_action_pressed("Left Click") && position.distance_to(Global.Player.position) < 70):
+		avoidCounter = 0;
 
 func Damage(amount, sourceLocation):
 	if(!damaged):
@@ -29,3 +51,14 @@ func Damage(amount, sourceLocation):
 	pass
 	
 	return;
+	
+func JumpAttack(delta):
+	attackCounter = 500 * delta;
+	vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y);
+	translate(-50 * delta * vectorToPlayer)
+	
+func AvoidAttack(delta):
+	avoidCounter = -1;
+	vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y);
+	translate(60 * delta * vectorToPlayer)
+	
