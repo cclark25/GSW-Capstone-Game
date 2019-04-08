@@ -93,9 +93,6 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="DungeonWalls" parent="." index="0" instance=ExtResource( 2 )]
 
-EastDoor = false
-WestDoor = false
-
 [node name="DungeonFloorTemplate" type="Sprite" parent="." index="1"]
 
 position = Vector2( 320, 180 )

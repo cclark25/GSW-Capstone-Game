@@ -88,6 +88,8 @@ environment = SubResource( 1 )
 
 [node name="DungeonWalls" parent="." index="0" instance=ExtResource( 1 )]
 
+editor/display_folded = true
+
 [node name="NorthDoor" parent="DungeonWalls" index="1"]
 
 is_locked = false

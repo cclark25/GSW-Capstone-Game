@@ -16,10 +16,6 @@ z_index = 1
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Z Index" ]
-NorthDoor = true
-SouthDoor = true
-EastDoor = true
-WestDoor = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
 
