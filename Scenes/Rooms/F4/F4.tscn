@@ -90,26 +90,26 @@ environment = SubResource( 1 )
 
 [node name="NorthDoor" parent="DungeonWalls" index="1"]
 
-is_locked = false
-exitScene = "F4"
+visible = false
+exitScene = "G3"
 exitTo = "South"
 
 [node name="SouthDoor" parent="DungeonWalls" index="2"]
 
-visible = false
-exitScene = "H3"
+is_locked = false
+exitScene = "G4"
 exitTo = "North"
 
 [node name="EastDoor" parent="DungeonWalls" index="3"]
 
-is_locked = false
-exitScene = "G5"
+visible = false
+exitScene = "F3"
 exitTo = "West"
 
 [node name="WestDoor" parent="DungeonWalls" index="4"]
 
 is_locked = false
-exitScene = "G3"
+exitScene = "F3"
 exitTo = "East"
 
 [node name="DungeonFloorTemplate" type="Sprite" parent="." index="1"]
