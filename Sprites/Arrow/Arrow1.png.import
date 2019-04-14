@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Boss_Room.png-4a7bbd7c494f4460e09443cb638ee73c.stex"
+path="res://.import/Arrow1.png-df8f656aa16bc2149604405d7e95f3cd.stex"
 
 [deps]
 
-source_file="res://Sprites/Boss_Room/Background/Boss_Room.png"
-dest_files=[ "res://.import/Boss_Room.png-4a7bbd7c494f4460e09443cb638ee73c.stex" ]
+source_file="res://Sprites/Arrow/Arrow1.png"
+dest_files=[ "res://.import/Arrow1.png-df8f656aa16bc2149604405d7e95f3cd.stex" ]
 
 [params]
 
@@ -16,11 +16,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-<<<<<<< HEAD
-flags/filter=false
-=======
 flags/filter=true
->>>>>>> origin/ccrawfo4_branch
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
