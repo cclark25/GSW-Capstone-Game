@@ -9,19 +9,21 @@ func _ready():
 	# Initialization here
 	set_collision_layer_bit(Global.CollisionType.enemy, true);
 	set_collision_mask_bit(Global.CollisionType.weapon, true);
-	connect("body_entered", self, "DealDamage");
+	set_collision_mask_bit(Global.CollisionType.player, true);
+	connect("area_entered", self, "DealDamage");
 	pass
 
 
 func DealDamage(body):
 	if(body.has_method("TakeDamage")):
-		body.TakeDamage(4, get_parent().position);
+		body.TakeDamage(4, get_node("Katydid").position);
 	pass;
 	
 func TakeDamage(amount, source):
-	get_parent().damaged = true;
-	get_parent().lifePoints -= amount;
-	get_parent().animationTime = 0;
+	get_node("Katydid").damaged = true;
+	get_node("Katydid").lifePoints -= amount;
+	get_node("Katydid").animationTime = 0;
+	printerr("Damage Received.");
 	pass;
 
 

@@ -93,6 +93,14 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="DungeonWalls" parent="." index="0" instance=ExtResource( 2 )]
 
+[node name="EastDoor" parent="DungeonWalls" index="3"]
+
+visible = false
+
+[node name="WestDoor" parent="DungeonWalls" index="4"]
+
+visible = false
+
 [node name="DungeonFloorTemplate" type="Sprite" parent="." index="1"]
 
 position = Vector2( 320, 180 )
@@ -100,6 +108,8 @@ texture = ExtResource( 3 )
 _sections_unfolded = [ "Z Index" ]
 
 [node name="Katydid" parent="." index="2" instance=ExtResource( 4 )]
+
+position = Vector2( 430, 150 )
 
 [node name="Torch" parent="." index="3" instance=ExtResource( 5 )]
 
@@ -136,3 +146,4 @@ rotation = 3.14159
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 
+[editable path="DungeonWalls"]

@@ -7,6 +7,7 @@ var movement = Vector2();
 var moveAngle = 0;
 var lifePoints = 5;
 var damaged = false;
+var targetBody = Global.Player;
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
@@ -38,20 +39,28 @@ func _process(delta):
 		self_modulate.a *= tmp;
 		if(animationTime >= .15):
 			Global.GetDoor("North").unlock();
-			queue_free();
+			get_parent().queue_free();
 		return;
 	
 	if(animationTime / waitTime >= 1 && !inFlight):
 		inFlight = true;
 		animationTime = 0;
-		var angle = position.angle_to_point(get_parent().get_child(3).position);# (((randi()%180)/180) * PI)
-		var distance = (position - get_parent().get_child(3).position).length();
+		var angle;
+		if(targetBody != null):
+			angle = get_parent().global_position.angle_to_point(targetBody.global_position);# (((randi()%180)/180) * PI)
+		else:
+			angle = ((randi()%180)/180) * PI;
+		
+		var distance = 8;
+		if (targetBody != null):
+			distance = (get_parent().global_position - targetBody.global_position).length();
+		
 		movement = Vector2(max(distance * 1.5, 300), 0);
 		moveAngle = (randf() * PI/4) - PI/8;
 		movement = movement.rotated(angle);
 	
 	if(inFlight):
-		position -= delta * (movement.rotated(moveAngle * 2*sin(2*PI * (animationTime/flightTime)))) ;
+		get_parent().global_position -= delta * (movement.rotated(moveAngle * 2*sin(2*PI * (animationTime/flightTime)))) ;
 		frame = int(floor(animationTime/.15))%2 + 1;
 	
 	if(animationTime/flightTime >= 1):

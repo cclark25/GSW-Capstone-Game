@@ -16,7 +16,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://Global.gd"
+Global="*res://GlobalScripts/Global.gd"
+Damage="*res://GlobalScripts/Damage.gd"
 
 [debug]
 
