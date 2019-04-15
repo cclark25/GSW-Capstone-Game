@@ -11,12 +11,16 @@ func _ready():
 	set_collision_mask_bit(Global.CollisionType.weapon, true);
 	set_collision_mask_bit(Global.CollisionType.player, true);
 	connect("area_entered", self, "DealDamage");
+	connect("body_entered", self, "DealDamage");
+	
 	pass
 
 
 func DealDamage(body):
-	if(body.has_method("TakeDamage")):
-		body.TakeDamage(4, get_node("Katydid").position);
+#	printerr("Here");
+#	if(body.has_method("TakeDamage")):
+#		body.TakeDamage(4, get_node("Katydid").position);
+	Damage.DealDamage(4, body, Damage.DamageType.bite, self);
 	pass;
 	
 func TakeDamage(amount, source):
