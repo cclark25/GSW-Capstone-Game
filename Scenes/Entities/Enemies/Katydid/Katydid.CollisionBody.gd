@@ -9,21 +9,30 @@ func _ready():
 	# Initialization here
 	set_collision_layer_bit(Global.CollisionType.enemy, true);
 	set_collision_mask_bit(Global.CollisionType.weapon, true);
+	set_collision_mask_bit(Global.CollisionType.player, true);
+	connect("area_entered", self, "DealDamage");
 	connect("body_entered", self, "DealDamage");
+	
 	pass
 
+func GetColorableChildren():
+	return [get_node("Katydid")];
 
 func DealDamage(body):
-	if(body.has_method("TakeDamage")):
-		body.TakeDamage(4, get_parent().position);
+#	printerr("Here");
+#	if(body.has_method("TakeDamage")):
+#		body.TakeDamage(4, get_node("Katydid").position);
+	Damage.DealDamage(4, body, Damage.DamageType.bite, self);
 	pass;
 	
 func TakeDamage(amount, source):
-	get_parent().damaged = true;
-	get_parent().lifePoints -= amount;
-	get_parent().animationTime = 0;
+	#get_node("Katydid").damaged = true;
+	get_node("Katydid").HitPoints -= amount;
+	#get_node("Katydid").animationTime = 0;
 	pass;
 
+func GetHitPoints():
+	return get_node("Katydid").HitPoints;
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
