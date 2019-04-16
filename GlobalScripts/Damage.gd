@@ -7,7 +7,7 @@ class DHandler extends Node2D:
 	var destination = null;
 	var body = null;
 	var time = 0.0;
-	var maxTime = 0.1;
+	var maxTime = 1.0;
 	var normalColors = [];
 	var modChildren = [];
 	
@@ -34,14 +34,25 @@ class DHandler extends Node2D:
 	func _process(delta):
 		time += delta;
 		
-		if(body is KinematicBody2D):
-			body.move_and_collide((destination - origin) * delta / maxTime);
-		else:
-			body.global_position = origin + (destination - origin)*(time/maxTime);
+		if(body.has_method("GetHitPoints") && body.GetHitPoints() <= 0):
+			for i in range(0, modChildren.size()):
+				modChildren[i].self_modulate.a = normalColors[i].a * (1 - time/(maxTime/2));
+			if(time >= maxTime/2):
+				body.queue_free();
+				if(body == Global.Player):
+					Global.set_current_scene();
+				queue_free();
+			
 		
-		var mod = abs(sin((time / maxTime) * PI * 4));
+		if(time < maxTime/10):
+		 if(body is KinematicBody2D):
+		 	body.move_and_collide((destination - origin) * delta / (maxTime/10));
+		 else:
+		 	body.set_global_position(origin + (destination - origin)*(time/(maxTime/10))) ;
+		
+		var mod = abs(sin((time / maxTime) * PI * 4)) + 1;
 		for i in range(0, modChildren.size()):
-			modChildren[i].self_modulate.r = normalColors[i].r + mod;
+			modChildren[i].self_modulate.r = normalColors[i].r * mod;
 		
 		if(time >= maxTime):
 			if(body.has_method("SetInvincible")):
@@ -59,6 +70,8 @@ func DealDamage(amount, targetBody, type=DamageType.slash, sourceBody=null):
 	
 	if(type == DamageType.bite):
 		DealBite(amount, targetBody, sourceBody);
+	if(type == DamageType.slash):
+		DealSlash(amount, targetBody, sourceBody);
 	return;
 
 func KickBack(targetBody, sourceBody, amount):
@@ -76,6 +89,12 @@ func KickBack(targetBody, sourceBody, amount):
 	return;
 
 func DealBite(amount, targetBody, sourceBody):
+	targetBody.TakeDamage(amount, sourceBody);
+	if(sourceBody != null): 
+		KickBack(targetBody, sourceBody, amount);
+	return;
+	
+func DealSlash(amount, targetBody, sourceBody):
 	targetBody.TakeDamage(amount, sourceBody);
 	if(sourceBody != null): 
 		KickBack(targetBody, sourceBody, amount);

@@ -12,6 +12,9 @@ var targetCursor = preload("res://Scenes/Entities/Familiars/Bird/Bird.tscn").ins
 export (int) var HitPoints = 30;
 export (bool) var invincible = false;
 
+func GetHitPoints():
+	return HitPoints;
+
 func GetColorableChildren():
 	return [get_node("Animation")];
 

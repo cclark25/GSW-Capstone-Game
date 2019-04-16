@@ -5,7 +5,7 @@ var flightTime = 1;
 var inFlight = false;
 var movement = Vector2();
 var moveAngle = 0;
-var lifePoints = 5;
+var HitPoints = 5;
 var damaged = false;
 var targetBody = Global.Player;
 # class member variables go here, for example:
@@ -25,22 +25,22 @@ func _process(delta):
 	# Update game logic here.
 	animationTime += delta;
 	
-	if(damaged):
-		var tmp = 2 + sin((animationTime - floor(animationTime))*2*PI);
-		self_modulate.r *= tmp;
-		if(animationTime >= .15):
-			damaged = false;
-			if(lifePoints > 0): self_modulate.r = 1;
-			animationTime = 0;
-		return;
+#	if(damaged):
+#		var tmp = 2 + sin((animationTime - floor(animationTime))*2*PI);
+#		self_modulate.r *= tmp;
+#		if(animationTime >= .15):
+#			damaged = false;
+#			if(lifePoints > 0): self_modulate.r = 1;
+#			animationTime = 0;
+#		return;
 	
-	if(lifePoints <= 0):
-		var tmp = animationTime / .15;
-		self_modulate.a *= tmp;
-		if(animationTime >= .15):
-			Global.GetDoor("North").unlock();
-			get_parent().queue_free();
-		return;
+#	if(lifePoints <= 0):
+#		var tmp = animationTime / .15;
+#		self_modulate.a *= tmp;
+#		if(animationTime >= .15):
+#			Global.GetDoor("North").unlock();
+#			get_parent().queue_free();
+#		return;
 	
 	if(animationTime / waitTime >= 1 && !inFlight):
 		inFlight = true;

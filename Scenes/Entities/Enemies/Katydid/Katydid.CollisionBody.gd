@@ -15,6 +15,8 @@ func _ready():
 	
 	pass
 
+func GetColorableChildren():
+	return [get_node("Katydid")];
 
 func DealDamage(body):
 #	printerr("Here");
@@ -24,12 +26,13 @@ func DealDamage(body):
 	pass;
 	
 func TakeDamage(amount, source):
-	get_node("Katydid").damaged = true;
-	get_node("Katydid").lifePoints -= amount;
-	get_node("Katydid").animationTime = 0;
-	printerr("Damage Received.");
+	#get_node("Katydid").damaged = true;
+	get_node("Katydid").HitPoints -= amount;
+	#get_node("Katydid").animationTime = 0;
 	pass;
 
+func GetHitPoints():
+	return get_node("Katydid").HitPoints;
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

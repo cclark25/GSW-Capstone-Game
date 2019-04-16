@@ -85,13 +85,15 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Background" ]
 
-[node name="BossFight" type="WorldEnvironment"]
+[node name="BossFight" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
 
 [node name="DungeonWalls" parent="." index="0" instance=ExtResource( 2 )]
+
+editor/display_folded = true
 
 [node name="EastDoor" parent="DungeonWalls" index="3"]
 
