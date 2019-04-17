@@ -82,7 +82,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Background" ]
 
-[node name="Base" type="WorldEnvironment"]
+[node name="Base" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
 
@@ -90,7 +90,8 @@ environment = SubResource( 1 )
 
 [node name="NorthDoor" parent="DungeonWalls" index="1"]
 
-exitScene = "H3"
+is_locked = false
+exitScene = "F4"
 exitTo = "South"
 
 [node name="SouthDoor" parent="DungeonWalls" index="2"]
@@ -101,7 +102,9 @@ exitTo = "North"
 
 [node name="EastDoor" parent="DungeonWalls" index="3"]
 
-exitScene = "G4"
+is_locked = false
+exitScene = "G5"
+exitTo = "West"
 
 [node name="WestDoor" parent="DungeonWalls" index="4"]
 
