@@ -10,7 +10,7 @@ custom_solver_bias = 0.0
 radius = 3.66267
 height = 2.21225
 
-[node name="Collision" type="Area2D" index="0"]
+[node name="Collision" type="Area2D"]
 
 position = Vector2( -1, 1.00001 )
 input_pickable = true
