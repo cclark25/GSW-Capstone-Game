@@ -8,11 +8,12 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	connect("body_entered", self, "DealDamage");
+	connect("area_entered", self, "DealDamage");
 	pass
 
 func DealDamage(body):
-	if(body.has_method("TakeDamage")):
-		body.TakeDamage(4, get_parent().position);
+	printerr("damages")
+	Damage.DealDamage(10, body, Damage.DamageType.bite, self);
 	pass;
 	
 func TakeDamage(amount, source):
