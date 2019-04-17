@@ -3,7 +3,9 @@ extends KinematicBody2D
 var lifePoints = 15;
 var vectorToPlayer = Vector2(0,0);
 var attackCounter = 0;
+var attackFrames = 0;
 var avoidCounter = -1;
+var inAttack = false;
 export (bool) var damaged = false;
 
 func _ready():
@@ -18,6 +20,7 @@ func _ready():
 
 func _process(delta):
 	
+	
 	vectorToPlayer = Vector2((position.x - Global.Player.position.x),(position.y - Global.Player.position.y)).normalized();
 	attackCounter = attackCounter - delta;
 	
@@ -29,7 +32,7 @@ func _process(delta):
 	else:
 		translate(Vector2(0,0));
 		
-	if position.distance_to(Global.Player.position) < 100  && attackCounter < 5 * delta:
+	if position.distance_to(Global.Player.position) < 100  && attackCounter < 5 * delta || inAttack:
 		JumpAttack(delta);
 	
 	if avoidCounter != -1:
@@ -52,9 +55,16 @@ func DealDamage(body):
 	return;
 	
 func JumpAttack(delta):
-	printerr("attack")
-	attackCounter = 500 * delta;
-	translate(-position.distance_to(Global.Player.position) * 50 * delta * vectorToPlayer)
+		inAttack = true;
+		if attackFrames > 0:
+			printerr("attack");
+			move_and_collide(-position.distance_to(Global.Player.position) * 10 * delta * vectorToPlayer);
+			attackFrames = attackFrames - delta;
+		else:
+			attackFrames = 10 * delta;
+			attackCounter = 500 * delta;
+			inAttack = false;
+			return;
 	
 func AvoidAttack(delta):
 	avoidCounter = -1;
