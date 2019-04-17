@@ -1,19 +1,19 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://WolfBody.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Entities/Enemies/Wolf/WolfCollisionAreaBody.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.0.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.2.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.0.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.1.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.2.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.0.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.1.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.2.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.0.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.1.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.2.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.0.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.2.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.0.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.0.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.1.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.2.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Entities/Enemies/Wolf/AnimatedWolfSprite.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -21,46 +21,52 @@
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 6.38511, 10 )
+
+[sub_resource type="GDScript" id=3]
 
 script/source = ""
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=4]
 
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "Walk.Up",
+"name": "Walk.Left",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
-"name": "Walk.Right",
+"name": "Walk.Down",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "Walk.Left",
+"name": "Walk.Right",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": true,
-"name": "Walk.Down",
+"name": "Walk.Up",
 "speed": 10.0
 } ]
-script = SubResource( 2 )
+script = SubResource( 3 )
 
 [node name="WolfBody" type="KinematicBody2D" index="0"]
 
 position = Vector2( 104.157, 87.5715 )
 input_pickable = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 0
+collision_mask = 0
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
 damaged = false
 
-[node name="WolfCollisionAreaBody" type="CollisionShape2D" parent="." index="0"]
+[node name="WolfCollisionAreaBody1" type="CollisionShape2D" parent="." index="0"]
 
 position = Vector2( -1, 2.5 )
 scale = Vector2( 1.3, 0.8 )
@@ -68,9 +74,17 @@ shape = SubResource( 1 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 
-[node name="AnimatedWolfSprite" type="AnimatedSprite" parent="." index="1"]
+[node name="WolfCollisionAreaBody2" type="CollisionShape2D" parent="." index="1"]
 
-frames = SubResource( 3 )
+visible = false
+position = Vector2( 0.805351, 0.57251 )
+scale = Vector2( 1.06195, 1.66265 )
+shape = SubResource( 2 )
+script = ExtResource( 2 )
+
+[node name="AnimatedWolfSprite" type="AnimatedSprite" parent="." index="2"]
+
+frames = SubResource( 4 )
 animation = "Walk.Right"
 script = ExtResource( 15 )
 

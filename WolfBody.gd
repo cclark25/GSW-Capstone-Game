@@ -8,7 +8,9 @@ export (bool) var damaged = false;
 
 func _ready():
 	position = Vector2(get_viewport().size.x/2, get_viewport().size.y/2)
-	
+	set_collision_layer_bit(Global.CollisionType.enemy, true);
+	set_collision_mask_bit(Global.CollisionType.player, true);
+	set_collision_mask_bit(Global.CollisionType.weapon, true);
 	
 	pass
 
@@ -17,9 +19,9 @@ func _process(delta):
 	attackCounter = attackCounter - delta;
 	if position.distance_to(Global.Player.position) < 200:
 		if position.distance_to(Global.Player.position) < 70:
-			vectorToPlayer = Vector2((position.y - Global.Player.position.y),(position.x - Global.Player.position.x));
+			vectorToPlayer = Vector2((position.y - Global.Player.position.y),(position.x - Global.Player.position.x)).normalized();
 		else:
-			vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y);
+			vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y).normalized();
 	else:
 		vectorToPlayer = Vector2(0,0);
 		
@@ -27,7 +29,7 @@ func _process(delta):
 		JumpAttack(delta);
 	
 	
-	translate(-delta * vectorToPlayer)
+	translate(-delta * vectorToPlayer * 100)
 	
 	
 	if avoidCounter != -1:
@@ -54,11 +56,11 @@ func Damage(amount, sourceLocation):
 	
 func JumpAttack(delta):
 	attackCounter = 500 * delta;
-	vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y);
+	vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y).normalized();
 	translate(-50 * delta * vectorToPlayer)
 	
 func AvoidAttack(delta):
 	avoidCounter = -1;
-	vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y);
+	vectorToPlayer = Vector2(position.x - Global.Player.position.x, position.y - Global.Player.position.y).normalized();
 	translate(60 * delta * vectorToPlayer)
 	

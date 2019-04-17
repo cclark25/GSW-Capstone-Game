@@ -16,6 +16,14 @@ func _process(delta):
 	pass
 
 func Play(dir):
+	match [Global.Directions.keys()[dir]]:
+		["Right", "Left"]:
+			get_parent().get_node("WolfCollisionAreaBody1").Visible = false;
+			get_parent().get_node("WolfCollisionAreaBody2").Visible = true;
+		["Up", "Down"]:
+			get_parent().get_node("WolfCollisionAreaBody1").Visible = true;
+			get_parent().get_node("WolfCollisionAreaBody2").Visible = false;
+			
 	play("Walk." + Global.Directions.keys()[dir]);
 	
 func OnAnimationFinish():
