@@ -1,14 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://BossRoom.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Entities/Static/DungeonWalls/DungeonWalls.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Entities/Static/BossFloor/BossFloor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Entities/Static/LimbHook/Limb.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprites/Boss/VineBoss/Eye.png" type="Texture" id=5]
-[ext_resource path="res://Eye.gd" type="Script" id=6]
-[ext_resource path="res://Sprites/Boss/VineBoss/Vines.png" type="Texture" id=7]
-[ext_resource path="res://Vines.gd" type="Script" id=8]
-[ext_resource path="res://Scenes/Entities/Static/Torch/Torch.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Entities/Enemies/DungeonBoss/Boss.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Entities/Static/Torch/Torch.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Environment" id=1]
 
@@ -89,7 +86,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Background" ]
 
-[node name="BossRoom" type="WorldEnvironment" index="0"]
+[node name="BossRoom" type="WorldEnvironment"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
@@ -150,64 +147,38 @@ position = Vector2( 70, 230 )
 position = Vector2( 573, 228 )
 rotation = 3.14159
 
-[node name="Area2D" type="Area2D" parent="." index="10"]
+[node name="Boss" parent="." index="10" instance=ExtResource( 5 )]
 
-editor/display_folded = true
 position = Vector2( 320, 180 )
-z_index = 10
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Z Index" ]
+attackDuration = 10.0
 
-[node name="Eye" type="Sprite" parent="Area2D" index="0"]
+[node name="Torch" parent="." index="11" instance=ExtResource( 6 )]
 
-texture = ExtResource( 5 )
-vframes = 3
-script = ExtResource( 6 )
-_sections_unfolded = [ "Animation", "Transform" ]
-closedTime = 7.0
-openTime = 2
-
-[node name="Vines" type="Sprite" parent="Area2D" index="1"]
-
-z_index = -1
-texture = ExtResource( 7 )
-vframes = 3
-script = ExtResource( 8 )
-_sections_unfolded = [ "Animation", "Transform", "Z Index" ]
-
-[node name="Torch" parent="." index="11" instance=ExtResource( 9 )]
-
-[node name="Torch2" parent="." index="12" instance=ExtResource( 9 )]
+[node name="Torch2" parent="." index="12" instance=ExtResource( 6 )]
 
 position = Vector2( 120, 60 )
 
-[node name="Torch3" parent="." index="13" instance=ExtResource( 9 )]
+[node name="Torch3" parent="." index="13" instance=ExtResource( 6 )]
 
 position = Vector2( 520, 60 )
 
-[node name="Torch5" parent="." index="14" instance=ExtResource( 9 )]
+[node name="Torch5" parent="." index="14" instance=ExtResource( 6 )]
 
 position = Vector2( 115, 303 )
 rotation = 3.14159
 
-[node name="Torch6" parent="." index="15" instance=ExtResource( 9 )]
+[node name="Torch6" parent="." index="15" instance=ExtResource( 6 )]
 
 position = Vector2( 515, 303 )
 rotation = 3.14159
 
-[node name="Torch7" parent="." index="16" instance=ExtResource( 9 )]
+[node name="Torch7" parent="." index="16" instance=ExtResource( 6 )]
 
 position = Vector2( 578.523, 181.926 )
 rotation = 1.5708
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch8" parent="." index="17" instance=ExtResource( 9 )]
+[node name="Torch8" parent="." index="17" instance=ExtResource( 6 )]
 
 position = Vector2( 64.3001, 181.926 )
 rotation = -1.5708

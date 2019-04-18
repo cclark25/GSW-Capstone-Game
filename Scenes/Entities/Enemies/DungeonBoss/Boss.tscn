@@ -1,0 +1,138 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scenes/Entities/Enemies/DungeonBoss/Boss.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Eye/PNGs/0.kra.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Eye/PNGs/1.kra.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Eye/PNGs/2.kra.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/PNGs/0.kra.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/PNGs/1.kra.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/PNGs/2.kra.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Extend.Up.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Extend.DownRight.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Extend.UpLeft.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Extend.Right.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Extend.Down.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Extend.Left.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Extend.UpRight.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Extend.DownLeft.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Single.0.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Single.1.png" type="Texture" id=17]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": false,
+"name": "Open",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "Close",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 7.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "Extend.Up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": false,
+"name": "Extend.DownRight",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "Extend.UpLeft",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "Extend.Right",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "Extend.Down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": false,
+"name": "Extend.Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": false,
+"name": "Extend.UpRight",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": false,
+"name": "Extend.DownLeft",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+
+animations = [ {
+"frames": [ ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": false,
+"name": "Extend",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "Retract",
+"speed": 10.0
+} ]
+
+[node name="Boss" type="Area2D" index="0"]
+
+z_index = 10
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+closedTime = 5.0
+openTime = 2.0
+attackWait = 10.0
+attackDuration = 10.0
+
+[node name="Eye" type="AnimatedSprite" parent="." index="0"]
+
+frames = SubResource( 1 )
+animation = "Close"
+frame = 2
+playing = true
+
+[node name="Vines" type="AnimatedSprite" parent="." index="1"]
+
+frames = SubResource( 2 )
+animation = "Idle"
+frame = 1
+
+[node name="AttackVine" type="AnimatedSprite" parent="." index="2"]
+
+visible = false
+position = Vector2( 10, 0 )
+frames = SubResource( 3 )
+animation = "Extend"
+centered = false
+offset = Vector2( 0, -10 )
+_sections_unfolded = [ "Transform" ]
+
+
