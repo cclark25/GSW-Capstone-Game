@@ -150,7 +150,6 @@ rotation = 3.14159
 [node name="Boss" parent="." index="10" instance=ExtResource( 5 )]
 
 position = Vector2( 320, 180 )
-attackDuration = 10.0
 
 [node name="Torch" parent="." index="11" instance=ExtResource( 6 )]
 

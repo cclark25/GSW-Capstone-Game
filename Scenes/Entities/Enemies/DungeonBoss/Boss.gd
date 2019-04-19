@@ -17,25 +17,31 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	get_node("Vines").play("Idle");
+	randomize();
 	pass
 
 func Attack():
 	var atVine = get_node("AttackVine");
-	var extendDur = 0.10;
+	var extendDur = 0.50;
+	var extendDist;
+	if(round(sin(atVine.rotation)*10000)/10000 != 0):
+		extendDist = (5.0/3.0) / abs(sin(atVine.rotation));
+	else:
+		extendDist = 10.0 / 3.0;
 	var shake = Vector2(randf() * 1.0, randf() * 1.0);
 	
-	if(atVine.animation == "Extend" && atVine.frame == 1):
-		atVine.scale.x = 1 + min(time / extendDur, extendDur);
-		shake *= min(time, 1.0);
-	elif(atVine.animation == "Retract" && atVine.frame == 0):
-		atVine.scale.x = 2 - min(1 - (attackDuration - time)/extendDur, extendDur);
+	if(atVine.animation == "Extend" && atVine.scale.x < extendDist): 
+		if(atVine.frame == 1):
+			atVine.scale.x = max(extendDist * min(time / extendDur, 1), 1.0);
+			shake *= min(time, 1.0);
+	elif(time >= attackDuration - extendDur):
+		atVine.scale.x = max(extendDist * min((attackDuration - time) / extendDur, 1), 1.0);
+		printerr(time);
 		shake *= max(attackDuration - time, 0.0)
 	
 	get_node("Eye").position = shake;
 	get_node("Vines").position = shake;
 	
-	if(atVine.animation == "Extend" && time >= attackDuration - extendDur):
-		atVine.play("Retract");
 	
 	if(time >= attackDuration):
 		time = 0.0;
@@ -56,12 +62,21 @@ func _process(delta):
 	
 	if(!attack && attackTimer >= attackWait):
 		attack = true;
-		attackDir = randi()%8;
+		#attackDir = randi()%8;
+		attackDir += 1;
+		var angle = Vector2(1, 0).rotated((attackDir / 8.0) * 2*PI);
+		
+		angle.x *= 16;
+		angle.y *= 9;
+		angle = angle.normalized();
+		if(attackDir == 4):
+			angle = Vector2(-1, 0);
+		
 		time = 0.0;
 		get_node("Eye").play("Close");
-		get_node("AttackVine").position = Vector2(10, 0).rotated((attackDir / 8.0) * 2*PI);
+		get_node("AttackVine").position = Vector2(10, 0).rotated(angle.angle());
 		get_node("AttackVine").play("Extend");
-		get_node("AttackVine").rotation = (attackDir / 8.0) * 2*PI;
+		get_node("AttackVine").rotation = angle.angle();
 		get_node("AttackVine").visible = true;
 		get_node("Vines").play("Extend." + Global.Directions.keys()[attackDir]);
 	if(attack):
