@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Entities/Enemies/DungeonBoss/Boss.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Eye/PNGs/0.kra.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Extend.DownLeft.png" type="Texture" id=15]
 [ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Single.0.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/krita_src/Boss/VineBoss/Vines/Single.1.png" type="Texture" id=17]
+[ext_resource path="res://Scenes/Entities/Enemies/DungeonBoss/AttackSquare.tscn" type="PackedScene" id=18]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -134,5 +135,47 @@ animation = "Extend"
 centered = false
 offset = Vector2( 0, -10 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Squares" type="Node2D" parent="." index="3"]
+
+[node name="Right" parent="Squares" index="0" instance=ExtResource( 18 )]
+
+visible = false
+position = Vector2( 10, -100 )
+
+[node name="DownRight" parent="Squares" index="1" instance=ExtResource( 18 )]
+
+visible = false
+position = Vector2( 10, 0 )
+
+[node name="Down" parent="Squares" index="2" instance=ExtResource( 18 )]
+
+visible = false
+position = Vector2( -190, 0 )
+
+[node name="DownLeft" parent="Squares" index="3" instance=ExtResource( 18 )]
+
+visible = false
+position = Vector2( -390, 0 )
+
+[node name="Left" parent="Squares" index="4" instance=ExtResource( 18 )]
+
+visible = false
+position = Vector2( -390, -100 )
+
+[node name="UpLeft" parent="Squares" index="5" instance=ExtResource( 18 )]
+
+visible = false
+position = Vector2( -390, -190 )
+
+[node name="Up" parent="Squares" index="6" instance=ExtResource( 18 )]
+
+visible = false
+position = Vector2( -190, -190 )
+
+[node name="UpRight" parent="Squares" index="7" instance=ExtResource( 18 )]
+
+visible = false
+position = Vector2( 10, -190 )
 
 

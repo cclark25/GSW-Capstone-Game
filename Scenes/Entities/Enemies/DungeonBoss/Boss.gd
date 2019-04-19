@@ -20,6 +20,9 @@ func _ready():
 	randomize();
 	pass
 
+func EndAttack():
+	attack = false;
+
 func Attack():
 	var atVine = get_node("AttackVine");
 	var extendDur = 0.50;
@@ -34,10 +37,13 @@ func Attack():
 		if(atVine.frame == 1):
 			atVine.scale.x = max(extendDist * min(time / extendDur, 1), 1.0);
 			shake *= min(time, 1.0);
-	elif(time >= attackDuration - extendDur):
+	if(time >= attackDuration - extendDur):
 		atVine.scale.x = max(extendDist * min((attackDuration - time) / extendDur, 1), 1.0);
-		printerr(time);
-		shake *= max(attackDuration - time, 0.0)
+		shake *= max(attackDuration - time, 0.0);
+		atVine.play("Retract");
+	
+	if(time > extendDur && time < attackDuration - extendDur && get_node("Squares").get_child_count() >= attackDir + 1 && get_node("Squares").get_child(attackDir).has_method("BeginAttack")):
+		get_node("Squares").get_child(attackDir).BeginAttack(attackDuration - 2*extendDur);
 	
 	get_node("Eye").position = shake;
 	get_node("Vines").position = shake;
@@ -64,6 +70,7 @@ func _process(delta):
 		attack = true;
 		#attackDir = randi()%8;
 		attackDir += 1;
+		attackDir %= 8;
 		var angle = Vector2(1, 0).rotated((attackDir / 8.0) * 2*PI);
 		
 		angle.x *= 16;

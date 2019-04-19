@@ -151,6 +151,10 @@ rotation = 3.14159
 
 position = Vector2( 320, 180 )
 
+[node name="AttackVine" parent="Boss" index="2"]
+
+editor/display_folded = true
+
 [node name="Torch" parent="." index="11" instance=ExtResource( 6 )]
 
 [node name="Torch2" parent="." index="12" instance=ExtResource( 6 )]
@@ -185,3 +189,4 @@ _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 
 [editable path="DungeonWalls"]
+[editable path="Boss"]
