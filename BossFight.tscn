@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://BossFight.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Entities/Static/DungeonWalls/DungeonWalls.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/Dungeon Floors/DungeonFloorTemplate.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Entities/Enemies/Katydid/Katydid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Entities/Static/Torch/Torch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Entities/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Environment" id=1]
 
@@ -93,6 +94,16 @@ _sections_unfolded = [ "Pause" ]
 
 [node name="DungeonWalls" parent="." index="0" instance=ExtResource( 2 )]
 
+editor/display_folded = true
+
+[node name="EastDoor" parent="DungeonWalls" index="3"]
+
+visible = false
+
+[node name="WestDoor" parent="DungeonWalls" index="4"]
+
+visible = false
+
 [node name="DungeonFloorTemplate" type="Sprite" parent="." index="1"]
 
 position = Vector2( 320, 180 )
@@ -100,6 +111,9 @@ texture = ExtResource( 3 )
 _sections_unfolded = [ "Z Index" ]
 
 [node name="Katydid" parent="." index="2" instance=ExtResource( 4 )]
+
+position = Vector2( 430, 150 )
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="Torch" parent="." index="3" instance=ExtResource( 5 )]
 
@@ -135,4 +149,7 @@ position = Vector2( 485, 303 )
 rotation = 3.14159
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
+[node name="WolfBody" parent="." index="9" instance=ExtResource( 6 )]
 
+
+[editable path="DungeonWalls"]
