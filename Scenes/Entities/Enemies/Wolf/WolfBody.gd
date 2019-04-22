@@ -23,11 +23,8 @@ func _process(delta):
 	vectorToPlayer = Vector2((position.x - Global.Player.position.x),(position.y - Global.Player.position.y)).normalized();
 	
 	if randDirCounter <= 0:
-		match randi()%2:
-			0:
-				randCirDir = -1;
-			1:
-				randCirDir = 1;
+		randCirDir = 2*randi()%2 - 1
+		printerr(randCirDir)
 		randDirCounter = 500 * delta;
 	
 	randDirCounter = randDirCounter - delta;
@@ -56,7 +53,7 @@ func _process(delta):
 
 func _input(event):
 	
-	if(event.is_action_pressed("Left Click") && Global.Player.activeItem == null && inAggroMode):
+	if(event.is_action_pressed("Left Click") && Global.Player.activeItem != null && inAggroMode):
 		inRetreatMode = true;
 	
 func JumpAttack(delta):
@@ -80,10 +77,10 @@ func AvoidAttack(delta):
 		inRetreatMode = false;
 		
 func TakeDamage(amount, source):
-	printerr("Wolf HP:", lifePoints);
 	damaged = true;
 	lifePoints -= amount;
 	if lifePoints <= 0:
 		get_parent().remove_child(self);
+	printerr("Wolf HP:", lifePoints);
 	pass;
 	
