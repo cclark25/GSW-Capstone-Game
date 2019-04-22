@@ -122,6 +122,7 @@ animations = [ {
 "frames": [ ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ) ],
 "loop": true,
 "name": "Walk.Down",
+
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ) ],
