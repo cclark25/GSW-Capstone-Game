@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var lifePoints = 15;
+var lifePoints = 30;
 var vectorToPlayer = Vector2(0,0);
 var attackCounter = 0;
 var attackFrames = 0;
@@ -13,7 +13,9 @@ var randDirCounter = 0;
 export (bool) var damaged = false;
 
 func _ready():
-	
+	set_collision_layer_bit(Global.CollisionType.enemy, true);
+	set_collision_mask_bit(Global.CollisionType.weapon, true);
+	set_collision_mask_bit(Global.CollisionType.player, true);
 	pass
 
 func _process(delta):
@@ -56,13 +58,6 @@ func _input(event):
 	
 	if(event.is_action_pressed("Left Click") && Global.Player.activeItem == null && inAggroMode):
 		inRetreatMode = true;
-
-
-func DealDamage(body):
-	Damage.DealDamage(10, body, Damage.DamageType.bite, self);
-	pass;
-	
-	return;
 	
 func JumpAttack(delta):
 		inAttack = true;
@@ -83,4 +78,12 @@ func AvoidAttack(delta):
 	else:
 		avoidCounter = 0;
 		inRetreatMode = false;
+		
+func TakeDamage(amount, source):
+	printerr("Wolf HP:", lifePoints);
+	damaged = true;
+	lifePoints -= amount;
+	if lifePoints <= 0:
+		get_parent().remove_child(self);
+	pass;
 	

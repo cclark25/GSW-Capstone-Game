@@ -65,12 +65,12 @@ animations = [ {
 } ]
 script = SubResource( 3 )
 
-[node name="WolfBody" type="KinematicBody2D" index="0"]
+[node name="WolfBody" type="KinematicBody2D"]
 
 position = Vector2( 104.157, 87.5715 )
 input_pickable = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 0
+collision_mask = 0
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Pickable", "collision" ]
@@ -81,6 +81,7 @@ damaged = false
 editor/display_folded = true
 position = Vector2( -0.5, 0.5 )
 shape = SubResource( 1 )
+disabled = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="WolfCollisionShapeBodyHor" type="CollisionShape2D" parent="." index="1"]
@@ -108,6 +109,7 @@ _sections_unfolded = [ "Collision" ]
 
 position = Vector2( -0.25, 0.25 )
 shape = SubResource( 5 )
+disabled = true
 _sections_unfolded = [ "Transform" ]
 
 [node name="WolfArea2DHor" type="Area2D" parent="." index="3"]

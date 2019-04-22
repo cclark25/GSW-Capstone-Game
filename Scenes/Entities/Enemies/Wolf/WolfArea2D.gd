@@ -14,10 +14,5 @@ func DealDamage(body):
 	Damage.DealDamage(10, body, Damage.DamageType.bite, self);
 	pass;
 	
-func TakeDamage(amount, source):
-	get_parent().damaged = true;
-	get_parent().lifePoints -= amount;
-	get_parent().animationTime = 0;
-	pass;
 
 
