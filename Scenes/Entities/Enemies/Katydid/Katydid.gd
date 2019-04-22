@@ -58,7 +58,17 @@ func _process(delta):
 		movement = Vector2(max(distance * 1.5, 300), 0);
 		moveAngle = (randf() * PI/4) - PI/8;
 		movement = movement.rotated(angle);
-	
+		var tmp = get_parent().global_position - movement;
+		if(tmp.x < 0):
+			movement.x = get_parent().global_position.x - 10;
+		elif(tmp.x > 640):
+			movement.x = get_parent().global_position.x - 630;
+		
+		if(tmp.y < 0):
+			movement.y = get_parent().global_position.y - 10;
+		elif(tmp.y > 360):
+			movement.y = get_parent().global_position.y - 350;
+			
 	if(inFlight):
 		get_parent().global_position -= delta * (movement.rotated(moveAngle * 2*sin(2*PI * (animationTime/flightTime)))) ;
 		frame = int(floor(animationTime/.15))%2 + 1;
