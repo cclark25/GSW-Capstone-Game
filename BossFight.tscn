@@ -6,6 +6,8 @@
 [ext_resource path="res://Scenes/Entities/Enemies/Katydid/Katydid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Entities/Static/Torch/Torch.tscn" type="PackedScene" id=5]
 
+
+
 [sub_resource type="Environment" id=1]
 
 background_mode = 4
