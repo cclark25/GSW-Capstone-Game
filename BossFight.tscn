@@ -113,6 +113,7 @@ _sections_unfolded = [ "Z Index" ]
 [node name="Katydid" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 430, 150 )
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="Torch" parent="." index="3" instance=ExtResource( 5 )]
 

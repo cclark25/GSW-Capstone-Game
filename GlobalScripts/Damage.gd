@@ -38,9 +38,11 @@ class DHandler extends Node2D:
 			for i in range(0, modChildren.size()):
 				modChildren[i].self_modulate.a = normalColors[i].a * (1 - time/(maxTime/2));
 			if(time >= maxTime/2):
-				body.queue_free();
 				if(body == Global.Player):
 					Global.set_current_scene();
+				if(Global.current_scene.has_method("handleDeath")):
+					Global.current_scene.handleDeath(body);
+				body.queue_free();
 				queue_free();
 			
 		
