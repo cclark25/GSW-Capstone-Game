@@ -12,6 +12,12 @@ var randCirDir = 1;
 var randDirCounter = 0;
 export (bool) var damaged = false;
 
+func GetHitPoints():
+	return lifePoints;
+
+func GetColorableChildren():
+	return [get_node("AnimatedWolfSprite")];
+
 func _ready():
 	set_collision_layer_bit(Global.CollisionType.enemy, true);
 	set_collision_mask_bit(Global.CollisionType.weapon, true);
@@ -77,10 +83,10 @@ func AvoidAttack(delta):
 		inRetreatMode = false;
 		
 func TakeDamage(amount, source):
-	damaged = true;
+	#damaged = true;
 	lifePoints -= amount;
-	if lifePoints <= 0:
-		get_parent().remove_child(self);
+	#if lifePoints <= 0:
+	#	get_parent().remove_child(self);
 	printerr("Wolf HP:", lifePoints);
 	pass;
 	
