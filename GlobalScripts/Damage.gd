@@ -1,6 +1,6 @@
 extends Node;
 
-enum DamageType {slash, bludgeon, burn, freeze, shock, psychic, bite};
+enum DamageType {slash, bludgeon, burn, freeze, shock, psychic, bite, grapple};
 
 class DHandler extends Node2D:
 	var origin = null;
@@ -74,6 +74,8 @@ func DealDamage(amount, targetBody, type=DamageType.slash, sourceBody=null):
 		DealBite(amount, targetBody, sourceBody);
 	if(type == DamageType.slash):
 		DealSlash(amount, targetBody, sourceBody);
+	if(type == DamageType.grapple):
+		DealGrapple(amount, targetBody, sourceBody);
 	return;
 
 func KickBack(targetBody, sourceBody, amount):
@@ -88,6 +90,11 @@ func KickBack(targetBody, sourceBody, amount):
 	add_child(handler);
 	handler.Handle(targetBody.global_position, targetBody.global_position + direction * 100 * kickback, targetBody);
 	
+	return;
+
+func DealGrapple(amount, targetBody, sourceBody):
+	targetBody.TakeDamage(amount, sourceBody);
+	KickBack(targetBody, sourceBody, 0);
 	return;
 
 func DealBite(amount, targetBody, sourceBody):

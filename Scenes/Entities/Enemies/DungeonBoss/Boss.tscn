@@ -96,7 +96,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="Boss" type="Area2D" index="0"]
+[node name="Boss" type="Area2D"]
 
 z_index = 10
 input_pickable = true
