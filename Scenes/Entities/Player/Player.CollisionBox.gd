@@ -9,7 +9,7 @@ export (float) var jumpModifier = 1.75;
 var activeItem = null;
 var itemList = [];
 var targetCursor = preload("res://Scenes/Entities/Familiars/Bird/Bird.tscn").instance();
-export (int) var HitPoints = 3000000;
+export (int) var HitPoints = 30;
 export (bool) var invincible = false;
 
 func GetHitPoints():
