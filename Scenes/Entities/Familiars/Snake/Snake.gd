@@ -12,6 +12,7 @@ var hookedPos = Vector2(0,0);
 var isJumping = false;
 var jumpDestination = null;
 var jumpOrigin = null;
+var launched = false;
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -22,13 +23,14 @@ func _ready():
 	#set_collision_mask_bit(Global.CollisionType.player, false);
 	#connect("body_entered", self, "Collide");
 	connect("area_entered", self, "Collide");
+	connect("body_entered", self, "Collide");
 	get_node("Head").disabled = true;
 	set_process(false);
 	pass
 
 func Collide(body):
 	if(body.get_collision_layer_bit(Global.CollisionType.enemy)):
-		body.TakeDamage(5, self);
+		Damage.DealDamage(5, body, Damage.DamageType.bite, self);
 	if(body.get_collision_layer_bit(Global.CollisionType.hookable)):
 		Hook(body);
 		pass;
@@ -40,7 +42,7 @@ func Hook(body):
 	get_node("Animation").stop();
 	time = 0.3;
 	hookedBody = body;
-	hookedPos = global_position - body.global_position;
+	hookedPos = (global_position - body.global_position).rotated(-1 * body.rotation);
 	
 	set_process(true);
 	return;
@@ -50,6 +52,7 @@ func UnHook():
 	hookedBody = null;
 	scale.x = 1;
 	set_process(true);
+	launched = false;
 	EndMove();
 
 func ItemJump():
@@ -61,8 +64,12 @@ func ItemJump():
 		time = 0.0;
 
 func Use():
-	if(hookedBody != null):
-		UnHook();
+	if(!launched &&hookedBody != null):
+		if(hookedBody.get_collision_layer_bit(Global.CollisionType.dragable)):
+			hookedBody.apply_impulse(hookedPos, Vector2((scale.x )*1000, 0).rotated(rotation + PI));
+			launched = true;
+		else:
+			UnHook();
 		return;
 	
 	if(get_parent() == Global.Player && Global.Player.isTargeting()):
@@ -115,11 +122,14 @@ func _process(delta):
 			UnHook();
 	
 	if(hookedBody != null):
-		global_position = hookedBody.global_position + hookedPos;
+		global_position = hookedBody.global_position + hookedPos.rotated(hookedBody.rotation);
 		rotation = (global_position - get_parent().global_position).angle();
 		scale.x = position.length() / 40;
 		if(scale.x > 2):
-			UnHook();
+			if(!launched && hookedBody.get_collision_layer_bit(Global.CollisionType.dragable)):
+				hookedBody.apply_impulse(hookedPos, Vector2((scale.x - 2)*25, 0).rotated(rotation + PI));
+			else: 
+				UnHook();
 		return;
 	
 	

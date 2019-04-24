@@ -1,6 +1,6 @@
 extends Node;
 
-enum DamageType {slash, bludgeon, burn, freeze, shock, psychic, bite};
+enum DamageType {slash, bludgeon, burn, freeze, shock, psychic, bite, grapple};
 
 class DHandler extends Node2D:
 	var origin = null;
@@ -39,7 +39,7 @@ class DHandler extends Node2D:
 				modChildren[i].self_modulate.a = normalColors[i].a * (1 - time/(maxTime/2));
 			if(time >= maxTime/2):
 				if(body == Global.Player):
-					Global.set_current_scene();
+					Global.set_current_scene("game_over");
 				if(Global.current_scene.has_method("handleDeath")):
 					Global.current_scene.handleDeath(body);
 				body.queue_free();
@@ -74,6 +74,11 @@ func DealDamage(amount, targetBody, type=DamageType.slash, sourceBody=null):
 		DealBite(amount, targetBody, sourceBody);
 	if(type == DamageType.slash):
 		DealSlash(amount, targetBody, sourceBody);
+	if(type == DamageType.grapple):
+		DealGrapple(amount, targetBody, sourceBody);
+	if(type == DamageType.bludgeon):
+		printerr("Bludgeon dealt")
+		DealBludgeon(amount, targetBody, sourceBody);
 	return;
 
 func KickBack(targetBody, sourceBody, amount):
@@ -90,7 +95,18 @@ func KickBack(targetBody, sourceBody, amount):
 	
 	return;
 
+func DealGrapple(amount, targetBody, sourceBody):
+	targetBody.TakeDamage(amount, sourceBody);
+	KickBack(targetBody, sourceBody, 0);
+	return;
+
 func DealBite(amount, targetBody, sourceBody):
+	targetBody.TakeDamage(amount, sourceBody);
+	if(sourceBody != null): 
+		KickBack(targetBody, sourceBody, amount);
+	return;
+	
+func DealBludgeon(amount, targetBody, sourceBody):
 	targetBody.TakeDamage(amount, sourceBody);
 	if(sourceBody != null): 
 		KickBack(targetBody, sourceBody, amount);

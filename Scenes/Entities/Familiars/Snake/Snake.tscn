@@ -1,26 +1,26 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Entities/Familiars/Snake/Snake.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/krita_src/Familiars/Snake/PNGs/0.2.kra.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/krita_src/Familiars/Snake/PNGs/0.3.kra.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/krita_src/Familiars/Snake/PNGs/0.0.kra.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/krita_src/Familiars/Snake/PNGs/0.1.kra.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/krita_src/Familiars/Snake/PNGs/0.0.kra.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/krita_src/Familiars/Snake/PNGs/0.1.kra.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/krita_src/Familiars/Snake/PNGs/0.3.kra.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/krita_src/Familiars/Snake/PNGs/0.2.kra.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Entities/Familiars/Snake/Animation.gd" type="Script" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": false,
 "name": "Extend",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), null ],
+"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), null ],
 "loop": false,
 "name": "Retract",
 "speed": 10.0
@@ -31,7 +31,7 @@ animations = [ {
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="Snake" type="Area2D"]
+[node name="Snake" type="Area2D" index="0"]
 
 z_index = -1
 input_pickable = true

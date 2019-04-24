@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Sprites/Boss_Room/Background/Boss_Room.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Entities/Static/BossFloor/FloorBlocks.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -17,49 +18,49 @@ extents = Vector2( 20, 11.5556 )
 custom_solver_bias = 0.0
 extents = Vector2( 12.1894, 10 )
 
-[node name="BossFloor" type="Sprite"]
+[node name="BossFloor" type="Sprite" index="0"]
 
-editor/display_folded = true
 position = Vector2( 320, 180 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Z Index" ]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
+[node name="FloorBlocks" type="StaticBody2D" parent="." index="0"]
 
 editor/display_folded = true
 input_pickable = false
-collision_layer = 512
-collision_mask = 31775
+collision_layer = 0
+collision_mask = 0
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 0.0
 bounce = 0.0
+script = ExtResource( 2 )
 _sections_unfolded = [ "Collision" ]
 
-[node name="CenterPit" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+[node name="CenterPit" type="CollisionShape2D" parent="FloorBlocks" index="0"]
 
 scale = Vector2( 11.5385, 4.49519 )
 shape = SubResource( 1 )
 
-[node name="LeftPit" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+[node name="LeftPit" type="CollisionShape2D" parent="FloorBlocks" index="1"]
 
 position = Vector2( -100, 1.52588e-05 )
 scale = Vector2( 1, 13.8462 )
 shape = SubResource( 2 )
 
-[node name="RightPit" type="CollisionShape2D" parent="StaticBody2D" index="2"]
+[node name="RightPit" type="CollisionShape2D" parent="FloorBlocks" index="2"]
 
 position = Vector2( 100, 0 )
 scale = Vector2( 1, 13.8462 )
 shape = SubResource( 2 )
 
-[node name="TopPit" type="CollisionShape2D" parent="StaticBody2D" index="3"]
+[node name="TopPit" type="CollisionShape2D" parent="FloorBlocks" index="3"]
 
 position = Vector2( 0, -50 )
 scale = Vector2( 24.6731, 1 )
 shape = SubResource( 3 )
 
-[node name="TopPit2" type="CollisionShape2D" parent="StaticBody2D" index="4"]
+[node name="TopPit2" type="CollisionShape2D" parent="FloorBlocks" index="4"]
 
 position = Vector2( 0, 50 )
 scale = Vector2( 24.6731, 1 )
