@@ -133,16 +133,7 @@ rotation = 3.14159
 
 [node name="Boss" parent="." index="9" instance=ExtResource( 4 )]
 
-editor/display_folded = true
 position = Vector2( 320, 180 )
-
-[node name="AttackVine" parent="Boss" index="2"]
-
-editor/display_folded = true
-
-[node name="Squares" parent="Boss" index="3"]
-
-editor/display_folded = true
 
 [node name="Torch" parent="." index="10" instance=ExtResource( 5 )]
 
@@ -178,10 +169,6 @@ _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
 [node name="DungeonWalls" parent="." index="17" instance=ExtResource( 6 )]
 
-[node name="Walls" parent="DungeonWalls" index="0"]
-
-editor/display_folded = true
-
 [node name="NorthDoor" parent="DungeonWalls" index="1"]
 
 visible = false
@@ -195,5 +182,4 @@ visible = false
 visible = false
 
 
-[editable path="Boss"]
 [editable path="DungeonWalls"]

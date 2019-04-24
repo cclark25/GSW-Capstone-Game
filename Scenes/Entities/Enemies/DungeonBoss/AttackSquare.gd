@@ -8,6 +8,7 @@ var time = 0.0;
 var delay = 0.5;
 var entangledBodies = [];
 var entangledPositions = [];
+var branch = null;
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -61,4 +62,10 @@ func _process(delta):
 		get_node("Collision").disabled = true;
 		entangledBodies = [];
 		entangledPositions = [];
+		if(branch == null):
+			printerr("Spawning Branch");
+			var newBranch = load("res://Scenes/Entities/Objects/Branch/Branch.tscn").instance();
+			branch = newBranch;
+			Global.current_scene.add_child(newBranch);
+			newBranch.global_position = global_position + Vector2(40, 50);
 	pass
