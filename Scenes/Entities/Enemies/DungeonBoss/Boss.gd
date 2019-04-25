@@ -12,13 +12,22 @@ export (float) var attackDuration = 10.0;
 var opened = false;
 var attack = false;
 var attackDir = 0;
+export (float) var HitPoints = 30;
+
+func GetColorableChildren():
+	return [get_node("Eye"), get_node("Vines"), get_node("AttackVine")];
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	get_node("Vines").play("Idle");
+	set_collision_layer_bit(Global.CollisionType.enemy, true);
 	randomize();
 	pass
+
+func TakeDamage(amount, source):
+	HitPoints -= amount;
+	return;
 
 func EndAttack():
 	attack = false;
@@ -67,6 +76,11 @@ func _process(delta):
 	# Update game logic here.
 	time += delta;
 	attackTimer += delta;
+	
+	if((get_node("Eye").animation == "Open" && get_node("Eye").frame != 0) || (get_node("Eye").animation == "Close" && get_node("Eye").frame != 2)):
+		get_node("WeakPoint").disabled = false;
+	else:
+		get_node("WeakPoint").disabled = true;
 	
 	if(!attack && attackTimer >= attackWait):
 		attack = true;

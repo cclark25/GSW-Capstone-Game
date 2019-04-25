@@ -134,6 +134,7 @@ rotation = 3.14159
 [node name="Boss" parent="." index="9" instance=ExtResource( 4 )]
 
 position = Vector2( 320, 180 )
+HitPoints = 30
 
 [node name="Torch" parent="." index="10" instance=ExtResource( 5 )]
 
