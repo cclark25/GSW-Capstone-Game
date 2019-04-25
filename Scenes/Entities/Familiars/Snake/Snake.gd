@@ -48,6 +48,7 @@ func Hook(body):
 	return;
 
 func UnHook():
+	if(launched && hookedBody.has_method("on_launch")): hookedBody.on_launch();
 	get_node("Animation").play("Retract");
 	hookedBody = null;
 	scale.x = 1;
@@ -64,9 +65,14 @@ func ItemJump():
 		time = 0.0;
 
 func Use():
-	if(!launched &&hookedBody != null):
+	var DELETE = get_parent().isTargeting();
+	if(!launched && hookedBody != null):
 		if(hookedBody.get_collision_layer_bit(Global.CollisionType.dragable)):
-			hookedBody.apply_impulse(hookedPos, Vector2((scale.x )*1000, 0).rotated(rotation + PI));
+			if(get_parent().has_method("isTargeting") && get_parent().isTargeting()):
+				printerr("Targeting!");
+				hookedBody.apply_impulse(hookedPos, Vector2((scale.x )*1000, 0).rotated((get_parent().GetTarget().global_position - hookedBody.global_position).angle()));
+			else:
+				hookedBody.apply_impulse(hookedPos, Vector2((scale.x )*1000, 0).rotated(rotation + PI));
 			launched = true;
 		else:
 			UnHook();
@@ -128,6 +134,7 @@ func _process(delta):
 		if(scale.x > 2):
 			if(!launched && hookedBody.get_collision_layer_bit(Global.CollisionType.dragable)):
 				hookedBody.apply_impulse(hookedPos, Vector2((scale.x - 2)*25, 0).rotated(rotation + PI));
+				
 			else: 
 				UnHook();
 		return;

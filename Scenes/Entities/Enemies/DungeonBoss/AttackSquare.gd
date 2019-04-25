@@ -9,6 +9,7 @@ var delay = 0.5;
 var entangledBodies = [];
 var entangledPositions = [];
 var branch = null;
+var attackLock = false;
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -58,14 +59,17 @@ func _process(delta):
 		visible = false;
 		runTime = 0.0;
 		time = 0.0;
+		get_node("animation").stop();
+		get_node("animation").animation = "Extend";
+		get_node("animation").frame = 0;
 		set_process(false);
 		get_node("Collision").disabled = true;
 		entangledBodies = [];
 		entangledPositions = [];
-		if(branch == null):
-			printerr("Spawning Branch");
-			var newBranch = load("res://Scenes/Entities/Objects/Branch/Branch.tscn").instance();
-			branch = newBranch;
-			Global.current_scene.add_child(newBranch);
-			newBranch.global_position = global_position + Vector2(40, 50);
+		#if(branch == null):
+		var newBranch = load("res://Scenes/Entities/Objects/Branch/Branch.tscn").instance();
+		#	branch = newBranch;
+		Global.current_scene.add_child(newBranch);
+		newBranch.global_position = global_position + Vector2(40, 50);
+		newBranch.apply_impulse(Vector2(0,0), Vector2(100,0).rotated(randf()*2*PI));
 	pass

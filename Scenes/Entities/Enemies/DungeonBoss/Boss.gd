@@ -42,8 +42,9 @@ func Attack():
 		shake *= max(attackDuration - time, 0.0);
 		atVine.play("Retract");
 	
-	if(time > extendDur && time < attackDuration - extendDur && get_node("Squares").get_child_count() >= attackDir + 1 && get_node("Squares").get_child(attackDir).has_method("BeginAttack")):
+	if(time > extendDur && time < attackDuration - extendDur && get_node("Squares").get_child_count() >= attackDir + 1 && get_node("Squares").get_child(attackDir).has_method("BeginAttack") && !get_node("Squares").get_child(attackDir).attackLock):
 		get_node("Squares").get_child(attackDir).BeginAttack(attackDuration - 2*extendDur);
+		get_node("Squares").get_child(attackDir).attackLock = true;
 	
 	get_node("Eye").position = shake;
 	get_node("Vines").position = shake;
@@ -53,6 +54,7 @@ func Attack():
 		time = 0.0;
 		attackTimer = 0.0;
 		attack = false;
+		get_node("Squares").get_child(attackDir).attackLock = false;
 		get_node("Vines").play("Idle");
 		get_node("Eye").position = Vector2(0,0);
 		get_node("Vines").position = Vector2(0,0);
@@ -69,8 +71,10 @@ func _process(delta):
 	if(!attack && attackTimer >= attackWait):
 		attack = true;
 		#attackDir = randi()%8;
-		attackDir += 1;
-		attackDir %= 8;
+		#attackDir += 1;
+		#attackDir %= 8;
+		attackDir = round((Global.Player.global_position - global_position).angle() / (PI/4));
+		if(attackDir < 0): attackDir += 8;
 		var angle = Vector2(1, 0).rotated((attackDir / 8.0) * 2*PI);
 		
 		angle.x *= 16;

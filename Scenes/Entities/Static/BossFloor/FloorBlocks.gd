@@ -7,7 +7,7 @@ extends StaticBody2D
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	set_collision_layer_bit(Global.CollisionType.wall, true);
+	set_collision_layer_bit(Global.CollisionType.hole, true);
 	set_collision_mask_bit(Global.CollisionType.player, true);
 	set_collision_mask_bit(Global.CollisionType.enemy, true);
 	pass

@@ -18,7 +18,7 @@ extents = Vector2( 20, 11.5556 )
 custom_solver_bias = 0.0
 extents = Vector2( 12.1894, 10 )
 
-[node name="BossFloor" type="Sprite" index="0"]
+[node name="BossFloor" type="Sprite"]
 
 position = Vector2( 320, 180 )
 texture = ExtResource( 1 )

@@ -96,7 +96,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="Boss" type="Area2D"]
+[node name="Boss" type="Area2D" index="0"]
 
 z_index = 10
 input_pickable = true
@@ -137,6 +137,8 @@ offset = Vector2( 0, -10 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Squares" type="Node2D" parent="." index="3"]
+
+editor/display_folded = true
 
 [node name="Right" parent="Squares" index="0" instance=ExtResource( 18 )]
 

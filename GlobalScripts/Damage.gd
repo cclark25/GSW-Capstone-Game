@@ -34,7 +34,7 @@ class DHandler extends Node2D:
 	func _process(delta):
 		time += delta;
 		
-		if(body.has_method("GetHitPoints") && body.GetHitPoints() <= 0):
+		if(!body.has_method("GetHitPoints") || body.GetHitPoints() <= 0):
 			for i in range(0, modChildren.size()):
 				modChildren[i].self_modulate.a = normalColors[i].a * (1 - time/(maxTime/2));
 			if(time >= maxTime/2):
@@ -63,6 +63,13 @@ class DHandler extends Node2D:
 				modChildren[i].self_modulate.r = normalColors[i].r;
 			set_process(false);
 			queue_free();
+
+func BreakObject(object):
+	var handle = DHandler.new();
+	var loc = object.global_position;
+	add_child(handle);
+	handle.Handle(loc, loc, object);
+	return;
 
 func DealDamage(amount, targetBody, type=DamageType.slash, sourceBody=null):
 	if(!targetBody.has_method("TakeDamage")):

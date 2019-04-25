@@ -16,6 +16,7 @@ func Hit(body):
 	if(intensity > 100):
 		#intensity = min(intensity, 333);
 		Damage.DealDamage(round(intensity*10 / 1000), body, Damage.DamageType.bludgeon, self);
+		get_parent().Collision(body);
 	return;
 
 #func _process(delta):
