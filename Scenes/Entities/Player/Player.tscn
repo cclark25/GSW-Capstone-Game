@@ -60,8 +60,8 @@ extents = Vector2( 6.92908, 10.4658 )
 
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
-"loop": false,
-"name": "Roll.Up",
+"loop": true,
+"name": "Walk.Up",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
@@ -81,7 +81,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
 "loop": true,
-"name": "Walk.UpRight",
+"name": "Walk.Left",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
@@ -116,7 +116,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ) ],
 "loop": false,
-"name": "Roll.Down",
+"name": "Roll.DownLeft",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ) ],
@@ -140,7 +140,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="PlayerBody" type="KinematicBody2D"]
+[node name="PlayerBody" type="KinematicBody2D" index="0"]
 
 position = Vector2( 320, 300 )
 z_index = 2
@@ -152,7 +152,7 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "Material", "Pause", "Pickable", "Transform", "Visibility", "Z Index", "collision" ]
 speed = 5
 jumpModifier = 1.75
-HitPoints = 3000000
+HitPoints = 30
 invincible = false
 maxHP = 30
 
