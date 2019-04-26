@@ -20,6 +20,10 @@ func _ready():
 	
 	pass
 
+func handleDeath(body):
+	if(body == get_node("Boss")):
+		Global.GetDoor("North", self).unlock();
+
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.

@@ -35,6 +35,7 @@ class DHandler extends Node2D:
 		time += delta;
 		
 		if(!body.has_method("GetHitPoints") || body.GetHitPoints() <= 0):
+			#printerr("Damaged body's Hit Points: " + String(body.GetHitPoints()));
 			for i in range(0, modChildren.size()):
 				modChildren[i].self_modulate.a = normalColors[i].a * (1 - time/(maxTime/2));
 			if(time >= maxTime/2):
@@ -84,7 +85,6 @@ func DealDamage(amount, targetBody, type=DamageType.slash, sourceBody=null):
 	if(type == DamageType.grapple):
 		DealGrapple(amount, targetBody, sourceBody);
 	if(type == DamageType.bludgeon):
-		printerr("Bludgeon dealt")
 		DealBludgeon(amount, targetBody, sourceBody);
 	return;
 
@@ -93,7 +93,8 @@ func KickBack(targetBody, sourceBody, amount):
 	var weight = 5.0;
 	if(targetBody.has_method("GetWeight")):
 		weight = targetBody.GetWeight();
-	var kickback = amount / weight;
+	var kickback = 0;
+	if(weight != 0): kickback = amount / weight;
 	
 	#targetBody.global_position += direction * 100 * kickback;
 	var handler = DHandler.new();

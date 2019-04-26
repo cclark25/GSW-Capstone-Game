@@ -2,18 +2,18 @@
 
 [ext_resource path="res://Scenes/Entities/Enemies/Wolf/WolfBody.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Entities/Enemies/Wolf/WolfArea2D.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.0.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.2.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.0.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.1.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.2.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.0.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.1.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.2.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.0.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.1.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.2.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.0.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.1.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.2.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Entities/Enemies/Wolf/AnimatedWolfSprite.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -45,7 +45,7 @@ script/source = ""
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "Walk.Up",
+"name": "Walk.Right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
@@ -60,7 +60,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": true,
-"name": "Walk.Right",
+"name": "Walk.Up",
 "speed": 5.0
 } ]
 script = SubResource( 5 )
@@ -130,7 +130,7 @@ _sections_unfolded = [ "Collision", "Transform", "Visibility" ]
 
 shape = SubResource( 4 )
 
-[node name="AnimatedWolfSprite" type="AnimatedSprite" parent="." index="4"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="4"]
 
 editor/display_folded = true
 frames = SubResource( 6 )

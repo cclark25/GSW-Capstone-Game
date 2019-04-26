@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://BossRoom.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Rooms/A3/BossRoom.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Entities/Static/BossFloor/BossFloor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Entities/Static/LimbHook/Limb.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Entities/Enemies/DungeonBoss/Boss.tscn" type="PackedScene" id=4]
@@ -86,7 +86,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Background" ]
 
-[node name="BossRoom" type="WorldEnvironment"]
+[node name="BossRoom" type="WorldEnvironment" index="0"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
@@ -134,45 +134,43 @@ rotation = 3.14159
 [node name="Boss" parent="." index="9" instance=ExtResource( 4 )]
 
 position = Vector2( 320, 180 )
-HitPoints = 30
 
-[node name="Torch" parent="." index="10" instance=ExtResource( 5 )]
-
-[node name="Torch2" parent="." index="11" instance=ExtResource( 5 )]
+[node name="Torch2" parent="." index="10" instance=ExtResource( 5 )]
 
 position = Vector2( 120, 60 )
 
-[node name="Torch3" parent="." index="12" instance=ExtResource( 5 )]
+[node name="Torch3" parent="." index="11" instance=ExtResource( 5 )]
 
 position = Vector2( 520, 60 )
 
-[node name="Torch5" parent="." index="13" instance=ExtResource( 5 )]
+[node name="Torch5" parent="." index="12" instance=ExtResource( 5 )]
 
 position = Vector2( 115, 303 )
 rotation = 3.14159
 
-[node name="Torch6" parent="." index="14" instance=ExtResource( 5 )]
+[node name="Torch6" parent="." index="13" instance=ExtResource( 5 )]
 
 position = Vector2( 515, 303 )
 rotation = 3.14159
 
-[node name="Torch7" parent="." index="15" instance=ExtResource( 5 )]
+[node name="Torch7" parent="." index="14" instance=ExtResource( 5 )]
 
 position = Vector2( 578.523, 181.926 )
 rotation = 1.5708
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="Torch8" parent="." index="16" instance=ExtResource( 5 )]
+[node name="Torch8" parent="." index="15" instance=ExtResource( 5 )]
 
 position = Vector2( 64.3001, 181.926 )
 rotation = -1.5708
 _sections_unfolded = [ "Animation", "Material", "Transform", "Z Index" ]
 
-[node name="DungeonWalls" parent="." index="17" instance=ExtResource( 6 )]
+[node name="DungeonWalls" parent="." index="16" instance=ExtResource( 6 )]
 
 [node name="NorthDoor" parent="DungeonWalls" index="1"]
 
-visible = false
+exitScene = "H1"
+exitTo = "South"
 
 [node name="EastDoor" parent="DungeonWalls" index="3"]
 

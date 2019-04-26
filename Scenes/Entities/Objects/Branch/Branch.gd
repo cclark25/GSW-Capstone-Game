@@ -24,7 +24,6 @@ func on_launch():
 	set_process(true);
 
 func Collision(body):
-	printerr("Collide");
 	if(linear_velocity.length() > 100):
 		Damage.BreakObject(self);
 

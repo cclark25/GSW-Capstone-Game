@@ -10,12 +10,19 @@ var inRetreatMode = false;
 var inAggroMode = false;
 var randCirDir = 1;
 var randDirCounter = 0;
+var invincible = false;
+
+func SetInvincible(setVal):
+	invincible = setVal;
+
+func IsInvincible():
+	return invincible;
 
 func GetHitPoints():
 	return lifePoints;
 
 func GetColorableChildren():
-	return [get_node("AnimatedWolfSprite")];
+	return [get_node("AnimatedSprite")];
 
 func _ready():
 	set_collision_layer_bit(Global.CollisionType.enemy, true);

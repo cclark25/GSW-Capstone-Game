@@ -9,6 +9,7 @@ func _ready():
 	# Initialization
 	set_collision_mask_bit(Global.CollisionType.enemy, true);
 	connect("body_entered", self, "Hit");
+	connect("area_entered", self, "Hit");
 	pass
 
 func Hit(body):

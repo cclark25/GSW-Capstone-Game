@@ -14,6 +14,9 @@ var attack = false;
 var attackDir = 0;
 export (float) var HitPoints = 30;
 
+func GetHitPoints():
+	return HitPoints;
+
 func GetColorableChildren():
 	return [get_node("Eye"), get_node("Vines"), get_node("AttackVine")];
 
@@ -27,7 +30,11 @@ func _ready():
 
 func TakeDamage(amount, source):
 	HitPoints -= amount;
+	printerr("Boss Health: " + String(HitPoints));
 	return;
+
+func GetWeight():
+	return 0;
 
 func EndAttack():
 	attack = false;
