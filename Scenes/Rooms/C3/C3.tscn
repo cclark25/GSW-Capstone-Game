@@ -90,7 +90,8 @@ environment = SubResource( 1 )
 
 [node name="NorthDoor" parent="DungeonWalls" index="1"]
 
-exitScene = "F3"
+is_locked = false
+exitScene = "B3"
 exitTo = "South"
 
 [node name="SouthDoor" parent="DungeonWalls" index="2"]

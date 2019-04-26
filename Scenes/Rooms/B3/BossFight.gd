@@ -12,21 +12,10 @@ func _ready():
 	
 	#if(Global.get_current_scene() == null):
 	#	Global.set_current_scene("demo_BossFight");
-	var sword = preload("Scenes/Entities/Items/PlayerSword/Sword.tscn").instance();
-	var snake = preload("res://Scenes/Entities/Familiars/Snake/Snake.tscn").instance();
-	#add_child(sword);
 	
-	sword.visible = false;
-	sword.global_position = Vector2(100,100);
-	snake.visible = false;
-	snake.global_position = Vector2(100,100);
-	
-	Global.Player.AddItem(sword);
-	Global.Player.AddItem(snake);
-	
-	var d = Global.GetDoor("North", self);
-	d.exitScene = "demo_BossRoom";
-	d.exitTo = "South";
+	#var d = Global.GetDoor("North", self);
+	#d.exitScene = "demo_BossRoom";
+	#d.exitTo = "South";
 #	var w = Global.GetDoor("West", self);
 #	var e = Global.GetDoor("East", self);
 #	w.visible = false;
@@ -34,7 +23,8 @@ func _ready():
 	pass
 
 func handleDeath(body):
-	Global.GetDoor("North", self).unlock();
+	#Global.GetDoor("North", self).unlock();
+	return;
 
 func _process(delta):
 	# Called every frame. Delta is time since last frame.

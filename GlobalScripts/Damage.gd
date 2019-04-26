@@ -1,6 +1,6 @@
 extends Node;
 
-enum DamageType {slash, bludgeon, burn, freeze, shock, psychic, bite, pierce};
+enum DamageType {slash, bludgeon, burn, freeze, shock, psychic, bite, pierce, grapple};
 
 class DHandler extends Node2D:
 	var origin = null;
@@ -34,12 +34,13 @@ class DHandler extends Node2D:
 	func _process(delta):
 		time += delta;
 		
-		if(body.has_method("GetHitPoints") && body.GetHitPoints() <= 0):
+		if(!body.has_method("GetHitPoints") || body.GetHitPoints() <= 0):
+			#printerr("Damaged body's Hit Points: " + String(body.GetHitPoints()));
 			for i in range(0, modChildren.size()):
 				modChildren[i].self_modulate.a = normalColors[i].a * (1 - time/(maxTime/2));
 			if(time >= maxTime/2):
 				if(body == Global.Player):
-					Global.set_current_scene();
+					Global.set_current_scene("game_over");
 				if(Global.current_scene.has_method("handleDeath")):
 					Global.current_scene.handleDeath(body);
 				body.queue_free();
@@ -64,6 +65,13 @@ class DHandler extends Node2D:
 			set_process(false);
 			queue_free();
 
+func BreakObject(object):
+	var handle = DHandler.new();
+	var loc = object.global_position;
+	add_child(handle);
+	handle.Handle(loc, loc, object);
+	return;
+
 func DealDamage(amount, targetBody, type=DamageType.slash, sourceBody=null):
 	if(!targetBody.has_method("TakeDamage")):
 		return;
@@ -74,6 +82,10 @@ func DealDamage(amount, targetBody, type=DamageType.slash, sourceBody=null):
 		DealBite(amount, targetBody, sourceBody);
 	if(type == DamageType.slash):
 		DealSlash(amount, targetBody, sourceBody);
+	if(type == DamageType.grapple):
+		DealGrapple(amount, targetBody, sourceBody);
+	if(type == DamageType.bludgeon):
+		DealBludgeon(amount, targetBody, sourceBody);
 	if(type == DamageType.pierce):
 		DealPierce(amount, targetBody, sourceBody);
 	return;
@@ -83,7 +95,8 @@ func KickBack(targetBody, sourceBody, amount):
 	var weight = 5.0;
 	if(targetBody.has_method("GetWeight")):
 		weight = targetBody.GetWeight();
-	var kickback = amount / weight;
+	var kickback = 0;
+	if(weight != 0): kickback = amount / weight;
 	
 	#targetBody.global_position += direction * 100 * kickback;
 	var handler = DHandler.new();
@@ -92,7 +105,18 @@ func KickBack(targetBody, sourceBody, amount):
 	
 	return;
 
+func DealGrapple(amount, targetBody, sourceBody):
+	targetBody.TakeDamage(amount, sourceBody);
+	KickBack(targetBody, sourceBody, 0);
+	return;
+
 func DealBite(amount, targetBody, sourceBody):
+	targetBody.TakeDamage(amount, sourceBody);
+	if(sourceBody != null): 
+		KickBack(targetBody, sourceBody, amount);
+	return;
+	
+func DealBludgeon(amount, targetBody, sourceBody):
 	targetBody.TakeDamage(amount, sourceBody);
 	if(sourceBody != null): 
 		KickBack(targetBody, sourceBody, amount);
