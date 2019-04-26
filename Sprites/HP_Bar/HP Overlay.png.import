@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HP Segment.png-e308192615f8467c3c258d16ab449546.stex"
+path="res://.import/HP Overlay.png-b739be7c41981cbd1df011bb5a8b0314.stex"
 
 [deps]
 
-source_file="res://Sprites/HP Bar/HP Segment.png"
-dest_files=[ "res://.import/HP Segment.png-e308192615f8467c3c258d16ab449546.stex" ]
+source_file="res://Sprites/HP_Bar/HP Overlay.png"
+dest_files=[ "res://.import/HP Overlay.png-b739be7c41981cbd1df011bb5a8b0314.stex" ]
 
 [params]
 

@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/MenuItems/Health_Bar/HP_Bar.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/HP_Bar/HP_Overlay.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/HP_Bar/HP_Bar.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/HP_Bar/HP Logo.png" type="Texture" id=4]
+
+[node name="HealthBarNode2D" type="Node2D"]
+
+position = Vector2( 70, 30 )
+z_index = 20
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Bar" type="Node2D" parent="." index="0"]
+
+position = Vector2( 0.175804, -0.366512 )
+
+[node name="Container" type="Sprite" parent="Bar" index="0"]
+
+position = Vector2( 0.175804, -2.37634 )
+z_index = -1
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset", "Z Index" ]
+
+[node name="HP_Bar" type="Sprite" parent="Bar" index="1"]
+
+position = Vector2( 1.23084, 0.633488 )
+texture = ExtResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset", "Z Index" ]
+
+[node name="HP Logo" type="Sprite" parent="." index="1"]
+
+position = Vector2( -8.85031, 2.63349 )
+texture = ExtResource( 4 )
+
+
