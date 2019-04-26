@@ -1,0 +1,97 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Scenes/Entities/Enemies/Dryad/DryadRangerBody.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Entities/Enemies/Dryad/DryadArea2D.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/6.0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/6.1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/6.2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/4.0.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/4.1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/4.2.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/2.0.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/2.1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/2.2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/0.0.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/0.1.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/0.2.png" type="Texture" id=14]
+[ext_resource path="res://Scenes/Entities/Enemies/Dryad/AnimatedDryadSprite.gd" type="Script" id=15]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8.92184, 20.7109 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 21.747 )
+
+[sub_resource type="SpriteFrames" id=3]
+
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "Walk.Up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Walk.Left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "Walk.Down",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "Walk.Right",
+"speed": 5.0
+} ]
+_sections_unfolded = [ "Resource" ]
+
+[node name="DryadRangerBody" type="KinematicBody2D"]
+
+position = Vector2( 100, 100 )
+input_pickable = false
+collision_layer = 0
+collision_mask = 0
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( 0, 7 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="DryadArea2D" type="Area2D" parent="." index="1"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 2 )
+_sections_unfolded = [ "Collision" ]
+
+[node name="DryadAreaCollisionShape" type="CollisionShape2D" parent="DryadArea2D" index="0"]
+
+position = Vector2( 0, 7 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="AnimatedDryadSprite" type="AnimatedSprite" parent="." index="2"]
+
+frames = SubResource( 3 )
+animation = "Walk.Down"
+script = ExtResource( 15 )
+_sections_unfolded = [ "Transform" ]
+
+

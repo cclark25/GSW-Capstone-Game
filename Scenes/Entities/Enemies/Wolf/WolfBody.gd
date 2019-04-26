@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var lifePoints = 30;
+var lifePoints = 10;
 var vectorToPlayer = Vector2(0,0);
 var attackCounter = 0;
 var attackFrames = 0;
@@ -11,18 +11,6 @@ var inAggroMode = false;
 var randCirDir = 1;
 var randDirCounter = 0;
 var invincible = false;
-
-func SetInvincible(setVal):
-	invincible = setVal;
-
-func IsInvincible():
-	return invincible;
-
-func GetHitPoints():
-	return lifePoints;
-
-func GetColorableChildren():
-	return [get_node("AnimatedSprite")];
 
 func _ready():
 	set_collision_layer_bit(Global.CollisionType.enemy, true);
@@ -88,8 +76,20 @@ func AvoidAttack(delta):
 		avoidCounter = 0;
 		inRetreatMode = false;
 		
+func GetHitPoints():
+	return lifePoints;
+
+func GetColorableChildren():
+	return [get_node("AnimatedSprite")];
+		
 func TakeDamage(amount, source):
 	lifePoints -= amount;
 	printerr("Wolf HP:", lifePoints);
 	pass;
+	
+func SetInvincible(invince):
+	invincible = invince;
+	
+func IsInvincible():
+	return invincible;
 	
