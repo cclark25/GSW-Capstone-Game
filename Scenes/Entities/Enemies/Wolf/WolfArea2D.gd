@@ -8,7 +8,6 @@ func _ready():
 	pass
 
 func DealDamage(body):
-	printerr("damages")
 	Damage.DealDamage(10, body, Damage.DamageType.bite, self);
 	pass;
 	

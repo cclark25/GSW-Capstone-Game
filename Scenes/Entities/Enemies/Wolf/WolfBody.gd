@@ -10,12 +10,7 @@ var inRetreatMode = false;
 var inAggroMode = false;
 var randCirDir = 1;
 var randDirCounter = 0;
-
-func GetHitPoints():
-	return lifePoints;
-
-func GetColorableChildren():
-	return [get_node("AnimatedWolfSprite")];
+var invincible = false;
 
 func _ready():
 	set_collision_layer_bit(Global.CollisionType.enemy, true);
@@ -81,8 +76,20 @@ func AvoidAttack(delta):
 		avoidCounter = 0;
 		inRetreatMode = false;
 		
+func GetHitPoints():
+	return lifePoints;
+
+func GetColorableChildren():
+	return [get_node("AnimatedWolfSprite")];
+		
 func TakeDamage(amount, source):
 	lifePoints -= amount;
 	printerr("Wolf HP:", lifePoints);
 	pass;
+	
+func SetInvincible(invince):
+	invincible = invince;
+	
+func IsInvincible():
+	return invincible;
 	

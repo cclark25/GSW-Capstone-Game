@@ -1,6 +1,6 @@
 extends Node;
 
-enum DamageType {slash, bludgeon, burn, freeze, shock, psychic, bite};
+enum DamageType {slash, bludgeon, burn, freeze, shock, psychic, bite, pierce};
 
 class DHandler extends Node2D:
 	var origin = null;
@@ -74,6 +74,8 @@ func DealDamage(amount, targetBody, type=DamageType.slash, sourceBody=null):
 		DealBite(amount, targetBody, sourceBody);
 	if(type == DamageType.slash):
 		DealSlash(amount, targetBody, sourceBody);
+	if(type == DamageType.pierce):
+		DealPierce(amount, targetBody, sourceBody);
 	return;
 
 func KickBack(targetBody, sourceBody, amount):
@@ -97,6 +99,12 @@ func DealBite(amount, targetBody, sourceBody):
 	return;
 	
 func DealSlash(amount, targetBody, sourceBody):
+	targetBody.TakeDamage(amount, sourceBody);
+	if(sourceBody != null): 
+		KickBack(targetBody, sourceBody, amount);
+	return;
+
+func DealPierce(amount, targetBody, sourceBody):
 	targetBody.TakeDamage(amount, sourceBody);
 	if(sourceBody != null): 
 		KickBack(targetBody, sourceBody, amount);
