@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HP_bar.png-16458971e530aaf2c8a7e9f5c940b274.stex"
+path="res://.import/HP_Bar.png-3dc50208b13653a5998860d27b2cfe44.stex"
 
 [deps]
 
-source_file="res://Sprites/HP_Bar/HP_bar.png"
-dest_files=[ "res://.import/HP_bar.png-16458971e530aaf2c8a7e9f5c940b274.stex" ]
+source_file="res://Sprites/HP_Bar/HP_Bar.png"
+dest_files=[ "res://.import/HP_Bar.png-3dc50208b13653a5998860d27b2cfe44.stex" ]
 
 [params]
 
@@ -16,7 +16,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
