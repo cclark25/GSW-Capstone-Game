@@ -51,7 +51,7 @@ animations = [ {
 } ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="DryadRangerBody" type="KinematicBody2D" index="0"]
+[node name="DryadRangerBody" type="KinematicBody2D"]
 
 position = Vector2( 100, 100 )
 input_pickable = false
