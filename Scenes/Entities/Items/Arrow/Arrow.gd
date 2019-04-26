@@ -17,8 +17,7 @@ func _process(delta):
 	arrow_life_counter = arrow_life_counter + delta;
 	if arrow_life_counter >= arrow_life_span:
 		get_parent().remove_child(self);
-	if !stop:
-		translate(Vector2( -cos(dir) * speed * delta, -sin(dir) * speed * delta));
+	translate(Vector2( -cos(dir) * speed * delta, -sin(dir) * speed * delta));
 	
 	pass
 
@@ -30,5 +29,5 @@ func _shoot(arr_dir):
 func HitTarget(body):
 	Damage.DealDamage(10, body, Damage.DamageType.pierce, self);
 	get_node("CollisionShape2D").set_disabled(true);
-	stop = true;
+	queue_free();
 	pass;
