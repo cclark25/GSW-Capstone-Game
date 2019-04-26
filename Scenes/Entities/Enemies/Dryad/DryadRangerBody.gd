@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var lifePoints = 30;
+var lifePoints = 15;
 var vectorToPlayer = Vector2(0,0);
 var activeItem;
 var shootTimer = 1;

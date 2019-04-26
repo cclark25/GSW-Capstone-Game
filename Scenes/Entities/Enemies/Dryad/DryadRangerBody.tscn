@@ -2,18 +2,18 @@
 
 [ext_resource path="res://Scenes/Entities/Enemies/Dryad/DryadRangerBody.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Entities/Enemies/Dryad/DryadArea2D.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/2.0.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/2.1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/2.2.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/0.0.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/0.1.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/0.2.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/4.0.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/4.1.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/4.2.png" type="Texture" id=11]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/6.0.png" type="Texture" id=12]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/6.1.png" type="Texture" id=13]
-[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/6.2.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/6.0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/6.1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/6.2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/4.0.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/4.1.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/4.2.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/2.0.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/2.1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/2.2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/0.0.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/0.1.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/PNGs/0.2.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Entities/Enemies/Dryad/AnimatedDryadSprite.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -31,27 +31,27 @@ extents = Vector2( 10, 21.747 )
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "Walk.Down",
+"name": "Walk.Up",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
-"name": "Walk.Right",
+"name": "Walk.Left",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "Walk.Left",
+"name": "Walk.Down",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": true,
-"name": "Walk.Up",
+"name": "Walk.Right",
 "speed": 5.0
 } ]
 _sections_unfolded = [ "Resource" ]
 
-[node name="DryadRangerBody" type="KinematicBody2D"]
+[node name="DryadRangerBody" type="KinematicBody2D" index="0"]
 
 position = Vector2( 100, 100 )
 input_pickable = false

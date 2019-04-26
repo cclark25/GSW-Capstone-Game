@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var lifePoints = 30;
+var lifePoints = 10;
 var vectorToPlayer = Vector2(0,0);
 var attackCounter = 0;
 var attackFrames = 0;
