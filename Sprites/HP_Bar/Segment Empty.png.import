@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Segment Empty.png-dc05e201a224ed59c954040cbc9928b1.stex"
+path="res://.import/Segment Empty.png-5f6a5aa068096ab548d8dae12207bad5.stex"
 
 [deps]
 
-source_file="res://Sprites/HP Bar/Segment Empty.png"
-dest_files=[ "res://.import/Segment Empty.png-dc05e201a224ed59c954040cbc9928b1.stex" ]
+source_file="res://Sprites/HP_Bar/Segment Empty.png"
+dest_files=[ "res://.import/Segment Empty.png-5f6a5aa068096ab548d8dae12207bad5.stex" ]
 
 [params]
 

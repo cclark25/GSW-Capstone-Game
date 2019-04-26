@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HP Bar.png-1b64fa7966d0d219b235c31320153c22.stex"
+path="res://.import/HP Logo.png-196917e40578fa2e5c690fa4665ce2fe.stex"
 
 [deps]
 
-source_file="res://Sprites/HP Bar/HP Bar.png"
-dest_files=[ "res://.import/HP Bar.png-1b64fa7966d0d219b235c31320153c22.stex" ]
+source_file="res://Sprites/HP_Bar/HP Logo.png"
+dest_files=[ "res://.import/HP Logo.png-196917e40578fa2e5c690fa4665ce2fe.stex" ]
 
 [params]
 
@@ -16,7 +16,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

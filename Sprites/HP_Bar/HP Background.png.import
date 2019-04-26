@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HP Background.png-bde3d6845c782f7f065c37288f5778ba.stex"
+path="res://.import/HP Background.png-75cde9b8065353ca29546be2e6d8e8bf.stex"
 
 [deps]
 
-source_file="res://Sprites/HP Bar/HP Background.png"
-dest_files=[ "res://.import/HP Background.png-bde3d6845c782f7f065c37288f5778ba.stex" ]
+source_file="res://Sprites/HP_Bar/HP Background.png"
+dest_files=[ "res://.import/HP Background.png-75cde9b8065353ca29546be2e6d8e8bf.stex" ]
 
 [params]
 

@@ -11,6 +11,8 @@ var itemList = [];
 var targetCursor = preload("res://Scenes/Entities/Familiars/Bird/Bird.tscn").instance();
 export (int) var HitPoints = 30;
 export (bool) var invincible = false;
+var HPBar = load("res://Scenes/MenuItems/Health_Bar/HP_Bar.tscn").instance();
+export (float) var maxHP = 30;
 
 func GetTarget():
 	return targetBody;
@@ -52,6 +54,7 @@ func _ready():
 	set_process(false);
 	targetBody.set_name("TargetBody");
 	
+	Global.SpawnNode(HPBar);
 	
 	#if(Global.get_current_scene() == null):
 	#	Global.set_current_scene(self);
@@ -93,7 +96,9 @@ func TakeDamage(amount, source):
 	#	if(get_child(1).lifePoints <= 0):
 	#		get_tree().change_scene("res://GameOverScreen.tscn");
 	#	move_and_collide((position - sourceLocation ).normalized() * 75);
+	
 	HitPoints -= amount;
+	HPBar.SetHealthBar(HitPoints, maxHP);
 	printerr("Current HP: " + String(HitPoints));
 	pass	
 
