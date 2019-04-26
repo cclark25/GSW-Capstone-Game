@@ -80,7 +80,7 @@ func GetHitPoints():
 	return lifePoints;
 
 func GetColorableChildren():
-	return [get_node("AnimatedWolfSprite")];
+	return [get_node("AnimatedSprite")];
 		
 func TakeDamage(amount, source):
 	lifePoints -= amount;

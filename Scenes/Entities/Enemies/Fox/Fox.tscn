@@ -65,7 +65,7 @@ animations = [ {
 } ]
 script = SubResource( 5 )
 
-[node name="FoxBody" type="KinematicBody2D" index="0"]
+[node name="FoxBody" type="KinematicBody2D"]
 
 position = Vector2( 100, 100 )
 input_pickable = false

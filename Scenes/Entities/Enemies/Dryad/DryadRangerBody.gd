@@ -31,6 +31,7 @@ func _process(delta):
 		move_and_collide(-vectorToPlayer * delta * 75);
 		isAggro = true;
 	else:
+		animator.stop();
 		isAggro = false;
 		
 	
