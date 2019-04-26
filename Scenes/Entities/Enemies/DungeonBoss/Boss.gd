@@ -12,13 +12,29 @@ export (float) var attackDuration = 10.0;
 var opened = false;
 var attack = false;
 var attackDir = 0;
+export (float) var HitPoints = 30;
+
+func GetHitPoints():
+	return HitPoints;
+
+func GetColorableChildren():
+	return [get_node("Eye"), get_node("Vines"), get_node("AttackVine")];
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	get_node("Vines").play("Idle");
+	set_collision_layer_bit(Global.CollisionType.enemy, true);
 	randomize();
 	pass
+
+func TakeDamage(amount, source):
+	HitPoints -= amount;
+	printerr("Boss Health: " + String(HitPoints));
+	return;
+
+func GetWeight():
+	return 0;
 
 func EndAttack():
 	attack = false;
@@ -42,8 +58,9 @@ func Attack():
 		shake *= max(attackDuration - time, 0.0);
 		atVine.play("Retract");
 	
-	if(time > extendDur && time < attackDuration - extendDur && get_node("Squares").get_child_count() >= attackDir + 1 && get_node("Squares").get_child(attackDir).has_method("BeginAttack")):
+	if(time > extendDur && time < attackDuration - extendDur && get_node("Squares").get_child_count() >= attackDir + 1 && get_node("Squares").get_child(attackDir).has_method("BeginAttack") && !get_node("Squares").get_child(attackDir).attackLock):
 		get_node("Squares").get_child(attackDir).BeginAttack(attackDuration - 2*extendDur);
+		get_node("Squares").get_child(attackDir).attackLock = true;
 	
 	get_node("Eye").position = shake;
 	get_node("Vines").position = shake;
@@ -53,6 +70,7 @@ func Attack():
 		time = 0.0;
 		attackTimer = 0.0;
 		attack = false;
+		get_node("Squares").get_child(attackDir).attackLock = false;
 		get_node("Vines").play("Idle");
 		get_node("Eye").position = Vector2(0,0);
 		get_node("Vines").position = Vector2(0,0);
@@ -66,11 +84,18 @@ func _process(delta):
 	time += delta;
 	attackTimer += delta;
 	
+	if((get_node("Eye").animation == "Open" && get_node("Eye").frame != 0) || (get_node("Eye").animation == "Close" && get_node("Eye").frame != 2)):
+		get_node("WeakPoint").disabled = false;
+	else:
+		get_node("WeakPoint").disabled = true;
+	
 	if(!attack && attackTimer >= attackWait):
 		attack = true;
 		#attackDir = randi()%8;
-		attackDir += 1;
-		attackDir %= 8;
+		#attackDir += 1;
+		#attackDir %= 8;
+		attackDir = round((Global.Player.global_position - global_position).angle() / (PI/4));
+		if(attackDir < 0): attackDir += 8;
 		var angle = Vector2(1, 0).rotated((attackDir / 8.0) * 2*PI);
 		
 		angle.x *= 16;

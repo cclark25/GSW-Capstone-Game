@@ -14,6 +14,9 @@ export (bool) var invincible = false;
 var HPBar = load("res://Scenes/MenuItems/Health_Bar/HP_Bar.tscn").instance();
 export (float) var maxHP = 30;
 
+func GetTarget():
+	return targetBody;
+
 func GetHitPoints():
 	return HitPoints;
 

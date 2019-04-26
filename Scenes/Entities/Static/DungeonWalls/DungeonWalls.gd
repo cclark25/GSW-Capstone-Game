@@ -7,6 +7,9 @@ extends Sprite
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
+	get_node("Walls").set_collision_layer_bit(Global.CollisionType.wall, true);
+	get_node("Walls").set_collision_mask_bit(Global.CollisionType.player, true);
+	get_node("Walls").set_collision_mask_bit(Global.CollisionType.enemy, true);
 	pass
 
 #func _process(delta):

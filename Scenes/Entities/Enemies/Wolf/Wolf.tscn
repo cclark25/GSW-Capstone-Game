@@ -2,15 +2,15 @@
 
 [ext_resource path="res://Scenes/Entities/Enemies/Wolf/WolfBody.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Entities/Enemies/Wolf/WolfArea2D.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.0.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.1.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.0.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.1.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.2.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.0.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.1.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/4.2.png" type="Texture" id=8]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.0.png" type="Texture" id=9]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.1.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/0.2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.0.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Enemies/Wolf/PNGs/2.2.png" type="Texture" id=11]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.0.png" type="Texture" id=12]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.1.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/Enemies/Wolf/PNGs/6.2.png" type="Texture" id=14]
@@ -45,7 +45,7 @@ script/source = ""
 animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "Walk.Down",
+"name": "Walk.Right",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
@@ -55,7 +55,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "Walk.Right",
+"name": "Walk.Down",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
@@ -65,18 +65,17 @@ animations = [ {
 } ]
 script = SubResource( 5 )
 
-[node name="WolfBody" type="KinematicBody2D" index="0"]
+[node name="WolfBody" type="KinematicBody2D"]
 
-position = Vector2( 104.157, 87.5715 )
+position = Vector2( 200, 200 )
 input_pickable = false
 collision_layer = 0
 collision_mask = 0
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Pickable", "collision" ]
-damaged = false
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "collision" ]
 
-[node name="WolfCollisionShapeBodyVert" type="CollisionShape2D" parent="." index="0"]
+[node name="CollisionShapeBodyVert" type="CollisionShape2D" parent="." index="0"]
 
 editor/display_folded = true
 position = Vector2( -0.5, 0.5 )
@@ -84,14 +83,14 @@ shape = SubResource( 1 )
 disabled = true
 _sections_unfolded = [ "Transform" ]
 
-[node name="WolfCollisionShapeBodyHor" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShapeBodyHor" type="CollisionShape2D" parent="." index="1"]
 
 editor/display_folded = true
 position = Vector2( -1, 2.5 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 
-[node name="WolfArea2DVert" type="Area2D" parent="." index="2"]
+[node name="Area2DVert" type="Area2D" parent="." index="2"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -105,14 +104,14 @@ audio_bus_name = "Master"
 script = ExtResource( 2 )
 _sections_unfolded = [ "Collision" ]
 
-[node name="WolfCollisionShape2DVert" type="CollisionShape2D" parent="WolfArea2DVert" index="0"]
+[node name="CollisionShape2DVert" type="CollisionShape2D" parent="Area2DVert" index="0"]
 
 position = Vector2( -0.25, 0.25 )
 shape = SubResource( 3 )
 disabled = true
 _sections_unfolded = [ "Transform" ]
 
-[node name="WolfArea2DHor" type="Area2D" parent="." index="3"]
+[node name="Area2DHor" type="Area2D" parent="." index="3"]
 
 position = Vector2( -1, 2.5 )
 input_pickable = true
@@ -127,11 +126,11 @@ audio_bus_name = "Master"
 script = ExtResource( 2 )
 _sections_unfolded = [ "Collision", "Transform", "Visibility" ]
 
-[node name="WolfCollisionShape2DHor" type="CollisionShape2D" parent="WolfArea2DHor" index="0"]
+[node name="CollisionShape2DHor" type="CollisionShape2D" parent="Area2DHor" index="0"]
 
 shape = SubResource( 4 )
 
-[node name="AnimatedWolfSprite" type="AnimatedSprite" parent="." index="4"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="4"]
 
 editor/display_folded = true
 frames = SubResource( 6 )

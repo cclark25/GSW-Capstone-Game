@@ -21,15 +21,15 @@ func _process(delta):
 func Play(dir):
 	match dir % 4:
 		0:
-			get_parent().get_node("WolfCollisionShapeBodyVert").set_disabled(true);
-			get_parent().get_node("WolfArea2DVert/WolfCollisionShape2DVert").set_disabled(true);
-			get_parent().get_node("WolfCollisionShapeBodyHor").set_disabled(false);
-			get_parent().get_node("WolfArea2DHor/WolfCollisionShape2DHor").set_disabled(false);
+			get_parent().get_node("CollisionShapeBodyVert").set_disabled(true);
+			get_parent().get_node("Area2DVert/CollisionShape2DVert").set_disabled(true);
+			get_parent().get_node("CollisionShapeBodyHor").set_disabled(false);
+			get_parent().get_node("Area2DHor/CollisionShape2DHor").set_disabled(false);
 		-2:
-			get_parent().get_node("WolfCollisionShapeBodyVert").set_disabled(false);
-			get_parent().get_node("WolfArea2DVert/WolfCollisionShape2DVert").set_disabled(false);
-			get_parent().get_node("WolfCollisionShapeBodyHor").set_disabled(true);
-			get_parent().get_node("WolfArea2DHor/WolfCollisionShape2DHor").set_disabled(true);
+			get_parent().get_node("CollisionShapeBodyVert").set_disabled(false);
+			get_parent().get_node("Area2DVert/CollisionShape2DVert").set_disabled(false);
+			get_parent().get_node("CollisionShapeBodyHor").set_disabled(true);
+			get_parent().get_node("Area2DHor/CollisionShape2DHor").set_disabled(true);
 			
 	play("Walk." + Global.Directions.keys()[dir]);
 	
