@@ -1,5 +1,5 @@
 [gd_scene format=2]
 
-[node name="GameRoot" type="Node2D"]
+[node name="GameRoot" type="Node2D" index="0"]
 
 

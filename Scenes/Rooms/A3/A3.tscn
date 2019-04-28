@@ -86,7 +86,7 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Background" ]
 
-[node name="BossRoom" type="WorldEnvironment" index="0"]
+[node name="BossRoom" type="Node2D" index="0"]
 
 environment = SubResource( 1 )
 script = ExtResource( 1 )
