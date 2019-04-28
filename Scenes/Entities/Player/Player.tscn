@@ -140,7 +140,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="PlayerBody" type="KinematicBody2D"]
+[node name="PlayerBody" type="KinematicBody2D" index="0"]
 
 position = Vector2( 320, 300 )
 z_index = 2

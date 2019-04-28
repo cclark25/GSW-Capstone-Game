@@ -16,7 +16,7 @@ extents = Vector2( 13, 12.7484 )
 custom_solver_bias = 0.0
 extents = Vector2( 13, 22.0236 )
 
-[node name="Door" type="StaticBody2D" index="0"]
+[node name="Door" type="StaticBody2D"]
 
 position = Vector2( 320, 19 )
 scale = Vector2( 1, 0.96875 )

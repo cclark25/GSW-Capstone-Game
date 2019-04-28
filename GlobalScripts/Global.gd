@@ -64,7 +64,24 @@ func _ready():
 	if(current_scene == null):
 		set_current_scene("start_menu");
 	SpawnNode(Player);
+	
+	Console.register("killall", {
+		'description': "Kills all damagable entities in the room.",
+		'target': [self, 'CHEAT_KillAll']
+	});
+	
+	return;
 
+func CHEAT_KillAll(s=current_scene):
+	if(s.get_children().size() <= 0):
+		return;
+	for e in s.get_children():
+		if(e == Player):
+			continue;
+		if(e.has_method("TakeDamage")):
+			Damage.DealDamage(99999999999999, e);
+		else:
+			CHEAT_KillAll(e);
 	return;
 
 func SpawnNode(entity):

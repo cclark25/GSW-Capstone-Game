@@ -33,8 +33,40 @@ func _ready():
 		lock();
 	else:
 		unlock();
-	pass
 	
+	Console.register("unlock", {
+		'description': "Unlocks selected door.",
+		'args': [TYPE_STRING],
+		'target': [self, 'CHEAT_Unlock']
+	});
+	
+	Console.register("lock", {
+		'description': "Locks selected door.",
+		'args': [TYPE_STRING],
+		'target': [self, 'CHEAT_Lock']
+	});
+	pass
+
+func CHEAT_Lock(name):
+	printerr("Trying to lock door: " + name);
+	var door = Global.GetDoor(name);
+	if(door == null):
+		Console.writeLine("Error: Door not found!");
+	else:
+		door.lock();
+		Console.writeLine("Door locked.");
+	return;
+
+func CHEAT_Unlock(name):
+	printerr("Trying to unlock door: " + name);
+	var door = Global.GetDoor(name);
+	if(door == null):
+		Console.writeLine("Error: Door not found!");
+	else:
+		door.unlock();
+		Console.writeLine("Door unlocked.");
+	return;
+
 func unlock():
 	is_locked = false;
 	set_process(true);

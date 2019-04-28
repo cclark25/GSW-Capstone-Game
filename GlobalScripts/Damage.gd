@@ -91,7 +91,9 @@ func DealDamage(amount, targetBody, type=DamageType.slash, sourceBody=null):
 	return;
 
 func KickBack(targetBody, sourceBody, amount):
-	var direction = (targetBody.global_position - sourceBody.global_position).normalized();
+	var direction = Vector2(0,0);
+	if(sourceBody != null):
+		direction = (targetBody.global_position - sourceBody.global_position).normalized();
 	var weight = 5.0;
 	if(targetBody.has_method("GetWeight")):
 		weight = targetBody.GetWeight();
@@ -124,8 +126,8 @@ func DealBludgeon(amount, targetBody, sourceBody):
 	
 func DealSlash(amount, targetBody, sourceBody):
 	targetBody.TakeDamage(amount, sourceBody);
-	if(sourceBody != null): 
-		KickBack(targetBody, sourceBody, amount);
+	#if(sourceBody != null): 
+	KickBack(targetBody, sourceBody, amount);
 	return;
 
 func DealPierce(amount, targetBody, sourceBody):

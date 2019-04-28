@@ -69,7 +69,7 @@ func _ready():
 	Console.register("godmode", {
 		'description': "Enables player invincibility.",
 		'target': [self, 'CHEAT_GodMode']
-	})
+	});
 	return;
 
 func CHEAT_GodMode():
@@ -156,7 +156,7 @@ func _input(event):
 		direction.y -= 1;
 	
 	if(event.is_action_pressed("Jump")):
-	 if(activeItem.has_method("ItemJump")):
+	 if(activeItem != null && activeItem.has_method("ItemJump")):
 	 	activeItem.ItemJump();
 	 else:
 	 	animator.CurrentMode = animator.Modes.Roll;
