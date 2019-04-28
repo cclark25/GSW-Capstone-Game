@@ -127,7 +127,7 @@ func _process(delta):
 			isJumping = false;
 			UnHook();
 	
-	if(hookedBody != null):
+	if(hookedBody != null && weakref(hookedBody).get_ref()):
 		global_position = hookedBody.global_position + hookedPos.rotated(hookedBody.rotation);
 		rotation = (global_position - get_parent().global_position).angle();
 		scale.x = position.length() / 40;

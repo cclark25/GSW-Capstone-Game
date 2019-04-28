@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Menu/HUD.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/MenuItems/Health_Bar/HP_Bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/MenuItems/Map/Map.tscn" type="PackedScene" id=3]
+
+[node name="HUD" type="Node2D"]
+
+position = Vector2( 0, -100 )
+z_index = 100
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+extendTime = 0.25
+displayTime = 3.0
+
+[node name="HealthBar" parent="." index="0" instance=ExtResource( 2 )]
+
+position = Vector2( 430, 20 )
+scale = Vector2( 2, 2 )
+
+[node name="Map" parent="." index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 40, 10 )
+scale = Vector2( 2, 2 )
+_sections_unfolded = [ "Transform" ]
+
+

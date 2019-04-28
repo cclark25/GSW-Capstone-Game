@@ -11,8 +11,8 @@ var itemList = [];
 var targetCursor = preload("res://Scenes/Entities/Familiars/Bird/Bird.tscn").instance();
 export (int) var HitPoints = 30;
 export (bool) var invincible = false;
-var HPBar = load("res://Scenes/MenuItems/Health_Bar/HP_Bar.tscn").instance();
 export (float) var maxHP = 30;
+
 
 func GetTarget():
 	return targetBody;
@@ -54,7 +54,6 @@ func _ready():
 	set_process(false);
 	targetBody.set_name("TargetBody");
 	
-	Global.SpawnNode(HPBar);
 	
 	#if(Global.get_current_scene() == null):
 	#	Global.set_current_scene(self);
@@ -67,7 +66,15 @@ func _ready():
 	set_collision_mask_bit(Global.CollisionType.enemy, true);
 	#printerr(Global.get_current_scene().name);
 	
+	Console.register("godmode", {
+		'description': "Enables player invincibility.",
+		'target': [self, 'CHEAT_GodMode']
+	})
 	return;
+
+func CHEAT_GodMode():
+	SetInvincible(!IsInvincible());
+	Console.writeLine("Godmode " + String(IsInvincible()));
 
 func SwitchItem(index):
 	activeItem = itemList[index % itemList.size()];
@@ -98,7 +105,7 @@ func TakeDamage(amount, source):
 	#	move_and_collide((position - sourceLocation ).normalized() * 75);
 	
 	HitPoints -= amount;
-	HPBar.SetHealthBar(HitPoints, maxHP);
+	HUD.get_node("HealthBar").SetHealthBar(HitPoints, maxHP);
 	printerr("Current HP: " + String(HitPoints));
 	pass	
 
@@ -187,6 +194,11 @@ func _input(event):
 func _process(delta):
 	Move(delta);
 	
+	if(!Input.is_action_pressed("Up") &&
+		!Input.is_action_pressed("Down") &&
+		!Input.is_action_pressed("Left") &&
+		!Input.is_action_pressed("Right") ):
+		direction *= 0;
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
 	pass

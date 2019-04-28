@@ -13,6 +13,12 @@ var opened = false;
 var attack = false;
 var attackDir = 0;
 export (float) var HitPoints = 30;
+var invincible = false;
+
+func SetInvincible(invince):
+	invincible = invince;
+func IsInvincible():
+	return invincible;
 
 func GetHitPoints():
 	return HitPoints;

@@ -127,7 +127,8 @@ func set_current_scene(id, doorway=null):
 		return;
 	
 	if(current_scene != null):
-		remove_child(current_scene);
+		#remove_child(current_scene);
+		call_deferred("remove_child", current_scene);
 	add_child(newScene);
 	current_scene = newScene;
 	
@@ -137,6 +138,7 @@ func set_current_scene(id, doorway=null):
 	ReloadScenes(current_scene);
 	
 	print("Scene changed to \"" + id + "\".");
+	HUD.get_node("Map").Show();
 	return;
 
 #func _process(delta):

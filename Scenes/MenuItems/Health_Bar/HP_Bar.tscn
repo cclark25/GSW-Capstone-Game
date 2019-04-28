@@ -5,7 +5,7 @@
 [ext_resource path="res://Sprites/HP_Bar/HP_Bar.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/HP_Bar/HP Logo.png" type="Texture" id=4]
 
-[node name="HealthBarNode2D" type="Node2D"]
+[node name="HealthBarNode2D" type="Node2D" index="0"]
 
 position = Vector2( 70, 30 )
 z_index = 20
