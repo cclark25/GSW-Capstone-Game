@@ -70,6 +70,19 @@ func _ready():
 		'description': "Enables player invincibility.",
 		'target': [self, 'CHEAT_GodMode']
 	});
+	
+	var sword = load("Scenes/Entities/Items/PlayerSword/Sword.tscn").instance();
+	var snake = load("res://Scenes/Entities/Familiars/Snake/Snake.tscn").instance();
+	#add_child(sword);
+	
+	sword.visible = false;
+	sword.global_position = Vector2(100,100);
+	snake.visible = false;
+	snake.global_position = Vector2(100,100);
+	
+	AddItem(sword);
+	AddItem(snake);
+	
 	return;
 
 func CHEAT_GodMode():
