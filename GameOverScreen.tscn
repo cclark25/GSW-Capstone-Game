@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://StartButton.gd" type="Script" id=1]
+[ext_resource path="res://Retry.gd" type="Script" id=1]
 [ext_resource path="res://Exit.gd" type="Script" id=2]
 
 [sub_resource type="Environment" id=1]
@@ -108,15 +108,15 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Start" type="Button" parent="." index="1"]
+[node name="Retry" type="Button" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 270.0
+margin_left = 260.0
 margin_top = 150.0
-margin_right = 390.0
+margin_right = 400.0
 margin_bottom = 170.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -129,7 +129,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Retry?"
+text = "Back to Main Menu"
 flat = false
 align = 1
 script = ExtResource( 1 )
