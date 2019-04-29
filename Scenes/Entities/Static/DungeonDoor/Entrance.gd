@@ -1,15 +1,16 @@
 extends Area2D
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
+	connect("body_entered", self, "body_entered");
+	set_collision_layer_bit(Global.CollisionType.trigger, true);
+	set_collision_mask_bit(Global.CollisionType.player, true);
 	pass
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func body_entered(body):
+	printerr("Here");
+	if body == Global.Player && body.get("keys") > 0:
+		body.keys -= 1
+		printerr ("Key Used");
+		get_node("EntranceTrigger").disabled = true;
+		get_parent().unlock();
+		

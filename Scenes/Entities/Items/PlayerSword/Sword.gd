@@ -11,13 +11,16 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	connect("area_entered", self, "DealDamage");
+	connect("body_entered", self, "DealDamage");
 	set_process(false);
 	get_node("CollisionShape2D").disabled = true;
+	set_collision_layer_bit(Global.CollisionType.weapon, true);
 	set_collision_mask_bit(Global.CollisionType.enemy, true);
 	pass
 
 func DealDamage(body):
-	body.TakeDamage(8, get_parent().position);
+	#body.TakeDamage(8, get_parent().position);
+	Damage.DealDamage(8, body, Damage.DamageType.slash, self);
 	pass;
 
 func Use():
@@ -48,11 +51,13 @@ func _process(delta):
 		rotation -= delta*radPerSec;
 		if(rotation <= dir - 2*PI/3):
 			set_process(false);
+			get_node("CollisionShape2D").disabled = true;
 			visible = false;
 	else:
 		rotation += delta*radPerSec;
 		if(rotation >= dir + 2*PI/3):
 			set_process(false);
+			get_node("CollisionShape2D").disabled = true;
 			visible = false;
 	#set_process(false);
 	return;

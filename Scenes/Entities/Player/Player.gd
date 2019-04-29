@@ -18,10 +18,10 @@ var isMoving = false;
 export (bool) var damaged = false;
 var lifePoints = 20;
 export (int) var itemIndex = 0;
+var keys = 0;
 
-func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
+func _physics_process(delta):
+	keys = min(keys, 9)
 	pass
 
 func get_input(delta):

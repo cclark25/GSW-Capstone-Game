@@ -8,7 +8,29 @@ export (int) var speed = 5;
 export (float) var jumpModifier = 1.75;
 var activeItem = null;
 var itemList = [];
+var keys = 0;
 var targetCursor = preload("res://Scenes/Entities/Familiars/Bird/Bird.tscn").instance();
+export (int) var HitPoints = 30;
+export (bool) var invincible = false;
+
+
+func GetKeys():
+	return keys;
+
+func SetKeys(amount):
+	keys = amount;
+
+func GetHitPoints():
+	return HitPoints;
+
+func GetColorableChildren():
+	return [get_node("Animation")];
+
+func SetInvincible(invince):
+	invincible = invince;
+func IsInvincible():
+	return invincible;
+
 
 func get_direction():
 	return get_node("Animation").dir;
@@ -27,6 +49,8 @@ class _target extends Node2D:
 		
 var targetBody = _target.new();
 
+func isTargeting():
+	return targetBody.is_processing();
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -43,6 +67,7 @@ func _ready():
 	#targetCursor.global_position = targetBody.global_position;
 	
 	set_collision_layer_bit(Global.CollisionType.player, true);
+	set_collision_mask_bit(Global.CollisionType.enemy, true);
 	#printerr(Global.get_current_scene().name);
 	
 	return;
@@ -66,7 +91,7 @@ func RemoveItem(item):
 	remove_child(item);
 	return item;
 
-func TakeDamage(amount, sourceLocation):
+func TakeDamage(amount, source):
 	#if(!(get_child(1).damaged)):
 	#	get_child(1).damaged = true;
 	#	get_child(1).animationTime = 0;
@@ -74,6 +99,8 @@ func TakeDamage(amount, sourceLocation):
 	#	if(get_child(1).lifePoints <= 0):
 	#		get_tree().change_scene("res://GameOverScreen.tscn");
 	#	move_and_collide((position - sourceLocation ).normalized() * 75);
+	HitPoints -= amount;
+	printerr("Current HP: " + String(HitPoints));
 	pass	
 
 func Move(delta):
@@ -123,7 +150,10 @@ func _input(event):
 		direction.y -= 1;
 	
 	if(event.is_action_pressed("Jump")):
-		animator.CurrentMode = animator.Modes.Roll;
+	 if(activeItem.has_method("ItemJump")):
+	 	activeItem.ItemJump();
+	 else:
+	 	animator.CurrentMode = animator.Modes.Roll;
 	
 	if(event.is_action_pressed("Target")):
 		Target();

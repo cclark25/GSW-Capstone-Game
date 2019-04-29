@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Entities/Static/DungeonWalls/DungeonWalls.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Sprites/Dungeon Floors/DungeonFloorTemplate.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Rooms/H3/H3.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Entities/Static/DungeonWalls/DungeonWalls.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/Dungeon Floors/DungeonFloorTemplate.png" type="Texture" id=3]
 
 [sub_resource type="Environment" id=1]
 
@@ -85,8 +86,12 @@ _sections_unfolded = [ "Background" ]
 [node name="Base" type="WorldEnvironment"]
 
 environment = SubResource( 1 )
+script = ExtResource( 1 )
 
-[node name="DungeonWalls" parent="." index="0" instance=ExtResource( 1 )]
+[node name="DungeonWalls" parent="." index="0" instance=ExtResource( 2 )]
+
+editor/display_folded = true
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="NorthDoor" parent="DungeonWalls" index="1"]
 
@@ -105,7 +110,7 @@ visible = false
 [node name="DungeonFloorTemplate" type="Sprite" parent="." index="1"]
 
 position = Vector2( 320, 180 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 
 [editable path="DungeonWalls"]

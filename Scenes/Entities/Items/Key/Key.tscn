@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/MenuItems/Pickups/key.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Area2D
+
+func _ready():
+	connect(\"body_entered\", self, \"body_entered\")
+	set_collision_layer_bit(Global.CollisionType.itemDrop, true);
+	set_collision_mask_bit(Global.CollisionType.player, true);
+	
+func body_entered(body):
+	if body.has_method(\"GetKeys\") && body.GetKeys() < 3:
+		printerr(\"Got Here\");
+		body.SetKeys(body.GetKeys() + 1);
+		queue_free()"
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 18.3021 )
+
+[node name="Key" type="Area2D"]
+
+scale = Vector2( 0.5, 0.5 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 0
+collision_mask = 0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = SubResource( 1 )
+_sections_unfolded = [ "Collision", "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+position = Vector2( -9.63402, -4.85118 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( -9.40318, -2.79571 )
+rotation = 2.26893
+scale = Vector2( 0.357189, 0.538223 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+

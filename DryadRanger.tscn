@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Sprites/Enemies/DryadRanger/DryadRanger.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Enemies/DryadRanger/Bow/Bow0.png" type="Texture" id=2]
+
+[sub_resource type="AtlasTexture" id=1]
+
+flags = 0
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 105, 252 )
+margin = Rect2( 0, 0, 0, 0 )
+filter_clip = false
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="DryadRanger" type="Sprite" index="0"]
+
+position = Vector2( 134.826, 140.624 )
+texture = SubResource( 1 )
+vframes = 4
+hframes = 3
+_sections_unfolded = [ "Animation" ]
+
+[node name="Area2D" type="Area2D" parent="." index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( -1.68601, 3.75657 )
+scale = Vector2( 1.17374, 2.60265 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bow" type="Sprite" parent="." index="1"]
+
+position = Vector2( 4, 7 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+

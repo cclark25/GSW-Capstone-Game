@@ -9,6 +9,7 @@ export (String) var doorId;
 export (String) var exitScene;
 export (String) var exitTo;
 export (bool) var locksOnEnter = false;
+export (bool) var Has_Key = false;
 var respawn = [];
 
 func get_door_id():
@@ -64,5 +65,10 @@ func _process(delta):
 			get_child(0).frame = 3;
 			set_process(false);
 			get_child(1).disabled = true;
-		
+	pass
+	
+func LockWithKey():
+	lock()
+	get_node("Entrance/EntranceTrigger").set_disabled(false);
+	printerr("It Works");
 	pass
