@@ -76,9 +76,9 @@ func _ready():
 	#add_child(sword);
 	
 	sword.visible = false;
-	sword.global_position = Vector2(100,100);
+	#sword.global_position = Vector2(100,100);
 	snake.visible = false;
-	snake.global_position = Vector2(100,100);
+	#snake.global_position = Vector2(100,100);
 	
 	AddItem(sword);
 	AddItem(snake);
