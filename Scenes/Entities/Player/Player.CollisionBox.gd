@@ -118,7 +118,7 @@ func TakeDamage(amount, source):
 	#	move_and_collide((position - sourceLocation ).normalized() * 75);
 	
 	HitPoints -= amount;
-	HUD.get_node("HealthBar").SetHealthBar(HitPoints, maxHP);
+	#GameCamera.get_node("HUD").get_node("HealthBar").SetHealthBar(HitPoints, maxHP);
 	printerr("Current HP: " + String(HitPoints));
 	pass	
 

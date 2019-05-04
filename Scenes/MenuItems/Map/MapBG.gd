@@ -13,9 +13,10 @@ var numRows = 0;
 var numCol = 0;
 
 func _ready():
+	return;
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	for scene in Global.SceneNames:
+	for scene in Global.GetSceneNames():
 		if(scene.length() == 2):
 			var r = square.instance();
 			r.name = scene;

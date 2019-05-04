@@ -16,10 +16,11 @@ config/icon="res://icon.png"
 
 [autoload]
 
+SceneLoader="*res://GlobalScripts/SceneLoader.gd"
 Global="*res://GlobalScripts/Global.gd"
 Damage="*res://GlobalScripts/Damage.gd"
 Console="*res://godot-console/src/Console.tscn"
-HUD="*res://Scenes/Menu/HUD.tscn"
+GameCamera="*res://Scenes/Camera.tscn"
 
 [debug]
 

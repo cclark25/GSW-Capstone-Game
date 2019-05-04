@@ -85,16 +85,16 @@ func _process(delta):
 	
 	animationTime += delta;
 	if(is_locked):
-		get_child(0).frame = 3 - int(animationTime / .07);
-		if(get_child(0).frame <= 0):
-			get_child(0).frame = 0;
+		get_node("DoorSprite").frame = 3 - int(animationTime / .07);
+		if(get_node("DoorSprite").frame <= 0):
+			get_node("DoorSprite").frame = 0;
 			set_process(false);
-			get_child(1).disabled = false;
+			get_node("DoorWall").disabled = false;
 	else:
-		get_child(0).frame = int(animationTime / .07);
-		if(get_child(0).frame >= 3):
-			get_child(0).frame = 3;
+		get_node("DoorSprite").frame = int(animationTime / .07);
+		if(get_node("DoorSprite").frame >= 3):
+			get_node("DoorSprite").frame = 3;
 			set_process(false);
-			get_child(1).disabled = true;
+			get_node("DoorWall").disabled = true;
 		
 	pass

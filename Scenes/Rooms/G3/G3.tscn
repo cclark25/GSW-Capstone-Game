@@ -6,6 +6,8 @@
 
 [node name="Base" type="Node2D"]
 
+position = Vector2( 0, -360 )
+
 [node name="DungeonWalls" parent="." index="0" instance=ExtResource( 1 )]
 
 editor/display_folded = true

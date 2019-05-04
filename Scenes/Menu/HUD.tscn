@@ -6,6 +6,7 @@
 
 [node name="HUD" type="Node2D"]
 
+editor/display_folded = true
 position = Vector2( 0, -100 )
 z_index = 100
 script = ExtResource( 1 )

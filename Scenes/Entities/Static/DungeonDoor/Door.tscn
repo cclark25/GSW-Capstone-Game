@@ -16,7 +16,7 @@ extents = Vector2( 13, 12.7484 )
 custom_solver_bias = 0.0
 extents = Vector2( 13, 22.0236 )
 
-[node name="Door" type="StaticBody2D"]
+[node name="Door" type="StaticBody2D" index="0"]
 
 position = Vector2( 320, 19 )
 scale = Vector2( 1, 0.96875 )
@@ -36,7 +36,7 @@ exitScene = null
 exitTo = null
 locksOnEnter = false
 
-[node name="Door" type="Sprite" parent="." index="0"]
+[node name="DoorSprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 vframes = 4

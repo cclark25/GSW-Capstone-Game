@@ -1,23 +1,21 @@
-extends Node
+extends Node2D;
 
-signal spawn_node(node);
-
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-var Player = preload("res://Scenes/Entities/Player/Player.tscn").instance();
-var current_scene = null;
-var SceneList = [];
-var PackedScenes = [];
-var SceneNames = [];
-
-var spawn_pending = [];
-var spawned = [];
+var Context = null;
+var currentScene = null;
+var currentSceneId = null;
+var neighbors = [];
+var neighNames = [];
+var Player = load("res://Scenes/Entities/Player/Player.tscn").instance();
 
 enum Directions { Right, DownRight, Down, DownLeft, Left, UpLeft, Up, UpRight }
 enum CollisionType {player, enemy, weapon, hookable, dragable, hazard, wall, hole};
 
-func GetDoor(name, root=current_scene):
+func _ready():
+	EnterMainMenu();
+	#add_child(load("res://Scenes/Menu/HUD.tscn").instance());
+	return;
+
+func GetDoor(name, root=currentScene):
 	var door = null;
 	for child in root.get_children():
 		if(child.has_method("get_door_id") && child.get_door_id() == name):
@@ -25,140 +23,77 @@ func GetDoor(name, root=current_scene):
 			return door;
 		else:
 			door = GetDoor(name, child);
-			if(door != null):
-				return door;
+		if(door != null):
+			return door;
 	return door;
 
-func AddScene(scene, id):
-	if(!SceneNames.has(id)):
-		SceneNames.push_back(id);
-		SceneList.push_back(scene);
-	else:
-		printerr("Error: Scene Exists already!");
-	return;
+func GetAllDoors(root=currentScene):
+	var doors = [];
+	for child in root.get_children():
+		if(child.has_method("get_door_id")):
+			doors.push_back(child.exitScene);
+			continue;
+		else:
+			doors += GetAllDoors(child);
+	return doors;
 
-func _input(event):
-	if(event.is_action_pressed("DEBUG")):
-		var index = SceneList.find(current_scene);
-		if(index >= 0):
-			SceneList[index] = PackedScenes[index].instance();
-			set_current_scene(SceneNames[index]);
-	return;
-
-func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
+func SetSceneContext(file):
+	if(currentScene != null): currentScene.queue_free();
+	Context = SceneLoader.MakeContext();
 	var sceneFile = File.new();
-	sceneFile.open("res://Scenes/SceneList.cfg", File.READ);
+	sceneFile.open(file, File.READ);
 	var fileText = sceneFile.get_as_text();
 	sceneFile.close();
 	var a1 = fileText.split("\n", false);
-#
+
 	for e in a1:
 		var sp = e.split(":");
 		var loc = "res://" + sp[0];
 		var pScene = load(loc);
-		PackedScenes.push_back(pScene);
-		AddScene(pScene.instance(), sp[1]);
+		Context.StoreScene(pScene, sp[1]);
+	SetScene("H3");
 
-	if(current_scene == null):
-		set_current_scene("start_menu");
-	SpawnNode(Player);
-	
-	Console.register("killall", {
-		'description': "Kills all damagable entities in the room.",
-		'target': [self, 'CHEAT_KillAll']
-	});
-	
-	return;
-
-func CHEAT_KillAll(s=current_scene):
-	if(s.get_children().size() <= 0):
+func SetScene(id, loadPosition=null):
+	var scene = Context.FetchScene(id);
+	if(scene == null):
+		printerr("There is no scene in the scene set called \"" + id + "\"");
 		return;
-	for e in s.get_children():
-		if(e == Player):
-			continue;
-		if(e.has_method("TakeDamage")):
-			Damage.DealDamage(99999999999999, e);
-		else:
-			CHEAT_KillAll(e);
-	return;
+	var neighborList = GetAllDoors(scene);
+	for n in neighNames:
+		var index = neighNames.find(n);
+		if(neighborList.find(n) < 0):
+			Context.StoreScene(neighbors[index], n);
+			neighbors.remove(index);
+			neighNames.remove(index);
+	for n in neighborList:
+		if(neighNames.find(n) < 0):
+			var s = Context.FetchScene(n);
+			neighbors.push_back(s);
+			neighNames.push_back(n);
+			add_child(s);
+	
+	Context.StoreScene(currentScene, currentSceneId);
+	if(currentScene != null): 
+		currentScene.queue_free();
+	currentScene = scene;
+	currentSceneId = id;
+	add_child(scene);
+	if(!has_node("PlayerBody")):
+		add_child(Player);
+	if(loadPosition != null):
+		currentScene.global_position = loadPosition;
 
 func SpawnNode(entity):
-	spawn_pending.push_back(entity);
+	add_child(entity);
+
+func EnterMainMenu():
+	if(currentScene != null): remove_child(currentScene);
+	currentScene = load("res://StartMenu.tscn").instance();
+	add_child(currentScene);
 	return;
-
-func GetScene(id):
-	return SceneList[SceneNames.find(id)];
-
-func DespawnSpawned():
-	for e in spawned:
-		if(e.get_parent() != null):
-			e.get_parent().remove_child(e);
-		spawn_pending.push_back(e);
-	spawned.clear();
-	return;
-
-func SpawnPending(doorEntered=null):
-	for e in spawn_pending:
-		if(e.get_parent() != null):
-			e.get_parent().remove_child(e);
-		current_scene.add_child(e);
-		#if(current_scene.has_node(e.name + "SpawnPoint")):
-		#	e.global_position = current_scene.get_node(e.name + "SpawnPoint").global_position;
-				
-		spawned.push_back(e);
-	
-	if(doorEntered != null && doorEntered.has_method("GetRespawnables")):
-#		for o in current_scene.get_children():
-#			if(o.has_method("get_door_id") && o.get_door_id() == doorEntered.exitTo):
-#				var entities = doorEntered.GetRespawnables();
-#				entities.push_back(Player);
-#				for i in entities:
-#					i.global_position = o.GetSpawnPoint();
-#				if(o.has_method("_SceneReload")): o._SceneReload();
-#				break;
-		var dest = GetDoor(doorEntered.exitTo);
-		var entities = doorEntered.GetRespawnables();
-		entities.push_back(Player);
-		for i in entities:
-			i.global_position = dest.GetSpawnPoint();
-			if(dest.has_method("_SceneReload")): 
-				dest._SceneReload();
-	spawn_pending.clear();
-	return;
-
-func ReloadScenes(scene):
-	for child in scene.get_children():
-		ReloadScenes(child);
-		if(child.has_method("_SceneReload")): child._SceneReload();
 
 func GetCurrentSceneId():
-	var index = SceneList.find(current_scene);
-	return SceneNames[index];
+	return currentSceneId;
 
-func set_current_scene(id, doorway=null):
-	var newScene = GetScene(id);
-	if(newScene == null):
-		printerr("Error: newScene is null!");
-		return;
-	
-	if(current_scene != null):
-		#remove_child(current_scene);
-		call_deferred("remove_child", current_scene);
-	add_child(newScene);
-	current_scene = newScene;
-	
-	DespawnSpawned();
-	SpawnPending(doorway);
-	
-	ReloadScenes(current_scene);
-	
-	print("Scene changed to \"" + id + "\".");
-	HUD.get_node("Map").Show();
-	return;
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func GetSceneNames():
+	return Context.PackedNames;

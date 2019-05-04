@@ -8,8 +8,8 @@ var tmp = false;
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	if(!is_connected("body_exited", self, "exit")): connect("body_exited", self, "exit");
-	set_collision_mask_bit(Global.CollisionType.player, true);
+	#if(!is_connected("body_exited", self, "exit")): connect("body_exited", self, "exit");
+	#set_collision_mask_bit(Global.CollisionType.player, true);
 	#get_node("ExitTrigger").disabled = false;
 	#tmp = false;
 	#printerr(get_overlapping_bodies());
@@ -29,7 +29,7 @@ func exit(body):
 	
 	
 	if(body == Global.Player ):
-		Global.set_current_scene(get_parent().exitScene, get_parent());
+		Global.SetScene(get_parent().exitScene);
 	
 	pass;
 
