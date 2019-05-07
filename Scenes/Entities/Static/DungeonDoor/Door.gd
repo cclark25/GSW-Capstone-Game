@@ -91,7 +91,7 @@ func _process(delta):
 			set_process(false);
 			get_node("DoorWall").disabled = false;
 	else:
-		get_node("DoorSprite").frame = int(animationTime / .07);
+		$DoorSprite.frame = int(animationTime / .07);
 		if(get_node("DoorSprite").frame >= 3):
 			get_node("DoorSprite").frame = 3;
 			set_process(false);

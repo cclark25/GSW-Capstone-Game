@@ -5,7 +5,7 @@ extends OptionButton
 # var b = "textvar"
 var count = 0;
 
-func ListScenes(next="Scenes"):
+func ListScenes(next="Scenes/SceneSets"):
 	var nextDirs = [];
 	var dir = Directory.new();
 	dir.open(next);
@@ -20,7 +20,7 @@ func ListScenes(next="Scenes"):
 			continue;
 		elif(dir.dir_exists(file)):
 			nextDirs.append(file);
-		elif file.ends_with(".cfg"):
+		elif file.begins_with("set.") && file.ends_with(".tscn"):
 			#printerr("Adding scene: ");
 			#printerr(file);
 			add_item(next + "/" + file, count + 1);

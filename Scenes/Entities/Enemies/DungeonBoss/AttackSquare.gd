@@ -69,7 +69,7 @@ func _process(delta):
 		#if(branch == null):
 		var newBranch = load("res://Scenes/Entities/Objects/Branch/Branch.tscn").instance();
 		#	branch = newBranch;
-		Global.current_scene.add_child(newBranch);
+		Global.SpawnNode(newBranch);
 		newBranch.global_position = global_position + Vector2(40, 50);
 		newBranch.apply_impulse(Vector2(0,0), Vector2(100,0).rotated(randf()*2*PI));
 	pass

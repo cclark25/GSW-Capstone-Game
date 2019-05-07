@@ -14,7 +14,7 @@ extents = Vector2( 13, 12.7484 )
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 13, 22.0236 )
+extents = Vector2( 13, 0.596622 )
 
 [node name="Door" type="StaticBody2D" index="0"]
 
@@ -41,7 +41,7 @@ locksOnEnter = false
 texture = ExtResource( 2 )
 vframes = 4
 frame = 3
-_sections_unfolded = [ "Animation" ]
+_sections_unfolded = [ "Animation", "Offset" ]
 
 [node name="DoorWall" type="CollisionShape2D" parent="." index="1"]
 
@@ -67,9 +67,10 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="ExitTrigger" type="CollisionShape2D" parent="Exit" index="0"]
 
-position = Vector2( 0, 33.7661 )
-scale = Vector2( 3.07692, 0.219143 )
+position = Vector2( 0, 29.5 )
+scale = Vector2( 3.07692, 0.367537 )
 shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="Entrance" type="Area2D" parent="." index="3"]
 
@@ -89,8 +90,8 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="EntranceTrigger" type="CollisionShape2D" parent="Entrance" index="0"]
 
-position = Vector2( 0, 73.6178 )
-scale = Vector2( 3.07692, 0.255039 )
+position = Vector2( 0, 69.9999 )
+scale = Vector2( 3.07692, 3.72564 )
 shape = SubResource( 2 )
 disabled = true
 

@@ -1,0 +1,177 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/SceneSets/set.Dungeon1.gd" type="Script" id=1]
+
+[sub_resource type="Environment" id=1]
+
+background_mode = 4
+background_sky_custom_fov = 0.0
+background_color = Color( 0, 0, 0, 1 )
+background_energy = 1.0
+background_canvas_max_layer = 0
+ambient_light_color = Color( 0, 0, 0, 1 )
+ambient_light_energy = 1.0
+ambient_light_sky_contribution = 1.0
+fog_enabled = false
+fog_color = Color( 0.5, 0.6, 0.7, 1 )
+fog_sun_color = Color( 1, 0.9, 0.7, 1 )
+fog_sun_amount = 0.0
+fog_depth_enabled = true
+fog_depth_begin = 10.0
+fog_depth_curve = 1.0
+fog_transmit_enabled = false
+fog_transmit_curve = 1.0
+fog_height_enabled = false
+fog_height_min = 0.0
+fog_height_max = 100.0
+fog_height_curve = 1.0
+tonemap_mode = 0
+tonemap_exposure = 1.0
+tonemap_white = 1.0
+auto_exposure_enabled = false
+auto_exposure_scale = 0.4
+auto_exposure_min_luma = 0.05
+auto_exposure_max_luma = 8.0
+auto_exposure_speed = 0.5
+ss_reflections_enabled = false
+ss_reflections_max_steps = 64
+ss_reflections_fade_in = 0.15
+ss_reflections_fade_out = 2.0
+ss_reflections_depth_tolerance = 0.2
+ss_reflections_roughness = true
+ssao_enabled = false
+ssao_radius = 1.0
+ssao_intensity = 1.0
+ssao_radius2 = 0.0
+ssao_intensity2 = 1.0
+ssao_bias = 0.01
+ssao_light_affect = 0.0
+ssao_color = Color( 0, 0, 0, 1 )
+ssao_quality = 0
+ssao_blur = 3
+ssao_edge_sharpness = 4.0
+dof_blur_far_enabled = false
+dof_blur_far_distance = 10.0
+dof_blur_far_transition = 5.0
+dof_blur_far_amount = 0.1
+dof_blur_far_quality = 1
+dof_blur_near_enabled = false
+dof_blur_near_distance = 2.0
+dof_blur_near_transition = 1.0
+dof_blur_near_amount = 0.1
+dof_blur_near_quality = 1
+glow_enabled = false
+glow_levels/1 = false
+glow_levels/2 = false
+glow_levels/3 = true
+glow_levels/4 = false
+glow_levels/5 = true
+glow_levels/6 = false
+glow_levels/7 = false
+glow_intensity = 0.8
+glow_strength = 1.0
+glow_bloom = 0.0
+glow_blend_mode = 2
+glow_hdr_threshold = 1.0
+glow_hdr_scale = 2.0
+glow_bicubic_upscale = false
+adjustment_enabled = false
+adjustment_brightness = 1.0
+adjustment_contrast = 1.0
+adjustment_saturation = 1.0
+_sections_unfolded = [ "Background" ]
+
+[node name="Dungeon1" type="WorldEnvironment"]
+
+environment = SubResource( 1 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
+startRoom = "H3"
+
+[node name="H3" parent="." index="0" instance_placeholder="res://Scenes/Rooms/H3/H3.tscn"]
+
+_sections_unfolded = [ "Visibility" ]
+
+[node name="G3" parent="." index="1" instance_placeholder="res://Scenes/Rooms/G3/G3.tscn"]
+
+[node name="E3" parent="." index="2" instance_placeholder="res://Scenes/Rooms/E3/E3.tscn"]
+
+position = Vector2( 0, -1080 )
+
+[node name="D3" parent="." index="3" instance_placeholder="res://Scenes/Rooms/D3/D3.tscn"]
+
+position = Vector2( 0, -1440 )
+
+[node name="C3" parent="." index="4" instance_placeholder="res://Scenes/Rooms/C3/C3.tscn"]
+
+position = Vector2( 0, -1800 )
+
+[node name="B3" parent="." index="5" instance_placeholder="res://Scenes/Rooms/B3/B3.tscn"]
+
+position = Vector2( 0, -2160 )
+
+[node name="A3" parent="." index="6" instance_placeholder="res://Scenes/Rooms/A3/A3.tscn"]
+
+position = Vector2( 0, -2520 )
+
+[node name="G4" parent="." index="7" instance_placeholder="res://Scenes/Rooms/G4/G4.tscn"]
+
+position = Vector2( 640, -360 )
+
+[node name="G5" parent="." index="8" instance_placeholder="res://Scenes/Rooms/G5/G5.tscn"]
+
+position = Vector2( 1280, -360 )
+
+[node name="G2" parent="." index="9" instance_placeholder="res://Scenes/Rooms/G2/G2.tscn"]
+
+position = Vector2( -640, -360 )
+
+[node name="G1" parent="." index="10" instance_placeholder="res://Scenes/Rooms/G1/G1.tscn"]
+
+position = Vector2( -1280, -360 )
+
+[node name="H1" parent="." index="11" instance_placeholder="res://Scenes/Rooms/H1/H1.tscn"]
+
+position = Vector2( -1280, 0 )
+
+[node name="H5" parent="." index="12" instance_placeholder="res://Scenes/Rooms/H5/H5.tscn"]
+
+position = Vector2( 1280, 0 )
+
+[node name="F2" parent="." index="13" instance_placeholder="res://Scenes/Rooms/F2/F2.tscn"]
+
+position = Vector2( -640, -720 )
+
+[node name="F3" parent="." index="14" instance_placeholder="res://Scenes/Rooms/F3/F3.tscn"]
+
+position = Vector2( 0, -720 )
+
+[node name="F4" parent="." index="15" instance_placeholder="res://Scenes/Rooms/F4/F4.tscn"]
+
+position = Vector2( 640, -720 )
+
+[node name="C4" parent="." index="16" instance_placeholder="res://Scenes/Rooms/C4/C4.tscn"]
+
+position = Vector2( 640, -1800 )
+
+[node name="C5" parent="." index="17" instance_placeholder="res://Scenes/Rooms/C5/C5.tscn"]
+
+position = Vector2( 1280, -1800 )
+
+[node name="D5" parent="." index="18" instance_placeholder="res://Scenes/Rooms/D5/D5.tscn"]
+
+position = Vector2( 1280, -1440 )
+
+[node name="C2" parent="." index="19" instance_placeholder="res://Scenes/Rooms/C2/C2.tscn"]
+
+position = Vector2( -640, -1800 )
+
+[node name="C1" parent="." index="20" instance_placeholder="res://Scenes/Rooms/C1/C1.tscn"]
+
+position = Vector2( -1280, -1800 )
+
+[node name="D1" parent="." index="21" instance_placeholder="res://Scenes/Rooms/D1/D1.tscn"]
+
+position = Vector2( -1280, -1440 )
+
+

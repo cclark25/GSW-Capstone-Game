@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Windsor's Quest"
-run/main_scene="res://Scenes/GameRoot.tscn"
+run/main_scene="res://StartMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -20,7 +20,7 @@ SceneLoader="*res://GlobalScripts/SceneLoader.gd"
 Global="*res://GlobalScripts/Global.gd"
 Damage="*res://GlobalScripts/Damage.gd"
 Console="*res://godot-console/src/Console.tscn"
-GameCamera="*res://Scenes/Camera.tscn"
+GameRoot="*res://Scenes/GameRoot.tscn"
 
 [debug]
 

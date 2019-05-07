@@ -41,7 +41,7 @@ class DHandler extends Node2D:
 			if(time >= maxTime/2):
 				if(body == Global.Player):
 					Global.set_current_scene("game_over");
-				if(Global.current_scene.has_method("handleDeath")):
+				if(Global.currentScene.has_method("handleDeath")):
 					Global.current_scene.handleDeath(body);
 				body.queue_free();
 				queue_free();

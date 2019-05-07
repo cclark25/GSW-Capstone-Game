@@ -28,7 +28,12 @@ class SceneContext extends Node2D:
 			var scene = PackedScenes[index];
 			PackedScenes.remove(index);
 			PackedNames.remove(index);
-			return scene.instance();
+			return scene;
+	
+	func StorePack(pack, name):
+		PackedScenes.push_back(pack);
+		PackedNames.push_back(name);
+		return;
 
 func MakeContext():
 	return SceneContext.new();
