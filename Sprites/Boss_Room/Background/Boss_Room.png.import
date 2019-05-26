@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/Boss_Room.png-4a7bbd7c494f4460e09443cb638ee73c.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
@@ -14,19 +17,17 @@ dest_files=[ "res://.import/Boss_Room.png-4a7bbd7c494f4460e09443cb638ee73c.stex"
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-<<<<<<< HEAD
-flags/filter=false
-=======
 flags/filter=true
->>>>>>> origin/ccrawfo4_branch
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true
