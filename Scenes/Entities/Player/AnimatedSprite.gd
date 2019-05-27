@@ -44,25 +44,25 @@ func _process(delta):
 			dir = int(dir / 2);
 	
 	match CurrentMode:
-		Walk:
+		Modes.Walk:
 			Play(dir, CurrentMode);
 			if(get_parent().direction.length() == 0):
 				stop();
 				frame = 0;
 				set_process(false);
-		Roll:
+		Modes.Roll:
 			if(!inRoll):
 				inRoll = true;
-				Play(dir, Roll);
+				Play(dir, Modes.Roll);
 			
 			if(!is_playing()):
 				inRoll = false;
-				CurrentMode = Walk;
+				CurrentMode = Modes.Walk;
 	pass
 
 func FinishAnimation():
 	match CurrentMode:
-		Roll:
+		Modes.Roll:
 			inRoll = false;
-			CurrentMode = Walk;
+			CurrentMode = Modes.Walk;
 	pass;

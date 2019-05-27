@@ -8,7 +8,6 @@
 [ext_resource path="res://Scenes/Entities/Familiars/Snake/Animation.gd" type="Script" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
-
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
@@ -28,41 +27,22 @@ animations = [ {
 
 [sub_resource type="CircleShape2D" id=2]
 
-custom_solver_bias = 0.0
-radius = 10.0
-
-[node name="Snake" type="Area2D" index="0"]
-
+[node name="Snake" type="Area2D"]
 z_index = -1
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
 collision_layer = 0
 collision_mask = 0
-audio_bus_override = false
-audio_bus_name = "Master"
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
-PullSpeed = 1.5
 
-[node name="Animation" type="AnimatedSprite" parent="." index="0"]
-
+[node name="Animation" type="AnimatedSprite" parent="."]
 position = Vector2( -58.5, 5 )
 frames = SubResource( 1 )
 animation = "Extend"
 centered = false
 offset = Vector2( 0, -15 )
 script = ExtResource( 6 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Head" type="CollisionShape2D" parent="." index="1"]
-
+[node name="Head" type="CollisionShape2D" parent="."]
 position = Vector2( -3.5, 3 )
 scale = Vector2( 0.51202, 0.51202 )
 shape = SubResource( 2 )
 disabled = true
-_sections_unfolded = [ "Transform" ]
-
-

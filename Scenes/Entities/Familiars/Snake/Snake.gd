@@ -92,7 +92,7 @@ func Use():
 		rotation = get_parent().get_direction() * (PI/4);
 	
 	visible = true;
-	get_node("Animation").Play(get_node("Animation").Extend);
+	get_node("Animation").Play(get_node("Animation").Modes.Extend);
 	get_node("Head").disabled = false;
 	#set_process(true);
 	return;
